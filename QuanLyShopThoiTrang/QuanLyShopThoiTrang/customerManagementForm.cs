@@ -17,6 +17,7 @@ namespace QuanLyShopThoiTrang
             InitializeComponent();
         }
 
+        //hello github
         private void ptbArrowsBack_Click(object sender, EventArgs e)
         {
             this.Hide();
