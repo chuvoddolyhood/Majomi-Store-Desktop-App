@@ -16,9 +16,11 @@ namespace QuanLyShopThoiTrang
             //Application.Run(new loginForm());
             //Application.Run(new employeeManagementForm());
             //Application.Run(new splashScreen());
-            
+
             //Chay form customer
-            Application.Run(new customerManagementForm());
+            //Application.Run(new customerManagementForm());
+
+            Application.Run(new productManagement());
         }
     }
 }

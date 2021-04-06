@@ -26,7 +26,65 @@ namespace QuanLyShopThoiTrang
 
         private void productManagement_Load(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            // Show hộp thoại open file ra
+            // Nhận kết quả trả về qua biến kiểu DialogResult
+            DialogResult result = openFileDialog.ShowDialog();
+
+            //Kiểm tra xem người dùng đã chọn file chưa
+            if (result == DialogResult.OK)
+            {
+                // Lấy hình ảnh
+                Image img = Image.FromFile(openFileDialog.FileName);
+
+                // Gán ảnh
+                ptbProduct.Image = img;
+            }
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtIDProduct.Clear();
+            txtTitleProduct.Clear();
+            cmbTypeProduct.ResetText();
+            txtCostProduct.Clear();
+            txtToalProduct.Clear();
+            txtManuProduct.Clear();
+            ptbProduct.Image = null;
         }
     }
 }
