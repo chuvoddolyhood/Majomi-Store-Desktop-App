@@ -82,9 +82,14 @@ namespace QuanLyShopThoiTrang
             txtTitleProduct.Clear();
             cmbTypeProduct.ResetText();
             txtCostProduct.Clear();
-            txtToalProduct.Clear();
+            txtAmountProduct.Clear();
             txtManuProduct.Clear();
             ptbProduct.Image = null;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

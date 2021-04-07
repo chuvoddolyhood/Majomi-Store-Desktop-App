@@ -167,7 +167,7 @@ namespace QuanLyShopThoiTrang
             string queryAdd = "INSERT INTO EmpInfo VALUES(@id,@name,@sex,@dob,@address,@phoneNumber,@email,@edu,@language,@workType,@startWorkingDay);";
             //Them du lieu vao table.Employee
             string queryUpdate = "INSERT INTO Employee SELECT I.ID, I.Emp_Name,I.Sex,I.DOB,I.Emp_Address,I.Phone_Number,I.Email, I.Acadamic_Level,L.ID_Language, W.ID_Work,I.Start_Working_Day FROM EmpInfo I JOIN Employee_Language L ON I.Title_Language = L.Title JOIN Work W ON I.Title_Work = W.Title_Work WHERE ID = @id; ";
-            connector = new SqlConnection(strDatabase);
+            SqlConnection connector = new SqlConnection(strDatabase);
             connector.Open();
             SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
 

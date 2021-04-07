@@ -31,6 +31,11 @@ namespace QuanLyShopThoiTrang
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gboSex = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.txtColorProduct = new System.Windows.Forms.TextBox();
+            this.lblColor = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -39,7 +44,7 @@ namespace QuanLyShopThoiTrang
             this.label7 = new System.Windows.Forms.Label();
             this.txtManuProduct = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtToalProduct = new System.Windows.Forms.TextBox();
+            this.txtAmountProduct = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCostProduct = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -55,6 +60,7 @@ namespace QuanLyShopThoiTrang
             this.txtSearchProduct = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
+            this.gboSex.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
             this.SuspendLayout();
@@ -70,6 +76,9 @@ namespace QuanLyShopThoiTrang
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.gboSex);
+            this.groupBox3.Controls.Add(this.txtColorProduct);
+            this.groupBox3.Controls.Add(this.lblColor);
             this.groupBox3.Controls.Add(this.btnClear);
             this.groupBox3.Controls.Add(this.btnModify);
             this.groupBox3.Controls.Add(this.btnAdd);
@@ -78,7 +87,7 @@ namespace QuanLyShopThoiTrang
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.txtManuProduct);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.txtToalProduct);
+            this.groupBox3.Controls.Add(this.txtAmountProduct);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtCostProduct);
             this.groupBox3.Controls.Add(this.label5);
@@ -89,18 +98,70 @@ namespace QuanLyShopThoiTrang
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Location = new System.Drawing.Point(79, 623);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(852, 342);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(852, 397);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Nhap thong tin";
             // 
+            // gboSex
+            // 
+            this.gboSex.Controls.Add(this.radioButton2);
+            this.gboSex.Controls.Add(this.radioButton1);
+            this.gboSex.Location = new System.Drawing.Point(34, 179);
+            this.gboSex.Name = "gboSex";
+            this.gboSex.Size = new System.Drawing.Size(213, 56);
+            this.gboSex.TabIndex = 22;
+            this.gboSex.TabStop = false;
+            this.gboSex.Text = "Sex";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(84, 21);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(75, 21);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Female";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 21);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(59, 21);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Male";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // txtColorProduct
+            // 
+            this.txtColorProduct.Location = new System.Drawing.Point(420, 191);
+            this.txtColorProduct.Margin = new System.Windows.Forms.Padding(4);
+            this.txtColorProduct.Name = "txtColorProduct";
+            this.txtColorProduct.Size = new System.Drawing.Size(217, 22);
+            this.txtColorProduct.TabIndex = 21;
+            // 
+            // lblColor
+            // 
+            this.lblColor.AutoSize = true;
+            this.lblColor.Location = new System.Drawing.Point(319, 191);
+            this.lblColor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblColor.Name = "lblColor";
+            this.lblColor.Size = new System.Drawing.Size(41, 17);
+            this.lblColor.TabIndex = 20;
+            this.lblColor.Text = "Color";
+            // 
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(596, 306);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(100, 28);
             this.btnClear.TabIndex = 19;
@@ -111,7 +172,7 @@ namespace QuanLyShopThoiTrang
             // btnModify
             // 
             this.btnModify.Location = new System.Drawing.Point(469, 306);
-            this.btnModify.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModify.Margin = new System.Windows.Forms.Padding(4);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(100, 28);
             this.btnModify.TabIndex = 18;
@@ -122,7 +183,7 @@ namespace QuanLyShopThoiTrang
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(343, 306);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 28);
             this.btnAdd.TabIndex = 17;
@@ -133,7 +194,7 @@ namespace QuanLyShopThoiTrang
             // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(539, 91);
-            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(100, 28);
             this.btnBrowse.TabIndex = 16;
@@ -145,7 +206,7 @@ namespace QuanLyShopThoiTrang
             // 
             this.ptbProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ptbProduct.Location = new System.Drawing.Point(420, 89);
-            this.ptbProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ptbProduct.Margin = new System.Windows.Forms.Padding(4);
             this.ptbProduct.Name = "ptbProduct";
             this.ptbProduct.Size = new System.Drawing.Size(93, 86);
             this.ptbProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -165,7 +226,7 @@ namespace QuanLyShopThoiTrang
             // txtManuProduct
             // 
             this.txtManuProduct.Location = new System.Drawing.Point(420, 34);
-            this.txtManuProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtManuProduct.Margin = new System.Windows.Forms.Padding(4);
             this.txtManuProduct.Name = "txtManuProduct";
             this.txtManuProduct.Size = new System.Drawing.Size(217, 22);
             this.txtManuProduct.TabIndex = 11;
@@ -181,30 +242,30 @@ namespace QuanLyShopThoiTrang
             this.label6.Text = "Manufacturer";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
-            // txtToalProduct
+            // txtAmountProduct
             // 
-            this.txtToalProduct.Location = new System.Drawing.Point(87, 242);
-            this.txtToalProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtToalProduct.Name = "txtToalProduct";
-            this.txtToalProduct.Size = new System.Drawing.Size(160, 22);
-            this.txtToalProduct.TabIndex = 9;
-            this.txtToalProduct.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtAmountProduct.Location = new System.Drawing.Point(87, 312);
+            this.txtAmountProduct.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAmountProduct.Name = "txtAmountProduct";
+            this.txtAmountProduct.Size = new System.Drawing.Size(160, 22);
+            this.txtAmountProduct.TabIndex = 9;
+            this.txtAmountProduct.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 242);
+            this.label1.Location = new System.Drawing.Point(31, 312);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 17);
+            this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Total";
+            this.label1.Text = "Amount";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtCostProduct
             // 
-            this.txtCostProduct.Location = new System.Drawing.Point(87, 188);
-            this.txtCostProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCostProduct.Location = new System.Drawing.Point(87, 258);
+            this.txtCostProduct.Margin = new System.Windows.Forms.Padding(4);
             this.txtCostProduct.Name = "txtCostProduct";
             this.txtCostProduct.Size = new System.Drawing.Size(160, 22);
             this.txtCostProduct.TabIndex = 7;
@@ -212,7 +273,7 @@ namespace QuanLyShopThoiTrang
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 188);
+            this.label5.Location = new System.Drawing.Point(27, 258);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 17);
@@ -230,7 +291,7 @@ namespace QuanLyShopThoiTrang
             "Tui xach",
             "Vi da"});
             this.cmbTypeProduct.Location = new System.Drawing.Point(87, 137);
-            this.cmbTypeProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTypeProduct.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTypeProduct.Name = "cmbTypeProduct";
             this.cmbTypeProduct.Size = new System.Drawing.Size(160, 24);
             this.cmbTypeProduct.TabIndex = 5;
@@ -238,7 +299,7 @@ namespace QuanLyShopThoiTrang
             // txtTitleProduct
             // 
             this.txtTitleProduct.Location = new System.Drawing.Point(87, 89);
-            this.txtTitleProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTitleProduct.Margin = new System.Windows.Forms.Padding(4);
             this.txtTitleProduct.Name = "txtTitleProduct";
             this.txtTitleProduct.Size = new System.Drawing.Size(160, 22);
             this.txtTitleProduct.TabIndex = 4;
@@ -246,7 +307,7 @@ namespace QuanLyShopThoiTrang
             // txtIDProduct
             // 
             this.txtIDProduct.Location = new System.Drawing.Point(87, 34);
-            this.txtIDProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIDProduct.Margin = new System.Windows.Forms.Padding(4);
             this.txtIDProduct.Name = "txtIDProduct";
             this.txtIDProduct.Size = new System.Drawing.Size(160, 22);
             this.txtIDProduct.TabIndex = 3;
@@ -301,8 +362,8 @@ namespace QuanLyShopThoiTrang
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1203, 574);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(1216, 623);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 20;
@@ -311,8 +372,8 @@ namespace QuanLyShopThoiTrang
             // 
             // txtSearchProduct
             // 
-            this.txtSearchProduct.Location = new System.Drawing.Point(955, 578);
-            this.txtSearchProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchProduct.Location = new System.Drawing.Point(968, 627);
+            this.txtSearchProduct.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchProduct.Name = "txtSearchProduct";
             this.txtSearchProduct.Size = new System.Drawing.Size(217, 22);
             this.txtSearchProduct.TabIndex = 21;
@@ -345,6 +406,8 @@ namespace QuanLyShopThoiTrang
             this.Load += new System.EventHandler(this.productManagement_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.gboSex.ResumeLayout(false);
+            this.gboSex.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).EndInit();
             this.ResumeLayout(false);
@@ -366,7 +429,7 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCostProduct;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtToalProduct;
+        private System.Windows.Forms.TextBox txtAmountProduct;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtManuProduct;
         private System.Windows.Forms.PictureBox ptbProduct;
@@ -379,5 +442,10 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtSearchProduct;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtColorProduct;
+        private System.Windows.Forms.Label lblColor;
+        private System.Windows.Forms.GroupBox gboSex;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

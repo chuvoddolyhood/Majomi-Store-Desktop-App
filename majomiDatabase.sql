@@ -6,7 +6,6 @@ CREATE TABLE Employee_Language(
 	Title VARCHAR(25) NOT NULL
 );
 
-
 CREATE TABLE Work(
 	ID_Work VARCHAR(3) NOT NULL PRIMARY KEY,
 	Title_Work VARCHAR(25) NOT NULL,
@@ -34,7 +33,40 @@ CREATE TABLE Account(
 );
 
 
---//////////////////////////LANGUAGE/////////////////////////
+CREATE TABLE Customer(
+	ID_Customer VARCHAR(10) NOT NULL PRIMARY KEY,
+	Name_Customer VARCHAR(25) NOT NULL,
+	PhoneNumber_Customer VARCHAR(15) NOT NULL,
+	MarkOfReward_Customer INT,
+);
+
+
+CREATE TABLE Product(
+	ID_Product VARCHAR(10) NOT NULL PRIMARY KEY,
+	Title_Product VARCHAR(100) NOT NULL,
+	Type_Product VARCHAR(10) NOT NULL,
+	Sex_Product VARCHAR(7) NULL,
+	Cost_Product FLOAT,
+	Amount_Product INT,
+	Manufacturer VARCHAR(100),
+	Color_Porduct VARCHAR(30),
+	Image_Product IMAGE NULL,
+);
+
+CREATE TABLE INVOICE(
+	ID_Invoice VARCHAR(10) NOT NULL,
+	Invoice_Day Date,
+	ID_Customer VARCHAR(10) NOT NULL REFERENCES Customer(ID_Customer),
+	ID_Product VARCHAR(10) NOT NULL REFERENCES Product(ID_Product),
+	Quantity_Product INT,
+	SubTotal FLOAT NULL,
+	Discount FLOAT NULL,
+	GrandTotal FLOAT NULL,
+	MarkOfAccumulation INT
+);
+
+	
+--////////////////////////////////////////LANGUAGE/////////////////////////////////////////////
 
 SELECT *
 FROM Employee_Language;
@@ -76,6 +108,66 @@ INSERT INTO Account VALUES ('001','thu3012','alittlesugar');
 INSERT INTO Account VALUES ('002','ngoc73','ngoc73');
 INSERT INTO Account VALUES ('003','thaouyen','thaouyen');
 INSERT INTO Account VALUES ('004','nghia241','chuvod');
+
+--------------------Customer------------------------------------
+SELECT * FROM Customer
+INSERT INTO Customer VALUES ('KH001','Lu Thi Thanh Mi','0914635308',10);
+INSERT INTO Customer VALUES ('KH002','Truong Tieu Phung','0793904783',5);
+INSERT INTO Customer VALUES ('KH003','Tran Quang Vinh','0879293131',8);
+INSERT INTO Customer VALUES ('KH004','Cao Ngoc Bao Long','0939894721',17);
+
+--------------------Product------------------------------------
+
+SELECT * FROM Product;
+
+INSERT INTO Product 
+SELECT 'ASM001','Ao so mi trang nam tay dai','Ao','Male',100000,10,'Thai Tuan','Trang',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\ao_so_mi_nam.jpg', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'AK001','Ao khoac jean','Ao','Female',350000,3,'Taobao','Xanh den',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\ao_khoac_jean.jpg', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'AK002','Ao khoac Cardigan','Ao','Female',550000,2,'Taobao','Den',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\Ao_Cardigan.jpg', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'AT001','Ao thun champion','Ao','Male',330000,20,'champion','Trang',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\champion.jpg', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'V001','Vay jean','Vay','Female',180000,10,'Taobao','Xanh dam',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\vay_jean.jpg', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'TX001','Tui Da Beo','Tui xach','Female',80000,50,'Taobao','Da beo',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\tui_da_beo.jpg', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'G001','Giay adidas ultar boost 20','Giay','Male',5000000,10,'Adidas','Trang vien xanh',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\adidas-xplr-white-sf.jpg', 
+	Single_Blob) AS Picture;
+
+-------------------------------------------Invoice-----------------------------------------------
+
+SELECT * FROM INVOICE;
+
+INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','AK002',1,550000,null,550000,5);
+INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','V001',1,180000,null,180000,1);
+INSERT INTO INVOICE VALUES('HD002','Apr 7, 2021','KH002','AK001',1,350000,null,350000,3);
+INSERT INTO INVOICE VALUES('HD003','Apr 7, 2021','KH003','AT001',2,330000,null,330000,(330000*2)/100000);
+INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','G001',1,5000000,null,5000000,5000000/100000);
+INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','AT001',1,350000,null,350000,3);
+INSERT INTO INVOICE VALUES('HD005','Apr 8, 2021','KH004','ASM001',1,100000,0.2,100000-100000*0.2,1);
+
+
 
 --------------------------
 SELECT COUNT(*)
@@ -134,3 +226,16 @@ FROM Employee E JOIN Work W ON E.ID_Work=W.ID_Work;
 ALTER TABLE Employee
 ALTER COLUMN Start_Working_Day DATE NULL
 
+
+
+--Truy xuat thong tin toan bo Customer
+SELECT * FROM Customer ORDER BY ID_Customer ASC;
+
+SELECT MAX(ID_Customer) FROM Customer;
+
+DELETE Customer WHERE ID_Customer='KH007';
+
+UPDATE Customer SET Name_Customer='Lan Nguyen', PhoneNumber_Customer='01234' WHERE ID_Customer='KH007';
+
+--Tim kiem customer theo phone number
+SELECT * FROM Customer WHERE PhoneNumber_Customer='0939894721';
