@@ -121,51 +121,56 @@ INSERT INTO Customer VALUES ('KH004','Cao Ngoc Bao Long','0939894721',17);
 SELECT * FROM Product;
 
 INSERT INTO Product 
-SELECT 'ASM001','Ao so mi trang nam tay dai','Ao','Male',100000,10,'Thai Tuan','Trang',
+SELECT 'Ao001','Ao so mi trang nam tay dai','Ao','Male',100000,10,'Thai Tuan','Trang',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\ao_so_mi_nam.jpg', 
 	Single_Blob) AS Picture;
 
 INSERT INTO Product 
-SELECT 'AK001','Ao khoac jean','Ao','Female',350000,3,'Taobao','Xanh den',
+SELECT 'Ao002','Ao khoac jean','Ao','Female',350000,3,'Taobao','Xanh den',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\ao_khoac_jean.jpg', 
 	Single_Blob) AS Picture;
 
 INSERT INTO Product 
-SELECT 'AK002','Ao khoac Cardigan','Ao','Female',550000,2,'Taobao','Den',
+SELECT 'Ao003','Ao khoac Cardigan','Ao','Female',550000,2,'Taobao','Den',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\Ao_Cardigan.jpg', 
 	Single_Blob) AS Picture;
 
 INSERT INTO Product 
-SELECT 'AT001','Ao thun champion','Ao','Male',330000,20,'champion','Trang',
+SELECT 'Ao004','Ao thun champion','Ao','Male',330000,20,'champion','Trang',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\champion.jpg', 
 	Single_Blob) AS Picture;
 
 INSERT INTO Product 
-SELECT 'V001','Vay jean','Vay','Female',180000,10,'Taobao','Xanh dam',
+SELECT 'Va001','Vay jean','Vay','Female',180000,10,'Taobao','Xanh dam',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\vay_jean.jpg', 
 	Single_Blob) AS Picture;
 
 INSERT INTO Product 
-SELECT 'TX001','Tui Da Beo','Tui xach','Female',80000,50,'Taobao','Da beo',
+SELECT 'Tu001','Tui Da Beo','Tui xach','Female',80000,50,'Taobao','Da beo',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\tui_da_beo.jpg', 
 	Single_Blob) AS Picture;
 
 INSERT INTO Product 
-SELECT 'G001','Giay adidas ultar boost 20','Giay','Male',5000000,10,'Adidas','Trang vien xanh',
+SELECT 'Gi001','Giay adidas ultar boost 20','Giay','Male',5000000,10,'Adidas','Trang vien xanh',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\adidas-xplr-white-sf.jpg', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'Qu001','Quan kappa','Quan','Male',4000000,30,'Kappa','Deng vien xanh dam',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\quan_Kappa.jpg', 
 	Single_Blob) AS Picture;
 
 -------------------------------------------Invoice-----------------------------------------------
 
 SELECT * FROM INVOICE;
 
-INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','AK002',1,550000,null,550000,5);
-INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','V001',1,180000,null,180000,1);
-INSERT INTO INVOICE VALUES('HD002','Apr 7, 2021','KH002','AK001',1,350000,null,350000,3);
-INSERT INTO INVOICE VALUES('HD003','Apr 7, 2021','KH003','AT001',2,330000,null,330000,(330000*2)/100000);
-INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','G001',1,5000000,null,5000000,5000000/100000);
-INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','AT001',1,350000,null,350000,3);
-INSERT INTO INVOICE VALUES('HD005','Apr 8, 2021','KH004','ASM001',1,100000,0.2,100000-100000*0.2,1);
+INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','Ao003',1,550000,null,550000,5);
+INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','Va001',1,180000,null,180000,1);
+INSERT INTO INVOICE VALUES('HD002','Apr 7, 2021','KH002','Ao002',1,350000,null,350000,3);
+INSERT INTO INVOICE VALUES('HD003','Apr 7, 2021','KH003','Ao004',2,330000,null,330000,(330000*2)/100000);
+INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','Gi001',1,5000000,null,5000000,5000000/100000);
+INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','Ao004',1,350000,null,350000,3);
+INSERT INTO INVOICE VALUES('HD005','Apr 8, 2021','KH004','Ao001',1,100000,0.2,100000-100000*0.2,1);
 
 
 
@@ -239,3 +244,36 @@ UPDATE Customer SET Name_Customer='Lan Nguyen', PhoneNumber_Customer='01234' WHE
 
 --Tim kiem customer theo phone number
 SELECT * FROM Customer WHERE PhoneNumber_Customer='0939894721';
+
+
+
+--Tim tat ca thong tin trong bang Product
+SELECT * FROM Product ORDER BY ID_Product ASC;
+
+--Tim tat ca loai ao
+SELECT * FROM Product WHERE Type_Product='Ao' ORDER BY ID_Product ASC;
+SELECT COUNT(*) FROM Product WHERE Type_Product='Ao';
+
+--Tim tat ca loai quan
+SELECT * FROM Product WHERE Type_Product='Quan';
+
+--Tim tat ca loai vay
+SELECT * FROM Product WHERE Type_Product='Vay';
+
+--Tim tat ca loai giay
+SELECT * FROM Product WHERE Type_Product='Giay';
+
+--Tim tat ca loai Tui xach
+SELECT * FROM Product WHERE Type_Product='Tui xach';
+
+--Cap nhat san pham
+UPDATE Product SET Title_Product=@title, Type_Product=@type, Sex_Product=@sex, Cost_Product=@cost, Amount_Product=@amount, Manufacturer=@manu, Color_Porduct=@color, Image_Product=@image WHERE ID_Product=@id;
+
+--Xac dinh ID Product
+
+SELECT * FROM Product;
+
+SELECT MAX(ID_Product)  FROM Product WHERE Type_Product='Ao';
+
+
+SELECT * FROM Product WHERE Title_Product='Quan kappa';

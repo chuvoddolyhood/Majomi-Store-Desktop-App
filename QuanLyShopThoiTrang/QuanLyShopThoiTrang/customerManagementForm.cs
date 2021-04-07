@@ -128,7 +128,7 @@ namespace QuanLyShopThoiTrang
         {
             if (txtNameCustomer.Text.Equals(""))
             {
-                MessageBox.Show("Ban cho chon doi tuong can xoa");
+                MessageBox.Show("Ban chua chon doi tuong can xoa");
             }
             else
             {
@@ -191,6 +191,12 @@ namespace QuanLyShopThoiTrang
             }
         }
 
+
+
+
+        //Con BUG o button Find
+        //
+
         private void btnFind_Click(object sender, EventArgs e)
         {
             if (txtPhoneNumberFinder.Text.Equals(""))
@@ -204,7 +210,8 @@ namespace QuanLyShopThoiTrang
 
                 SqlConnection connector = new SqlConnection(strDatabase);
                 connector.Open();
-                SqlCommand commandModify = new SqlCommand(queryFinder, connector);
+                SqlCommand command = new SqlCommand(queryFinder, connector);
+                command.Parameters.AddWithValue("@phoneNumberFinder",txtPhoneNumberFinder);
                 dataGridView_CellContentClick(i);
 
             }
