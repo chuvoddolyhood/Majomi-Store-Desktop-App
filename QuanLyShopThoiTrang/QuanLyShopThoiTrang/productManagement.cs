@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace QuanLyShopThoiTrang
 {
@@ -206,10 +207,65 @@ namespace QuanLyShopThoiTrang
             {
                 // Lấy hình ảnh
                 Image img = Image.FromFile(openFileDialog.FileName);
+                //Duong dan link hinh anh luu vao -> openFileDialog.FileName
 
                 // Gán ảnh
                 ptbProduct.Image = img;
             }
+        }
+
+        //public Image Resize(Image img, float percentage)
+        //{
+        //    //lấy kích thước ban đầu của bức ảnh
+        //    int originalW = img.Width;
+        //    int originalH = img.Height;
+
+        //    //tính kích thước cho ảnh mới theo tỷ lệ đưa vào
+        //    int resizedW = (int)(originalW * percentage);
+        //    int resizedH = (int)(originalH * percentage);
+
+        //    //tạo 1 ảnh Bitmap mới theo kích thước trên
+        //    Bitmap bmp = new Bitmap(resizedW, resizedH);
+        //    //tạo 1 graphic mới từ Bitmap
+        //    Graphics graphic = Graphics.FromImage((Image)bmp);
+        //    //vẽ lại ảnh ban đầu lên bmp theo kích thước mới
+        //    graphic.DrawImage(img, 0, 0, resizedW, resizedH);
+        //    //giải phóng tài nguyên mà graphic đang giữ
+        //    graphic.Dispose();
+        //    //return the image
+        //    return (Image)bmp;
+        //}
+
+        //Doi du lieu hinh anh sang byte
+        private byte[] converImgToByte()
+        {
+            FileStream fs;
+            
+            fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+
+            //Chuyen du lieu hinh anh thu nho size hinh anh lai -> tao dung luong byte moi
+            //Image img = Resize(Image.FromFile(openFileDialog.FileName), 0.1F);
+
+            byte[] picbyte = new byte[fs.Length];
+            fs.Read(picbyte, 0, (int)fs.Length);
+            fs.Close();
+            return picbyte;
+        }
+
+
+
+        //Co BUG
+        //Chuyen du lieu Byte thanh Image
+        private Image ByteToImg(string byteString)
+        {
+            //string input = "some text";
+            //byte[] array = Encoding.ASCII.GetBytes(input);
+
+            byte[] imgBytes = Encoding.ASCII.GetBytes(byteString);
+            MemoryStream ms = new MemoryStream(imgBytes, 0, imgBytes.Length);
+            ms.Write(imgBytes, 0, imgBytes.Length);
+            Image image = Image.FromStream(ms, true);
+            return image;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -259,6 +315,13 @@ namespace QuanLyShopThoiTrang
 
         private void dataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            string query = "SELECT Image_Product FROM Product WHERE ID_Product=@id;";
+            SqlConnection connector = new SqlConnection(strDatabase);
+            connector.Open();
+            SqlCommand command = new SqlCommand(query, connector);
+            command.Parameters.AddWithValue("@id", txtIDProduct.Text);
+
+
             int i;
             i = dataGridView.CurrentRow.Index;
             txtIDProduct.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
@@ -270,7 +333,10 @@ namespace QuanLyShopThoiTrang
             txtManuProduct.Text = dataGridView.Rows[i].Cells[6].Value.ToString();
             txtColorProduct.Text = dataGridView.Rows[i].Cells[7].Value.ToString();
             //image
-            //cmbTypeProduct.Text = dataGridView.Rows[i].Cells[8].Value.ToString();
+            //getPictureFromDatabase(txtIDProduct.Text);
+
+            //CO BUG
+            //ptbProduct.Image = ByteToImg(query);
         }
 
         private void cmbTypeProduct_SelectedIndexChanged(object sender, EventArgs e)
@@ -289,7 +355,7 @@ namespace QuanLyShopThoiTrang
             else
             {
                 //Them du lieu vao table.EmpInfo
-                string queryAdd = "INSERT INTO Product VALUES (@id,@title,@type,@sex,@cost,@amount,@manu,@color, null);";
+                string queryAdd = "INSERT INTO Product VALUES (@id,@title,@type,@sex,@cost,@amount,@manu,@color,@image);";
 
                 SqlConnection connector = new SqlConnection(strDatabase);
                 connector.Open();
@@ -300,11 +366,18 @@ namespace QuanLyShopThoiTrang
                 commandAdd.Parameters.AddWithValue("@title", txtTitleProduct.Text);
                 commandAdd.Parameters.AddWithValue("@type", cmbTypeProduct.Text);
                 commandAdd.Parameters.AddWithValue("@sex", cmbSex.Text);
-                commandAdd.Parameters.AddWithValue("@cost", txtCostProduct.Text);
-                commandAdd.Parameters.AddWithValue("@amount", txtAmountProduct.Text);
+                commandAdd.Parameters.AddWithValue("@cost", txtCostProduct.Text); //Kieu String
+                commandAdd.Parameters.AddWithValue("@amount", txtAmountProduct.Text); //Kieu String
                 commandAdd.Parameters.AddWithValue("@manu", txtManuProduct.Text);
                 commandAdd.Parameters.AddWithValue("@color", txtColorProduct.Text);
-                //Them danh muc hinh anh -> sua trong INSERT INTO luon nha!
+                //Và sau đó mất chỉ 10 phút để sửa sai dcm =((((((
+                commandAdd.Parameters.AddWithValue("@image", converImgToByte());
+                
+                //Link hinh anh da duoc chuyen doi sang dang byte code
+
+                //Tôi đã mất 3 tiếng đồng hồ để viết cái hàm ngu xuẩn này đm :((((
+                //Nó convert từ byte sang dạng quần què gì đéo hiểu nvarchar :((((
+                //String linkImage= Convert.ToBase64String(converImgToByte()); 
 
                 commandAdd.ExecuteNonQuery();
 

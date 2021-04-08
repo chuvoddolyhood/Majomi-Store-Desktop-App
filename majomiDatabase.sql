@@ -53,6 +53,12 @@ CREATE TABLE Product(
 	Image_Product IMAGE NULL,
 );
 
+
+--IMAGE -> Varbinary -> nvarchar
+SELECT * FROM Product
+
+
+
 CREATE TABLE INVOICE(
 	ID_Invoice VARCHAR(10) NOT NULL,
 	Invoice_Day Date,
@@ -159,6 +165,17 @@ INSERT INTO Product
 SELECT 'Qu001','Quan kappa','Quan','Male',4000000,30,'Kappa','Deng vien xanh dam',
 	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\quan_Kappa.jpg', 
 	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'Qu002','Quan short','Quan','Male',100000,30,'Tiki','Den',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\quan_short.jfif', 
+	Single_Blob) AS Picture;
+
+INSERT INTO Product 
+SELECT 'Gi002','Giay Nike','Giay','Male',7000000,1,'Nike','Trang xam',
+	BulkColumn FROM OPENROWSET(BULK 'F:\Programming\App\Fashion-Store-Development-Project\Photo\nike.jpeg', 
+	Single_Blob) AS Picture;
+
 
 -------------------------------------------Invoice-----------------------------------------------
 
@@ -272,8 +289,15 @@ UPDATE Product SET Title_Product=@title, Type_Product=@type, Sex_Product=@sex, C
 --Xac dinh ID Product
 
 SELECT * FROM Product;
-
+Use majomiStore
 SELECT MAX(ID_Product)  FROM Product WHERE Type_Product='Ao';
 
-
 SELECT * FROM Product WHERE Title_Product='Quan kappa';
+
+--Xuat picture tu id product
+SELECT Image_Product FROM Product WHERE ID_Product='Ao001';
+
+-- Hoa don
+SELECT * FROM INVOICE ORDER BY ID_Invoice ASC;
+
+SELECT MAX(ID_Invoice) FROM INVOICE;
