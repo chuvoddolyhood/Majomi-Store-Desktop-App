@@ -29,3 +29,4 @@ C:\Users\Admin\Source\Repos\chuvoddolyhood\Majomi-Store-Desktop-App\QuanLyShopTh
 C:\Users\Admin\Source\Repos\chuvoddolyhood\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.exe
 C:\Users\Admin\Source\Repos\chuvoddolyhood\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.pdb
 C:\Users\Admin\Source\Repos\chuvoddolyhood\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.Invoice.resources
+C:\Users\Admin\Source\Repos\chuvoddolyhood\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.History.resources

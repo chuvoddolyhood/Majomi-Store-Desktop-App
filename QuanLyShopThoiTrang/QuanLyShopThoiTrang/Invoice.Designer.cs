@@ -42,7 +42,6 @@ namespace QuanLyShopThoiTrang
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtUnitPrice = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnNewCustomer = new System.Windows.Forms.Button();
             this.btnClearProduct = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
@@ -55,6 +54,7 @@ namespace QuanLyShopThoiTrang
             this.txtIDProduct = new System.Windows.Forms.TextBox();
             this.txtIDInvoice = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnNewCustomer = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtNameCustomer = new System.Windows.Forms.TextBox();
             this.btnAddCustomer = new System.Windows.Forms.Button();
@@ -65,9 +65,10 @@ namespace QuanLyShopThoiTrang
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnCost = new System.Windows.Forms.Button();
             this.btnPrintInvoice = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.ptbArrowsBack = new System.Windows.Forms.PictureBox();
+            this.txtCost = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.lblHistory = new System.Windows.Forms.Label();
+            this.ptbArrowsBack = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduct)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -155,7 +156,6 @@ namespace QuanLyShopThoiTrang
             this.dataGridViewProduct.RowTemplate.Height = 24;
             this.dataGridViewProduct.Size = new System.Drawing.Size(1866, 373);
             this.dataGridViewProduct.TabIndex = 0;
-            this.dataGridViewProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProduct_CellContentClick);
             // 
             // label1
             // 
@@ -216,16 +216,6 @@ namespace QuanLyShopThoiTrang
             this.label10.Size = new System.Drawing.Size(68, 17);
             this.label10.TabIndex = 16;
             this.label10.Text = "Unit price";
-            // 
-            // btnNewCustomer
-            // 
-            this.btnNewCustomer.Location = new System.Drawing.Point(456, 15);
-            this.btnNewCustomer.Name = "btnNewCustomer";
-            this.btnNewCustomer.Size = new System.Drawing.Size(99, 74);
-            this.btnNewCustomer.TabIndex = 15;
-            this.btnNewCustomer.Text = "New Customer";
-            this.btnNewCustomer.UseVisualStyleBackColor = true;
-            this.btnNewCustomer.Click += new System.EventHandler(this.btnNewCustomer_Click);
             // 
             // btnClearProduct
             // 
@@ -332,6 +322,16 @@ namespace QuanLyShopThoiTrang
             this.label3.TabIndex = 3;
             this.label3.Text = "ID Product";
             // 
+            // btnNewCustomer
+            // 
+            this.btnNewCustomer.Location = new System.Drawing.Point(456, 15);
+            this.btnNewCustomer.Name = "btnNewCustomer";
+            this.btnNewCustomer.Size = new System.Drawing.Size(99, 74);
+            this.btnNewCustomer.TabIndex = 15;
+            this.btnNewCustomer.Text = "New Customer";
+            this.btnNewCustomer.UseVisualStyleBackColor = true;
+            this.btnNewCustomer.Click += new System.EventHandler(this.btnNewCustomer_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.txtNameCustomer);
@@ -407,7 +407,7 @@ namespace QuanLyShopThoiTrang
             // 
             this.groupBox4.Controls.Add(this.btnCost);
             this.groupBox4.Controls.Add(this.btnPrintInvoice);
-            this.groupBox4.Controls.Add(this.textBox6);
+            this.groupBox4.Controls.Add(this.txtCost);
             this.groupBox4.Location = new System.Drawing.Point(1176, 535);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(271, 145);
@@ -423,6 +423,7 @@ namespace QuanLyShopThoiTrang
             this.btnCost.TabIndex = 20;
             this.btnCost.Text = "Cost";
             this.btnCost.UseVisualStyleBackColor = true;
+            this.btnCost.Click += new System.EventHandler(this.btnCost_Click);
             // 
             // btnPrintInvoice
             // 
@@ -433,12 +434,33 @@ namespace QuanLyShopThoiTrang
             this.btnPrintInvoice.Text = "Print Invoice";
             this.btnPrintInvoice.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // txtCost
             // 
-            this.textBox6.Location = new System.Drawing.Point(21, 49);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(235, 22);
-            this.textBox6.TabIndex = 18;
+            this.txtCost.Location = new System.Drawing.Point(21, 49);
+            this.txtCost.Name = "txtCost";
+            this.txtCost.Size = new System.Drawing.Size(235, 22);
+            this.txtCost.TabIndex = 18;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Vogue", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(738, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(282, 39);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Sales System";
+            // 
+            // lblHistory
+            // 
+            this.lblHistory.AutoSize = true;
+            this.lblHistory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblHistory.Location = new System.Drawing.Point(1794, 25);
+            this.lblHistory.Name = "lblHistory";
+            this.lblHistory.Size = new System.Drawing.Size(52, 17);
+            this.lblHistory.TabIndex = 18;
+            this.lblHistory.Text = "History";
+            this.lblHistory.Click += new System.EventHandler(this.lblHistory_Click);
             // 
             // ptbArrowsBack
             // 
@@ -451,21 +473,12 @@ namespace QuanLyShopThoiTrang
             this.ptbArrowsBack.TabStop = false;
             this.ptbArrowsBack.Click += new System.EventHandler(this.ptbArrowsBack_Click);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Vogue", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(738, 25);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(282, 39);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Sales System";
-            // 
             // Invoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.lblHistory);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.ptbArrowsBack);
             this.Controls.Add(this.groupBox4);
@@ -519,7 +532,7 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnNewCustomer;
         private System.Windows.Forms.TextBox txtNameCustomer;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtCost;
         private System.Windows.Forms.Button btnCost;
         private System.Windows.Forms.Button btnPrintInvoice;
         private System.Windows.Forms.PictureBox ptbArrowsBack;
@@ -532,5 +545,6 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtNameCustomerDGV;
         private System.Windows.Forms.TextBox txtIDCustomerDGV;
+        private System.Windows.Forms.Label lblHistory;
     }
 }

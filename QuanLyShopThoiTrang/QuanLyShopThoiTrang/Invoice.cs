@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace QuanLyShopThoiTrang
 {
@@ -272,12 +273,6 @@ namespace QuanLyShopThoiTrang
             txtTitleProduct.Clear();
             txtUnitPrice.Clear();
             txtQuantity.Clear();
-            txtIDInvoiceDataGridView.Clear();
-        }
-
-        private void dataGridViewProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void btnNewCustomer_Click(object sender, EventArgs e)
@@ -291,10 +286,28 @@ namespace QuanLyShopThoiTrang
             txtNameCustomer.Clear();
             txtNameCustomerDGV.Clear();
             txtIDCustomerDGV.Clear();
-            
+            txtTotalProduct.Text = "0";
+            txtCost.Clear();
         }
-       
 
-        
+        private void btnCost_Click(object sender, EventArgs e)
+        {
+            string querySumMoney = "SELECT SUM(GrandTotal) FROM Invoice WHERE ID_Invoice=@idInvoice;";
+
+            SqlConnection connector = new SqlConnection(strDatabase);
+            connector.Open();
+            SqlCommand commandAdd = new SqlCommand(querySumMoney, connector);
+
+            commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoiceDataGridView.Text);
+            int costSum = Convert.ToInt32(commandAdd.ExecuteScalar());
+            txtCost.Text = costSum.ToString();
+            connector.Close();
+        }
+
+        private void lblHistory_Click(object sender, EventArgs e)
+        {
+            History history = new History();
+            history.Show();
+        }
     }
 }

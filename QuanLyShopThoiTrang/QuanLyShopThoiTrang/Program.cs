@@ -22,10 +22,10 @@ namespace QuanLyShopThoiTrang
             //Application.Run(new productManagement());
 
             Application.Run(new Invoice());
-            
-            
-            
-            
+
+            //Application.Run(new History());
+
+
             //singleton
         }
     }
