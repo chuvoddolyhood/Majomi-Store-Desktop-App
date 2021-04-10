@@ -46,7 +46,7 @@ CREATE TABLE Product(
 	Title_Product VARCHAR(100) NOT NULL,
 	Type_Product VARCHAR(10) NOT NULL,
 	Sex_Product VARCHAR(7) NULL,
-	Cost_Product FLOAT,
+	UnitPrice INT,
 	Amount_Product INT,
 	Manufacturer VARCHAR(100),
 	Color_Porduct VARCHAR(30),
@@ -54,21 +54,14 @@ CREATE TABLE Product(
 );
 
 
---IMAGE -> Varbinary -> nvarchar
-SELECT * FROM Product
-
-
-
-CREATE TABLE INVOICE(
+CREATE TABLE Invoice(
 	ID_Invoice VARCHAR(10) NOT NULL,
 	Invoice_Day Date,
 	ID_Customer VARCHAR(10) NOT NULL REFERENCES Customer(ID_Customer),
 	ID_Product VARCHAR(10) NOT NULL REFERENCES Product(ID_Product),
 	Quantity_Product INT,
-	SubTotal FLOAT NULL,
-	Discount FLOAT NULL,
+	UnitPrice INT,
 	GrandTotal FLOAT NULL,
-	MarkOfAccumulation INT
 );
 
 	
@@ -117,10 +110,10 @@ INSERT INTO Account VALUES ('004','nghia241','chuvod');
 
 --------------------Customer------------------------------------
 SELECT * FROM Customer
-INSERT INTO Customer VALUES ('KH001','Lu Thi Thanh Mi','0914635308',10);
-INSERT INTO Customer VALUES ('KH002','Truong Tieu Phung','0793904783',5);
-INSERT INTO Customer VALUES ('KH003','Tran Quang Vinh','0879293131',8);
-INSERT INTO Customer VALUES ('KH004','Cao Ngoc Bao Long','0939894721',17);
+INSERT INTO Customer VALUES ('KH001','Lu Thi Thanh Mi','0914635308');
+INSERT INTO Customer VALUES ('KH002','Truong Tieu Phung','0793904783');
+INSERT INTO Customer VALUES ('KH003','Tran Quang Vinh','0879293131');
+INSERT INTO Customer VALUES ('KH004','Cao Ngoc Bao Long','0939894721');
 
 --------------------Product------------------------------------
 
@@ -181,15 +174,13 @@ SELECT 'Gi002','Giay Nike','Giay','Male',7000000,1,'Nike','Trang xam',
 
 SELECT * FROM INVOICE;
 
-INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','Ao003',1,550000,null,550000,5);
-INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','Va001',1,180000,null,180000,1);
-INSERT INTO INVOICE VALUES('HD002','Apr 7, 2021','KH002','Ao002',1,350000,null,350000,3);
-INSERT INTO INVOICE VALUES('HD003','Apr 7, 2021','KH003','Ao004',2,330000,null,330000,(330000*2)/100000);
-INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','Gi001',1,5000000,null,5000000,5000000/100000);
-INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','Ao004',1,350000,null,350000,3);
-INSERT INTO INVOICE VALUES('HD005','Apr 8, 2021','KH004','Ao001',1,100000,0.2,100000-100000*0.2,1);
-
-
+INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','Ao003',1,550000,550000);
+INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','Va001',1,180000,180000);
+INSERT INTO INVOICE VALUES('HD002','Apr 7, 2021','KH002','Ao002',1,350000,350000);
+INSERT INTO INVOICE VALUES('HD003','Apr 7, 2021','KH003','Ao004',2,330000,330000*2);
+INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','Gi001',1,5000000,5000000);
+INSERT INTO INVOICE VALUES('HD004','Apr 7, 2021','KH004','Ao004',1,350000,350000);
+INSERT INTO INVOICE VALUES('HD005','Apr 8, 2021','KH004','Ao001',1,100000,100000);
 
 --------------------------
 SELECT COUNT(*)
@@ -301,3 +292,39 @@ SELECT Image_Product FROM Product WHERE ID_Product='Ao001';
 SELECT * FROM INVOICE ORDER BY ID_Invoice ASC;
 
 SELECT MAX(ID_Invoice) FROM INVOICE;
+
+--In danh sach hang hoa sau khi nhap ID vao
+SELECT I.ID_Product,P.Title_Product, Quantity_Product,I.UnitPrice,I.GrandTotal,P.Image_Product
+FROM INVOICE I JOIN Product P ON I.ID_Product=P.ID_Product
+WHERE I.ID_Invoice='HD001';
+
+--In title hang hoa sau khi nhap ID product vao
+SELECT Title_Product FROM Product WHERE ID_Product='Gi001';
+
+
+SELECT * FROM INVOICE WHERE ID_Invoice='HD001';
+SELECT * FROM INVOICE ORDER BY ID_Invoice ASC;
+SELECT * FROM Customer;
+USE majomiStore;
+
+INSERT INTO INVOICE VALUES('HD001','Apr 6, 2021','KH001','Ao003',1,550000,0,550000,5);
+
+SELECT COUNT(*) FROM INVOICE WHERE ID_Invoice='HD007';
+
+
+DELETE INVOICE WHERE ID_Invoice='HD007';
+
+ALTER TABLE Product
+ALTER COLUMN [Cost_Product] INT NULL;
+
+ALTER TABLE INVOICE
+ALTER COLUMN [SubTotal] INT NULL;
+
+SELECT * FROM Product;
+SELECT * FROM INVOICE
+
+SELECT Cost_Product FROM Product WHERE ID_Product='Ao001';
+
+SELECT UnitPrice FROM Product WHERE ID_Product='Ao001';
+
+

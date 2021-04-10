@@ -47,5 +47,12 @@ namespace QuanLyShopThoiTrang
             productManagement customer = new productManagement();
             customer.Show();
         }
+
+        private void invoices_Label_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Invoice customer = new Invoice();
+            customer.Show();
+        }
     }
 }

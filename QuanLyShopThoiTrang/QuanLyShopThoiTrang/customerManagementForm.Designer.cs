@@ -39,17 +39,17 @@ namespace QuanLyShopThoiTrang
             this.txtNameCustomer = new System.Windows.Forms.TextBox();
             this.txtPhoneNumberCustomer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPhoneNumberFinder = new System.Windows.Forms.TextBox();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnFind = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
             this.lblID = new System.Windows.Forms.Label();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnFind = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtTotalCustomer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtPhoneNumberFinder = new System.Windows.Forms.TextBox();
+            this.txtTotalCustomer = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -100,11 +100,11 @@ namespace QuanLyShopThoiTrang
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridView.Location = new System.Drawing.Point(6, 21);
+            this.dataGridView.Location = new System.Drawing.Point(9, 21);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
-            this.dataGridView.Size = new System.Drawing.Size(1888, 537);
+            this.dataGridView.Size = new System.Drawing.Size(1869, 489);
             this.dataGridView.TabIndex = 14;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentDoubleClick);
             // 
@@ -164,6 +164,13 @@ namespace QuanLyShopThoiTrang
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controler";
             // 
+            // txtPhoneNumberFinder
+            // 
+            this.txtPhoneNumberFinder.Location = new System.Drawing.Point(1395, 54);
+            this.txtPhoneNumberFinder.Name = "txtPhoneNumberFinder";
+            this.txtPhoneNumberFinder.Size = new System.Drawing.Size(352, 32);
+            this.txtPhoneNumberFinder.TabIndex = 23;
+            // 
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(890, 161);
@@ -173,6 +180,16 @@ namespace QuanLyShopThoiTrang
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnFind
+            // 
+            this.btnFind.Location = new System.Drawing.Point(1770, 31);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(88, 74);
+            this.btnFind.TabIndex = 22;
+            this.btnFind.Text = "Find";
+            this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // txtID
             // 
@@ -222,16 +239,6 @@ namespace QuanLyShopThoiTrang
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnFind
-            // 
-            this.btnFind.Location = new System.Drawing.Point(1770, 31);
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(88, 74);
-            this.btnFind.TabIndex = 22;
-            this.btnFind.Text = "Find";
-            this.btnFind.UseVisualStyleBackColor = true;
-            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtTotalCustomer);
@@ -243,14 +250,6 @@ namespace QuanLyShopThoiTrang
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             // 
-            // txtTotalCustomer
-            // 
-            this.txtTotalCustomer.Location = new System.Drawing.Point(58, 574);
-            this.txtTotalCustomer.Name = "txtTotalCustomer";
-            this.txtTotalCustomer.ReadOnly = true;
-            this.txtTotalCustomer.Size = new System.Drawing.Size(100, 22);
-            this.txtTotalCustomer.TabIndex = 16;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -260,12 +259,13 @@ namespace QuanLyShopThoiTrang
             this.label2.TabIndex = 15;
             this.label2.Text = "Total";
             // 
-            // txtPhoneNumberFinder
+            // txtTotalCustomer
             // 
-            this.txtPhoneNumberFinder.Location = new System.Drawing.Point(1395, 54);
-            this.txtPhoneNumberFinder.Name = "txtPhoneNumberFinder";
-            this.txtPhoneNumberFinder.Size = new System.Drawing.Size(352, 32);
-            this.txtPhoneNumberFinder.TabIndex = 23;
+            this.txtTotalCustomer.Location = new System.Drawing.Point(19, 527);
+            this.txtTotalCustomer.Name = "txtTotalCustomer";
+            this.txtTotalCustomer.ReadOnly = true;
+            this.txtTotalCustomer.Size = new System.Drawing.Size(111, 22);
+            this.txtTotalCustomer.TabIndex = 26;
             // 
             // customerManagementForm
             // 
@@ -308,8 +308,8 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtTotalCustomer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPhoneNumberFinder;
+        private System.Windows.Forms.TextBox txtTotalCustomer;
     }
 }

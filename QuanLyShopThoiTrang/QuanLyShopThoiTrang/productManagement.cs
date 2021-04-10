@@ -240,7 +240,7 @@ namespace QuanLyShopThoiTrang
         private byte[] converImgToByte()
         {
             FileStream fs;
-            
+
             fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
 
             //Chuyen du lieu hinh anh thu nho size hinh anh lai -> tao dung luong byte moi
@@ -371,6 +371,7 @@ namespace QuanLyShopThoiTrang
                 commandAdd.Parameters.AddWithValue("@manu", txtManuProduct.Text);
                 commandAdd.Parameters.AddWithValue("@color", txtColorProduct.Text);
                 //Và sau đó mất chỉ 10 phút để sửa sai dcm =((((((
+                //Phai co hinh anh neu khong se co loi
                 commandAdd.Parameters.AddWithValue("@image", converImgToByte());
                 
                 //Link hinh anh da duoc chuyen doi sang dang byte code

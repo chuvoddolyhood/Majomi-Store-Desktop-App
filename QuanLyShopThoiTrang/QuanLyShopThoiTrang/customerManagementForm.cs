@@ -107,7 +107,7 @@ namespace QuanLyShopThoiTrang
             else
             {
                 //Them du lieu vao table.EmpInfo
-                string queryAdd = "INSERT INTO Customer VALUES (@id,@name,@phoneNumber,null);";
+                string queryAdd = "INSERT INTO Customer VALUES (@id,@name,@phoneNumber);";
                 SqlConnection connector = new SqlConnection(strDatabase);
                 connector.Open();
                 SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
@@ -194,6 +194,7 @@ namespace QuanLyShopThoiTrang
 
 
 
+        //Con BUG o button Find
         //Con BUG o button Find
         //
 

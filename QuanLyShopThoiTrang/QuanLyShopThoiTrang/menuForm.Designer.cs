@@ -110,6 +110,7 @@ namespace QuanLyShopThoiTrang
             this.invoices_Label.Size = new System.Drawing.Size(490, 70);
             this.invoices_Label.TabIndex = 2;
             this.invoices_Label.Text = "Search Invoices";
+            this.invoices_Label.Click += new System.EventHandler(this.invoices_Label_Click);
             // 
             // customerManagement_Label
             // 
