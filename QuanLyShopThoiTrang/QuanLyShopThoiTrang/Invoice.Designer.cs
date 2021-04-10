@@ -421,7 +421,7 @@ namespace QuanLyShopThoiTrang
             this.btnCost.Name = "btnCost";
             this.btnCost.Size = new System.Drawing.Size(116, 35);
             this.btnCost.TabIndex = 20;
-            this.btnCost.Text = "Cost";
+            this.btnCost.Text = "Calculating";
             this.btnCost.UseVisualStyleBackColor = true;
             this.btnCost.Click += new System.EventHandler(this.btnCost_Click);
             // 
@@ -433,6 +433,7 @@ namespace QuanLyShopThoiTrang
             this.btnPrintInvoice.TabIndex = 19;
             this.btnPrintInvoice.Text = "Print Invoice";
             this.btnPrintInvoice.UseVisualStyleBackColor = true;
+            this.btnPrintInvoice.Click += new System.EventHandler(this.btnPrintInvoice_Click);
             // 
             // txtCost
             // 

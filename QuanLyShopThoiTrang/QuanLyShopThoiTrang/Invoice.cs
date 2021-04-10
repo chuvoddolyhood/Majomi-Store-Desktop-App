@@ -170,7 +170,42 @@ namespace QuanLyShopThoiTrang
 
         //Tinh tong tien
         private int grandTotal() =>  int.Parse(txtUnitPrice.Text) * int.Parse(txtQuantity.Text);
-        
+
+        private string getIDProduct()
+        {
+            int i = int.Parse(txtTotalProduct.Text) - 1; //Lay gia tri hang(row) cua bang dataGridView
+            string IDProduct = dataGridViewProduct.Rows[i].Cells[0].Value.ToString();
+            return IDProduct;
+        }
+
+        private string getQuantityProduct()
+        {
+            int i = int.Parse(txtTotalProduct.Text) - 1; //Lay gia tri hang(row) cua bang dataGridView
+            string IDProduct = dataGridViewProduct.Rows[i].Cells[2].Value.ToString();
+            return IDProduct;
+        }
+
+        private int updateAmount;//Cap nhat so luong con lai sau khi mua hang
+        private void updateAmountProduct()
+        {
+            string queryAmount = "SELECT Amount_Product FROM Product WHERE ID_Product=@idProduct;";
+            SqlConnection connector = new SqlConnection(strDatabase);
+            connector.Open();
+            SqlCommand commandGetAmount = new SqlCommand(queryAmount, connector);
+
+            commandGetAmount.Parameters.AddWithValue("@idProduct", getIDProduct());
+            int amountProduct = Convert.ToInt32(commandGetAmount.ExecuteScalar()); //lay so luong trong kho
+            updateAmount = amountProduct - int.Parse(getQuantityProduct()); //Cap nhat so luong con lai sau khi mua hang
+
+
+            string queryUpdateAmountInTheProductTable = "UPDATE Product SET Amount_Product=7 WHERE ID_Product=@idProduct;";
+            SqlCommand commandUpdate = new SqlCommand(queryUpdateAmountInTheProductTable, connector);
+            //commandUpdate.Parameters.AddWithValue("@updateAmountProduct", updateAmountProduct);
+            commandUpdate.Parameters.AddWithValue("@idProduct", getIDProduct());
+            connector.Close(); 
+        }
+
+
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
 
@@ -193,8 +228,10 @@ namespace QuanLyShopThoiTrang
                 commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
                 commandAdd.ExecuteNonQuery();
 
+                
                 loadProductToDataGridView();
                 countProduct();
+                updateAmountProduct();
                 btnClearProduct_Click(sender, e);
                 connector.Close();
             }
@@ -309,5 +346,16 @@ namespace QuanLyShopThoiTrang
             History history = new History();
             history.Show();
         }
+
+        private void btnPrintInvoice_Click(object sender, EventArgs e)
+        {
+            DialogResult dlr = MessageBox.Show("Xac nhan thanh toan hoa don voi so tien "+txtCost.Text, "Thanh toan",
+                                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+            if (dlr == DialogResult.Yes)
+            {
+                MessageBox.Show("Da thanh toan!");
+            }
+        }
+
     }
 }

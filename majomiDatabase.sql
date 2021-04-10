@@ -320,12 +320,25 @@ ALTER COLUMN [Cost_Product] INT NULL;
 ALTER TABLE INVOICE
 ALTER COLUMN [SubTotal] INT NULL;
 
-SELECT * FROM Product;
-SELECT * FROM INVOICE;
-SELECT * FROM Customer;
 
 SELECT Cost_Product FROM Product WHERE ID_Product='Ao001';
 
 SELECT UnitPrice FROM Product WHERE ID_Product='Ao001';
 
+SELECT SUM(GrandTotal) FROM Invoice WHERE ID_Invoice='HD001';
+
+SELECT I.ID_Invoice,I.Invoice_Day,C.ID_Customer,C.Name_Customer,I.ID_Product,I.Quantity_Product,I.UnitPrice,I.GrandTotal
+FROM Invoice I JOIN Customer C ON I.ID_Customer=C.ID_Customer
+WHERE C.Name_Customer='To Huynh Minh Khoi'
+ORDER BY I.ID_Invoice ASC;
+
+
+SELECT * FROM Product;
+SELECT * FROM Invoice;
+SELECT * FROM Customer;
+
 SELECT * FROM Invoice WHERE ID_Invoice='HD001';
+
+SELECT Amount_Product FROM Product WHERE ID_Product='Ao001';
+
+UPDATE Product SET Amount_Product=10 WHERE ID_Product='Ao001';
