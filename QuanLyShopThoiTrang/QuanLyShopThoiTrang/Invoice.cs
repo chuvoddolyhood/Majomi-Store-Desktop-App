@@ -197,7 +197,7 @@ namespace QuanLyShopThoiTrang
             int amountProduct = Convert.ToInt32(commandGetAmount.ExecuteScalar()); //lay so luong trong kho
             updateAmount = amountProduct - int.Parse(getQuantityProduct()); //Cap nhat so luong con lai sau khi mua hang
 
-
+            //Co BUG van ko tru duoc so hang sau khi mua
             string queryUpdateAmountInTheProductTable = "UPDATE Product SET Amount_Product=7 WHERE ID_Product=@idProduct;";
             SqlCommand commandUpdate = new SqlCommand(queryUpdateAmountInTheProductTable, connector);
             //commandUpdate.Parameters.AddWithValue("@updateAmountProduct", updateAmountProduct);

@@ -62,24 +62,19 @@ namespace QuanLyShopThoiTrang
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rdbPhoneNumber = new System.Windows.Forms.RadioButton();
-            this.rdbName = new System.Windows.Forms.RadioButton();
-            this.rdbID = new System.Windows.Forms.RadioButton();
-            this.btnSalary = new System.Windows.Forms.Button();
             this.btnClearFinder = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.findDataGridView = new System.Windows.Forms.DataGridView();
-            this.txtPhoneNumberFinder = new System.Windows.Forms.TextBox();
-            this.txtNameFinder = new System.Windows.Forms.TextBox();
             this.txtIdFinder = new System.Windows.Forms.TextBox();
             this.findButton = new System.Windows.Forms.Button();
             this.ptbArrowsBack = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtIDWorkType = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtAllowance = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.findDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,6 +131,9 @@ namespace QuanLyShopThoiTrang
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.groupBox3.Controls.Add(this.txtAllowance);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.txtIDWorkType);
             this.groupBox3.Controls.Add(this.btnClearInput);
             this.groupBox3.Controls.Add(this.cmbLanguage);
             this.groupBox3.Controls.Add(this.txtPhoneNumber);
@@ -215,16 +213,17 @@ namespace QuanLyShopThoiTrang
             // 
             this.cmbWorkType.FormattingEnabled = true;
             this.cmbWorkType.Items.AddRange(new object[] {
-            "Quan Ly",
-            "Ban Hang",
+            "Quan ly",
+            "Ban hang",
             "Bao Ve",
-            "Tap Vu",
+            "Tap vu",
             "Nhan vien order",
             "Mau anh"});
             this.cmbWorkType.Location = new System.Drawing.Point(508, 149);
             this.cmbWorkType.Name = "cmbWorkType";
-            this.cmbWorkType.Size = new System.Drawing.Size(186, 24);
+            this.cmbWorkType.Size = new System.Drawing.Size(111, 24);
             this.cmbWorkType.TabIndex = 25;
+            this.cmbWorkType.SelectedIndexChanged += new System.EventHandler(this.cmbWorkType_SelectedIndexChanged);
             // 
             // workTypelabel
             // 
@@ -322,8 +321,9 @@ namespace QuanLyShopThoiTrang
             // 
             this.sexComboBox.FormattingEnabled = true;
             this.sexComboBox.Items.AddRange(new object[] {
-            "Nam",
-            "Nu"});
+            "Male",
+            "Female",
+            "Others"});
             this.sexComboBox.Location = new System.Drawing.Point(151, 107);
             this.sexComboBox.Name = "sexComboBox";
             this.sexComboBox.Size = new System.Drawing.Size(186, 24);
@@ -420,15 +420,8 @@ namespace QuanLyShopThoiTrang
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.rdbPhoneNumber);
-            this.groupBox1.Controls.Add(this.rdbName);
-            this.groupBox1.Controls.Add(this.rdbID);
-            this.groupBox1.Controls.Add(this.btnSalary);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnClearFinder);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.findDataGridView);
-            this.groupBox1.Controls.Add(this.txtPhoneNumberFinder);
-            this.groupBox1.Controls.Add(this.txtNameFinder);
             this.groupBox1.Controls.Add(this.txtIdFinder);
             this.groupBox1.Controls.Add(this.findButton);
             this.groupBox1.Location = new System.Drawing.Point(774, 544);
@@ -438,55 +431,9 @@ namespace QuanLyShopThoiTrang
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
-            // rdbPhoneNumber
-            // 
-            this.rdbPhoneNumber.AutoSize = true;
-            this.rdbPhoneNumber.Location = new System.Drawing.Point(361, 44);
-            this.rdbPhoneNumber.Name = "rdbPhoneNumber";
-            this.rdbPhoneNumber.Size = new System.Drawing.Size(124, 21);
-            this.rdbPhoneNumber.TabIndex = 21;
-            this.rdbPhoneNumber.TabStop = true;
-            this.rdbPhoneNumber.Text = "Phone Number";
-            this.rdbPhoneNumber.UseVisualStyleBackColor = true;
-            this.rdbPhoneNumber.CheckedChanged += new System.EventHandler(this.rdbPhoneNumber_CheckedChanged);
-            // 
-            // rdbName
-            // 
-            this.rdbName.AutoSize = true;
-            this.rdbName.Location = new System.Drawing.Point(31, 89);
-            this.rdbName.Name = "rdbName";
-            this.rdbName.Size = new System.Drawing.Size(66, 21);
-            this.rdbName.TabIndex = 20;
-            this.rdbName.TabStop = true;
-            this.rdbName.Text = "Name";
-            this.rdbName.UseVisualStyleBackColor = true;
-            this.rdbName.CheckedChanged += new System.EventHandler(this.rdbName_CheckedChanged);
-            // 
-            // rdbID
-            // 
-            this.rdbID.AutoSize = true;
-            this.rdbID.Location = new System.Drawing.Point(31, 47);
-            this.rdbID.Name = "rdbID";
-            this.rdbID.Size = new System.Drawing.Size(42, 21);
-            this.rdbID.TabIndex = 19;
-            this.rdbID.TabStop = true;
-            this.rdbID.Text = "ID";
-            this.rdbID.UseVisualStyleBackColor = true;
-            this.rdbID.CheckedChanged += new System.EventHandler(this.rdbID_CheckedChanged);
-            // 
-            // btnSalary
-            // 
-            this.btnSalary.Location = new System.Drawing.Point(601, 89);
-            this.btnSalary.Name = "btnSalary";
-            this.btnSalary.Size = new System.Drawing.Size(75, 23);
-            this.btnSalary.TabIndex = 15;
-            this.btnSalary.Text = "Salary";
-            this.btnSalary.UseVisualStyleBackColor = true;
-            this.btnSalary.Click += new System.EventHandler(this.btnSalary_Click);
-            // 
             // btnClearFinder
             // 
-            this.btnClearFinder.Location = new System.Drawing.Point(481, 88);
+            this.btnClearFinder.Location = new System.Drawing.Point(180, 107);
             this.btnClearFinder.Name = "btnClearFinder";
             this.btnClearFinder.Size = new System.Drawing.Size(75, 23);
             this.btnClearFinder.TabIndex = 14;
@@ -494,52 +441,16 @@ namespace QuanLyShopThoiTrang
             this.btnClearFinder.UseVisualStyleBackColor = true;
             this.btnClearFinder.Click += new System.EventHandler(this.btnClearFinder_Click);
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(28, 139);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(60, 17);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "Ket Qua";
-            // 
-            // findDataGridView
-            // 
-            this.findDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.findDataGridView.Location = new System.Drawing.Point(31, 162);
-            this.findDataGridView.Name = "findDataGridView";
-            this.findDataGridView.RowHeadersWidth = 51;
-            this.findDataGridView.RowTemplate.Height = 24;
-            this.findDataGridView.Size = new System.Drawing.Size(1079, 264);
-            this.findDataGridView.TabIndex = 6;
-            // 
-            // txtPhoneNumberFinder
-            // 
-            this.txtPhoneNumberFinder.Location = new System.Drawing.Point(492, 44);
-            this.txtPhoneNumberFinder.Name = "txtPhoneNumberFinder";
-            this.txtPhoneNumberFinder.Size = new System.Drawing.Size(220, 22);
-            this.txtPhoneNumberFinder.TabIndex = 5;
-            this.txtPhoneNumberFinder.Visible = false;
-            // 
-            // txtNameFinder
-            // 
-            this.txtNameFinder.Location = new System.Drawing.Point(105, 86);
-            this.txtNameFinder.Name = "txtNameFinder";
-            this.txtNameFinder.Size = new System.Drawing.Size(208, 22);
-            this.txtNameFinder.TabIndex = 4;
-            this.txtNameFinder.Visible = false;
-            // 
             // txtIdFinder
             // 
             this.txtIdFinder.Location = new System.Drawing.Point(105, 46);
             this.txtIdFinder.Name = "txtIdFinder";
             this.txtIdFinder.Size = new System.Drawing.Size(208, 22);
             this.txtIdFinder.TabIndex = 3;
-            this.txtIdFinder.Visible = false;
             // 
             // findButton
             // 
-            this.findButton.Location = new System.Drawing.Point(361, 89);
+            this.findButton.Location = new System.Drawing.Point(68, 105);
             this.findButton.Name = "findButton";
             this.findButton.Size = new System.Drawing.Size(75, 23);
             this.findButton.TabIndex = 13;
@@ -568,6 +479,40 @@ namespace QuanLyShopThoiTrang
             this.label2.TabIndex = 12;
             this.label2.Text = "Employee Manager";
             // 
+            // txtIDWorkType
+            // 
+            this.txtIDWorkType.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtIDWorkType.Location = new System.Drawing.Point(625, 151);
+            this.txtIDWorkType.Name = "txtIDWorkType";
+            this.txtIDWorkType.ReadOnly = true;
+            this.txtIDWorkType.Size = new System.Drawing.Size(69, 22);
+            this.txtIDWorkType.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(372, 230);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 17);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Allowace";
+            // 
+            // txtAllowance
+            // 
+            this.txtAllowance.Location = new System.Drawing.Point(508, 230);
+            this.txtAllowance.Name = "txtAllowance";
+            this.txtAllowance.Size = new System.Drawing.Size(186, 22);
+            this.txtAllowance.TabIndex = 33;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(31, 50);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(21, 17);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "ID";
+            // 
             // employeeManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -591,7 +536,6 @@ namespace QuanLyShopThoiTrang
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.findDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -628,22 +572,18 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.Label languageLabel;
         private System.Windows.Forms.ComboBox cmbWorkType;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridView findDataGridView;
-        private System.Windows.Forms.TextBox txtPhoneNumberFinder;
-        private System.Windows.Forms.TextBox txtNameFinder;
         private System.Windows.Forms.TextBox txtIdFinder;
         private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.Button btnClearFinder;
         private System.Windows.Forms.ComboBox cmbLanguage;
         private System.Windows.Forms.TextBox txtPhoneNumber;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button btnSalary;
         private System.Windows.Forms.Button btnClearInput;
-        private System.Windows.Forms.RadioButton rdbID;
-        private System.Windows.Forms.RadioButton rdbPhoneNumber;
-        private System.Windows.Forms.RadioButton rdbName;
         private System.Windows.Forms.PictureBox ptbArrowsBack;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtIDWorkType;
+        private System.Windows.Forms.TextBox txtAllowance;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label9;
     }
 }

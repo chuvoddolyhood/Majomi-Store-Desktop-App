@@ -20,6 +20,14 @@ namespace QuanLyShopThoiTrang
         {
             InitializeComponent();
         }
+
+        private void ptbArrowsBack_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            menuForm menu = new menuForm();
+            menu.Show();
+        }
+
         private DataSet getAllEmployee()
         {
             DataSet data = new DataSet();
@@ -27,7 +35,7 @@ namespace QuanLyShopThoiTrang
             //Sau khi su dung xong se tu huy connection
             //int ID=2;
             //string query = "SELECT * FROM NHANVIEN"+ ID.toString());
-            string query = "SELECT * FROM EmpInfo ORDER BY ID ASC;";
+            string query = "SELECT E.ID, E.Emp_Name,E.Sex,E.DOB,E.Emp_Address,E.Phone_Number,E.Email,E.Acadamic_Level,E.Language ,W.TitleWork,E.Start_Working_Day, W.Salary, E.Allowance FROM Employee E JOIN Work W ON E.IDWorkType = W.IDWorkType WHERE E.IDWorkType = ANY(SELECT IDWorkType FROM Work) ORDER BY E.ID ASC; ";
 
             using (SqlConnection connection = new SqlConnection(strDatabase))
             {
@@ -46,7 +54,7 @@ namespace QuanLyShopThoiTrang
             int total;
             SqlConnection connector = new SqlConnection(strDatabase);
             connector.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM EmpInfo;", connector);
+            SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM Employee;", connector);
             total = (int)cmd.ExecuteScalar();
             totalEmployeeTextBox.Text = total.ToString();
             connector.Close();
@@ -57,18 +65,19 @@ namespace QuanLyShopThoiTrang
             SqlConnection connector = new SqlConnection(strDatabase);
             connector.Open();
             //Mac dinh lay gia tri cuoi danh sach trong CSDL
-            SqlCommand cmd = new SqlCommand("SELECT MAX(id) FROM EmpInfo", connector);
-            string id_temp = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
-            int id = int.Parse(id_temp)+1; //CHuyen doi sang dang so(int)
-            if (id < 10)
+            SqlCommand cmd = new SqlCommand("SELECT MAX(ID) FROM Employee", connector);
+            string id = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
+            string id_lastNumber = id.Substring(2,3);
+            int id_temp = int.Parse(id_lastNumber) +1; //CHuyen doi sang dang so(int)
+            if (id_temp < 10)
             {
-                idTextBox.Text = "00" + id.ToString();
+                idTextBox.Text = "NV00" + id_temp.ToString();
             }
-            else if (id >= 10 && id < 100)
+            else if (id_temp >= 10 && id_temp < 100)
             {
-                idTextBox.Text = "0" + id.ToString();
+                idTextBox.Text = "NV0" + id_temp.ToString();
             }
-            else idTextBox.Text =  id.ToString();
+            else idTextBox.Text =  "NV"+ id_temp.ToString();
             connector.Close();
         }
 
@@ -85,74 +94,20 @@ namespace QuanLyShopThoiTrang
             setIDInTheIdButton();
         }
 
-        private DataSet findEmployee()
+
+        //Sau khi bam chon Type work -> tu sinh ID work
+        private void cmbWorkType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataSet data2 = new DataSet();
-            string queryID = "SELECT * FROM EmpInfo WHERE id=@txtID";
-            string queryPhone = "SELECT * FROM EmpInfo WHERE Phone_Number=@txtPhoneNumberFinder";
-            string queryName = "SELECT * FROM EmpInfo WHERE Emp_Name=@txtNameFinder";
+            string titelWorkType = cmbWorkType.Text;
 
-            using (SqlConnection connector = new SqlConnection(strDatabase))
-            {
-                connector.Open();
-                //sqlCommand
-                SqlCommand cmdID = new SqlCommand(queryID, connector);
-                SqlCommand cmdPhone = new SqlCommand(queryPhone, connector);
-                SqlCommand cmdName = new SqlCommand(queryName, connector);
-                cmdID.Parameters.AddWithValue("@txtID", txtIdFinder.Text);
-                cmdPhone.Parameters.AddWithValue("@txtPhoneNumberFinder", txtPhoneNumberFinder.Text);
-                cmdName.Parameters.AddWithValue("@txtNameFinder", txtNameFinder.Text);
-                //sqldataAdapter
-                SqlDataAdapter adapterID = new SqlDataAdapter(cmdID);
-                SqlDataAdapter adapterPhone = new SqlDataAdapter(cmdPhone);
-                SqlDataAdapter adapterName = new SqlDataAdapter(cmdName);
-                adapterID.Fill(data2);
-                adapterPhone.Fill(data2);
-                adapterName.Fill(data2);
-                connector.Close();
-            }
-            return data2;
-        }
-
-        private void findButton_Click(object sender, EventArgs e)
-        {
-            //Xuat thong tin len bang nho
-            findDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            findDataGridView.DataSource = findEmployee().Tables[0];
-
-            //Xuat thong tin ra cac txt
-            printInfoInTheTextBox();
-        }
-
-        //Chuyen doi thong tin nhap vao va tim kiem trong CSDL
-        private void printInfoInTheTextBox()
-        {
-            //In thong tin ra tung textbox nho trong groupbox Input Employee lay tu ID
-            string getID = txtIdFinder.Text;
-            int indexRow = int.Parse(getID)-1; //tri so cot xuat theo tu ID
-            showInfoIntoTextBox(indexRow);
-
-            ////In thong tin ra tung textbox nho trong groupbox Input Employee lay tu name
-            //string queryGetIDFromName = "SELECT ID FROM EmpInfo WHERE Emp_Name=@name;";
-            //connector = new SqlConnection(strDatabase);
-            //connector.Open();
-            //SqlCommand commandFindIDFromName = new SqlCommand(queryGetIDFromName, connector);
-            //commandFindIDFromName.Parameters.AddWithValue("@name", txtNameFinder.Text);
-            //showInfoIntoTextBox(indexRow);
-        }
-
-        private void btnClearFinder_Click(object sender, EventArgs e)
-        {
-            txtIdFinder.Clear();
-            txtNameFinder.Clear();
-            txtPhoneNumberFinder.Clear();
-            rdbID.Checked = false;
-            rdbName.Checked = false;
-            rdbPhoneNumber.Checked = false;
-            txtIdFinder.Visible = false;
-            txtNameFinder.Visible = false;
-            txtPhoneNumberFinder.Visible = false;
-            
+            SqlConnection connector = new SqlConnection(strDatabase);
+            connector.Open();
+            //Mac dinh lay gia tri cuoi danh sach trong CSDL
+            SqlCommand cmd = new SqlCommand("SELECT IDWorkType FROM Work WHERE TitleWork=@titelWorkType;", connector);
+            cmd.Parameters.AddWithValue("@titelWorkType", titelWorkType);
+            string idWorkType = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
+            txtIDWorkType.Text = idWorkType;
+            connector.Close();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -163,13 +118,11 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-            //Them du lieu vao table.EmpInfo
-            string queryAdd = "INSERT INTO EmpInfo VALUES(@id,@name,@sex,@dob,@address,@phoneNumber,@email,@edu,@language,@workType,@startWorkingDay);";
-            //Them du lieu vao table.Employee
-            string queryUpdate = "INSERT INTO Employee SELECT I.ID, I.Emp_Name,I.Sex,I.DOB,I.Emp_Address,I.Phone_Number,I.Email, I.Acadamic_Level,L.ID_Language, W.ID_Work,I.Start_Working_Day FROM EmpInfo I JOIN Employee_Language L ON I.Title_Language = L.Title JOIN Work W ON I.Title_Work = W.Title_Work WHERE ID = @id; ";
+                //Them du lieu vao table.Employee 
+                string queryAddEmployee = "INSERT INTO Employee VALUES(@id,@name,@sex,@dob,@address,@phoneNumber,@email,@edu,@language,@idWorkType,@startWorkingDay,@allowance);";
             SqlConnection connector = new SqlConnection(strDatabase);
             connector.Open();
-            SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+            SqlCommand commandAdd = new SqlCommand(queryAddEmployee, connector);
 
             //Thuc thi lenh them du lieu vao bang EmpInfo
             commandAdd.Parameters.AddWithValue("@id",idTextBox.Text);
@@ -181,14 +134,10 @@ namespace QuanLyShopThoiTrang
             commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
             commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
             commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
-            commandAdd.Parameters.AddWithValue("@workType", cmbWorkType.Text);
+            commandAdd.Parameters.AddWithValue("@idWorkType", txtIDWorkType.Text);
             commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
+            commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
             commandAdd.ExecuteNonQuery();
-
-            //Thuc thi lenh update them du lieu vao bang Employee
-            SqlCommand commandUpdate = new SqlCommand(queryUpdate, connector);
-            commandUpdate.Parameters.AddWithValue("@id", idTextBox.Text);
-            commandUpdate.ExecuteNonQuery();
 
             employeeManagementForm_Load(sender, e);
             btnClearInput_Click(sender, e);
@@ -213,17 +162,10 @@ namespace QuanLyShopThoiTrang
                 }
                 if (dlr == DialogResult.Yes)
                 {
-                    string queryDeleteTabelEmpInfo = "DELETE EmpInfo WHERE ID=@id;";
                     string queryDeleteTabelEmployee = "DELETE Employee WHERE ID=@id;";
 
                     connector = new SqlConnection(strDatabase);
                     connector.Open();
-                    //Thuc thi tren table.EmpInfo
-                    SqlCommand commandDelTabelEmpInfo = new SqlCommand(queryDeleteTabelEmpInfo, connector);
-                    commandDelTabelEmpInfo.Parameters.AddWithValue("@id", idTextBox.Text);
-                    commandDelTabelEmpInfo.ExecuteNonQuery();
-
-                    //Thuc thi tren table.Emlpoyee
                     SqlCommand commandDelTabelEmployee = new SqlCommand(queryDeleteTabelEmployee, connector);
                     commandDelTabelEmployee.Parameters.AddWithValue("@id", idTextBox.Text);
                     commandDelTabelEmployee.ExecuteNonQuery();
@@ -237,10 +179,9 @@ namespace QuanLyShopThoiTrang
 
         private void modifyButton_Click(object sender, EventArgs e)
         {
-            //Them du lieu vao table.EmpInfo
-            string queryAdd = "UPDATE EmpInfo SET Emp_Name='@name', Sex='@sex',DOB='@dob',Emp_Address='@address',Phone_Number='@phoneNumber',Email='@email',Acadamic_Level='@edu',Title_Language='@language',Title_Work='@workType',Start_Working_Day='@startWorkingDay' WHERE ID='@id';";
             //Them du lieu vao table.Employee
-            //string queryUpdate = "INSERT INTO Employee SELECT I.ID, I.Emp_Name,I.Sex,I.DOB,I.Emp_Address,I.Phone_Number,I.Email, I.Acadamic_Level,L.ID_Language, W.ID_Work,I.Start_Working_Day FROM EmpInfo I JOIN Employee_Language L ON I.Title_Language = L.Title JOIN Work W ON I.Title_Work = W.Title_Work WHERE ID = @id; ";
+            string queryAdd = "UPDATE Employee SET Emp_Name=@name, Sex=@sex,DOB=@dob,Emp_Address=@address,Phone_Number=@phoneNumber,Email=@email,Acadamic_Level=@edu,Language=@language,IDWorkType = @idWorkType,Start_Working_Day=@startWorkingDay,Allowance = @allowance WHERE ID=@id;";
+            
             connector = new SqlConnection(strDatabase);
             connector.Open();
             SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
@@ -255,19 +196,14 @@ namespace QuanLyShopThoiTrang
             commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
             commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
             commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
-            commandAdd.Parameters.AddWithValue("@workType", cmbWorkType.Text);
+            commandAdd.Parameters.AddWithValue("@IDWorkType", txtIDWorkType.Text);
             commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
+            commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
             commandAdd.ExecuteNonQuery();
-
-            //Thuc thi lenh update them du lieu vao bang Employee
-            //SqlCommand commandUpdate = new SqlCommand(queryUpdate, connector);
-            //commandUpdate.Parameters.AddWithValue("@id", idTextBox.Text);
-            //commandUpdate.ExecuteNonQuery();
 
             employeeManagementForm_Load(sender, e);
             btnClearInput_Click(sender, e);
             connector.Close();
-
         }
 
         private void btnClearInput_Click(object sender, EventArgs e)
@@ -283,35 +219,13 @@ namespace QuanLyShopThoiTrang
             cmbLanguage.ResetText();
             cmbWorkType.ResetText();
             dtpStartWorkingDay.ResetText();
-        }
-
-        private void btnSalary_Click(object sender, EventArgs e)
-        {
-            outputSalary();
-        }
-
-        private DataSet outputSalary()
-        {
-            DataSet dataSalary = new DataSet();
-            string querySalary = "SELECT E.Emp_Name, W.Title_Work, W.Salary FROM Employee E JOIN Work W ON E.ID_Work = W.ID_Work; ";
-
-            using (SqlConnection connector = new SqlConnection(strDatabase))
-            {
-                connector.Open();
-                //sqlCommand
-                SqlCommand commandAdd = new SqlCommand(querySalary, connector);
-                //sqldataAdapter
-                SqlDataAdapter adapterSalary = new SqlDataAdapter(commandAdd);
-                adapterSalary.Fill(dataSalary);
-                connector.Close();
-            }
-            return dataSalary;
+            txtIDWorkType.Clear();
+            txtAllowance.Clear();
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i;
-            i = dataGridView.CurrentRow.Index;
+            int i= dataGridView.CurrentRow.Index;;
             idTextBox.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
             nameTextBox.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
             sexComboBox.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
@@ -323,55 +237,50 @@ namespace QuanLyShopThoiTrang
             cmbLanguage.Text = dataGridView.Rows[i].Cells[8].Value.ToString();
             cmbWorkType.Text = dataGridView.Rows[i].Cells[9].Value.ToString();
             dtpStartWorkingDay.Text = dataGridView.Rows[i].Cells[10].Value.ToString();
+            txtAllowance.Text = dataGridView.Rows[i].Cells[12].Value.ToString();
+        }
+
+        private void findButton_Click(object sender, EventArgs e)
+        {
+            if (txtIdFinder.Text != null)
+            {
+                printInfoInTheTextBoxFromIDFinderRadio();
+            }
+            else MessageBox.Show("Ban chua nhap thong tin");
+        }
+
+        //Chuyen doi thong tin nhap vao va tim kiem trong CSDL
+        private void printInfoInTheTextBoxFromIDFinderRadio()
+        {
+            //In thong tin ra tung textbox nho trong groupbox Input Employee lay tu ID
+            string id = txtIdFinder.Text.Substring(2, 3);
+            int indexRowDatagridview = int.Parse(id) -1; //tri so cot xuat theo tu ID
+            showInfoIntoTextBox(indexRowDatagridview);
         }
 
         //Xuat thong tin tu datagridview ra tung textbox
-        private void showInfoIntoTextBox(int indexDataGridView)
+        private void showInfoIntoTextBox(int indexRowDatagridview)
         {
-            int i = indexDataGridView;
-            indexDataGridView = dataGridView.CurrentRow.Index;
-            idTextBox.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
-            nameTextBox.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
-            sexComboBox.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
-            dateTimePicker.Text = dataGridView.Rows[i].Cells[3].Value.ToString();
-            addressTextBox.Text = dataGridView.Rows[i].Cells[4].Value.ToString();
-            txtPhoneNumber.Text = dataGridView.Rows[i].Cells[5].Value.ToString();
-            emailTextBox.Text = dataGridView.Rows[i].Cells[6].Value.ToString();
-            acadamicLevelComboBox.Text = dataGridView.Rows[i].Cells[7].Value.ToString();
-            cmbLanguage.Text = dataGridView.Rows[i].Cells[8].Value.ToString();
-            cmbWorkType.Text = dataGridView.Rows[i].Cells[9].Value.ToString();
-            dtpStartWorkingDay.Text = dataGridView.Rows[i].Cells[10].Value.ToString();
+            int indexRow = indexRowDatagridview;
+            idTextBox.Text = dataGridView.Rows[indexRow].Cells[0].Value.ToString();
+            nameTextBox.Text = dataGridView.Rows[indexRow].Cells[1].Value.ToString();
+            sexComboBox.Text = dataGridView.Rows[indexRow].Cells[2].Value.ToString();
+            dateTimePicker.Text = dataGridView.Rows[indexRow].Cells[3].Value.ToString();
+            addressTextBox.Text = dataGridView.Rows[indexRow].Cells[4].Value.ToString();
+            txtPhoneNumber.Text = dataGridView.Rows[indexRow].Cells[5].Value.ToString();
+            emailTextBox.Text = dataGridView.Rows[indexRow].Cells[6].Value.ToString();
+            acadamicLevelComboBox.Text = dataGridView.Rows[indexRow].Cells[7].Value.ToString();
+            cmbLanguage.Text = dataGridView.Rows[indexRow].Cells[8].Value.ToString();
+            cmbWorkType.Text = dataGridView.Rows[indexRow].Cells[9].Value.ToString();
+            dtpStartWorkingDay.Text = dataGridView.Rows[indexRow].Cells[10].Value.ToString();
+            txtAllowance.Text = dataGridView.Rows[indexRow].Cells[12].Value.ToString();
+            dataGridView.Rows[indexRow].Selected = true;
         }
 
-        private void rdbID_CheckedChanged(object sender, EventArgs e)
+        private void btnClearFinder_Click(object sender, EventArgs e)
         {
-            if (rdbID.Checked = true)
-            {
-                txtIdFinder.Visible = true;
-            }
-        }
-
-        private void rdbName_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbName.Checked = true)
-            {
-                txtNameFinder.Visible = true;
-            }
-        }
-
-        private void rdbPhoneNumber_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbPhoneNumber.Checked = true)
-            {
-                txtPhoneNumberFinder.Visible = true;
-            }
-        }
-
-        private void ptbArrowsBack_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            menuForm menu = new menuForm();
-            menu.Show();
+            txtIdFinder.Clear();
+            txtIdFinder.Visible = false;
         }
     }
 }
