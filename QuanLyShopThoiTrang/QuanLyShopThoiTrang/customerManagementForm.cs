@@ -80,6 +80,8 @@ namespace QuanLyShopThoiTrang
 
         private void customerManagementForm_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+
             //Xuat thong tin len bang lon
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.DataSource = getAllCustomer().Tables[0];
@@ -91,14 +93,41 @@ namespace QuanLyShopThoiTrang
             setIDInTheIdButton();
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+
+        //Bam vo 1 dong trong datagridview thi tu hien thi ra tung textbox
+        private void dataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtNameCustomer.Clear();
-            txtPhoneNumberCustomer.Clear();
-            setIDInTheIdButton();
+            int i;
+            i = dataGridView.CurrentRow.Index;
+            txtID.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
+            txtNameCustomer.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
+            txtPhoneNumberCustomer.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void showInfoIntoTextBox(int indexRowDatagridview)
+        {
+            int indexRow = indexRowDatagridview;
+            txtID.Text = dataGridView.Rows[indexRow].Cells[0].Value.ToString();
+            txtNameCustomer.Text = dataGridView.Rows[indexRow].Cells[1].Value.ToString();
+            txtPhoneNumberCustomer.Text = dataGridView.Rows[indexRow].Cells[2].Value.ToString();
+            dataGridView.Rows[indexRow].Selected = true;
+        }
+
+
+        //Ham ho tro button finer de goi toi in thong tin ra cac textbox
+        //vi ham tren co event e ko su dung duoc
+        private void dataGridView_CellContentClick(int index)
+        {
+            index = dataGridView.CurrentRow.Index;
+            txtID.Text = dataGridView.Rows[index].Cells[0].Value.ToString();
+            txtNameCustomer.Text = dataGridView.Rows[index].Cells[1].Value.ToString();
+            txtPhoneNumberCustomer.Text = dataGridView.Rows[index].Cells[2].Value.ToString();
+            
+            //To sang o trong datagridview khi duoc tim
+            dataGridView.Rows[index].Selected = true;
+        }
+
+        private void ptbAdd_Click(object sender, EventArgs e)
         {
             if (txtNameCustomer.Text.Equals(""))
             {
@@ -119,12 +148,17 @@ namespace QuanLyShopThoiTrang
                 commandAdd.ExecuteNonQuery();
 
                 customerManagementForm_Load(sender, e);
-                btnClear_Click(sender, e);
+                ptbClear_Click(sender, e);
                 connector.Close();
             }
         }
 
-        private void btnDel_Click(object sender, EventArgs e)
+        private void lblAdd_Click(object sender, EventArgs e)
+        {
+            ptbAdd_Click(sender, e);
+        }
+
+        private void ptbDel_Click(object sender, EventArgs e)
         {
             if (txtNameCustomer.Text.Equals(""))
             {
@@ -137,7 +171,7 @@ namespace QuanLyShopThoiTrang
                                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
                 if (dlr == DialogResult.No)
                 {
-                    btnClear_Click(sender, e);
+                    ptbClear_Click(sender, e);
                 }
                 if (dlr == DialogResult.Yes)
                 {
@@ -151,23 +185,30 @@ namespace QuanLyShopThoiTrang
                     commandDelTabelCustomer.ExecuteNonQuery();
 
                     customerManagementForm_Load(sender, e);
-                    btnClear_Click(sender, e);
+                    ptbClear_Click(sender, e);
                     connector.Close();
                 }
             }
         }
 
-        //Bam vo 1 dong trong datagridview thi tu hien thi ra tung textbox
-        private void dataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void lblDel_Click(object sender, EventArgs e)
         {
-            int i;
-            i = dataGridView.CurrentRow.Index;
-            txtID.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
-            txtNameCustomer.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
-            txtPhoneNumberCustomer.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
+            ptbDel_Click(sender, e);
         }
 
-        private void btnModify_Click(object sender, EventArgs e)
+        private void ptbClear_Click(object sender, EventArgs e)
+        {
+            txtNameCustomer.Clear();
+            txtPhoneNumberCustomer.Clear();
+            setIDInTheIdButton();
+        }
+
+        private void lblClear_Click(object sender, EventArgs e)
+        {
+            ptbClear_Click(sender, e);
+        }
+
+        private void ptbModify_Click(object sender, EventArgs e)
         {
             if (txtNameCustomer.Text.Equals(""))
             {
@@ -186,49 +227,37 @@ namespace QuanLyShopThoiTrang
                 commandModify.ExecuteNonQuery();
 
                 customerManagementForm_Load(sender, e);
-                btnClear_Click(sender, e);
+                ptbClear_Click(sender, e);
                 connector.Close();
             }
         }
 
-
-
-
-        //Con BUG o button Find
-        //Con BUG o button Find
-        //
-
-        private void btnFind_Click(object sender, EventArgs e)
+        private void lblModify_Click(object sender, EventArgs e)
         {
-            if (txtPhoneNumberFinder.Text.Equals(""))
-            {
-                MessageBox.Show("Ban chua nhap so dien thoai khach hang");
-            }
-            else
-            {
-                string queryFinder = "SELECT * FROM Customer WHERE PhoneNumber_Customer=@phoneNumberFinder;";
-                int i= dataGridView.CurrentRow.Index;
-
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand command = new SqlCommand(queryFinder, connector);
-                command.Parameters.AddWithValue("@phoneNumberFinder",txtPhoneNumberFinder);
-                dataGridView_CellContentClick(i);
-
-            }
+            ptbModify_Click(sender, e);
         }
 
-        //Ham ho tro button finer de goi toi in thong tin ra cac textbox
-        //vi ham tren co event e ko su dung duoc
-        private void dataGridView_CellContentClick(int index)
+        private void ptbFinder_Click(object sender, EventArgs e)
         {
-            index = dataGridView.CurrentRow.Index;
-            txtID.Text = dataGridView.Rows[index].Cells[0].Value.ToString();
-            txtNameCustomer.Text = dataGridView.Rows[index].Cells[1].Value.ToString();
-            txtPhoneNumberCustomer.Text = dataGridView.Rows[index].Cells[2].Value.ToString();
-            
-            //To sang o trong datagridview khi duoc tim
-            dataGridView.Rows[index].Selected = true;
+            if (txtPhoneNumberFinder.Text != null)
+            {
+                //In thong tin ra tung textbox nho trong groupbox Input Employee lay tu ID
+                string query = "SELECT ID_Customer FROM Customer WHERE PhoneNumber_Customer=@phoneNumber;";
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand command = new SqlCommand(query, connector);
+                command.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberFinder.Text);
+                string id = (string)command.ExecuteScalar();
+                string id_number = id.Substring(2, 3);
+                int indexRowDatagridview = int.Parse(id_number) - 1; //tri so cot xuat theo tu ID
+                showInfoIntoTextBox(indexRowDatagridview);
+            }
+            else MessageBox.Show("Ban chua nhap thong tin tim kiem");
+        }
+
+        private void lblFinder_Click(object sender, EventArgs e)
+        {
+            ptbFinder_Click(sender, e);
         }
     }
 }

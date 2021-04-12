@@ -75,6 +75,9 @@ namespace QuanLyShopThoiTrang
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.lblClearFinder = new System.Windows.Forms.Label();
+            this.ptbClearFinder = new System.Windows.Forms.PictureBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.lblFinder = new System.Windows.Forms.Label();
             this.ptbFinder = new System.Windows.Forms.PictureBox();
@@ -82,9 +85,6 @@ namespace QuanLyShopThoiTrang
             this.txtIdFinder = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ptbArrowsBack = new System.Windows.Forms.PictureBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.lblClearFinder = new System.Windows.Forms.Label();
-            this.ptbClearFinder = new System.Windows.Forms.PictureBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -97,11 +97,11 @@ namespace QuanLyShopThoiTrang
             this.grbAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbClearFinder)).BeginInit();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbClearFinder)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -620,6 +620,39 @@ namespace QuanLyShopThoiTrang
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.lblClearFinder);
+            this.groupBox8.Controls.Add(this.ptbClearFinder);
+            this.groupBox8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox8.Location = new System.Drawing.Point(257, 205);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(118, 61);
+            this.groupBox8.TabIndex = 40;
+            this.groupBox8.TabStop = false;
+            // 
+            // lblClearFinder
+            // 
+            this.lblClearFinder.AutoSize = true;
+            this.lblClearFinder.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClearFinder.Location = new System.Drawing.Point(54, 23);
+            this.lblClearFinder.Name = "lblClearFinder";
+            this.lblClearFinder.Size = new System.Drawing.Size(59, 22);
+            this.lblClearFinder.TabIndex = 36;
+            this.lblClearFinder.Text = "Clear";
+            this.lblClearFinder.Click += new System.EventHandler(this.lblClearFinder_Click);
+            // 
+            // ptbClearFinder
+            // 
+            this.ptbClearFinder.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_clear_symbol_100;
+            this.ptbClearFinder.Location = new System.Drawing.Point(6, 12);
+            this.ptbClearFinder.Name = "ptbClearFinder";
+            this.ptbClearFinder.Size = new System.Drawing.Size(45, 45);
+            this.ptbClearFinder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbClearFinder.TabIndex = 37;
+            this.ptbClearFinder.TabStop = false;
+            this.ptbClearFinder.Click += new System.EventHandler(this.ptbClearFinder_Click);
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.lblFinder);
@@ -692,39 +725,6 @@ namespace QuanLyShopThoiTrang
             this.ptbArrowsBack.TabStop = false;
             this.ptbArrowsBack.Click += new System.EventHandler(this.ptbArrowsBack_Click);
             // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.lblClearFinder);
-            this.groupBox8.Controls.Add(this.ptbClearFinder);
-            this.groupBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox8.Location = new System.Drawing.Point(257, 205);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(118, 61);
-            this.groupBox8.TabIndex = 40;
-            this.groupBox8.TabStop = false;
-            // 
-            // lblClearFinder
-            // 
-            this.lblClearFinder.AutoSize = true;
-            this.lblClearFinder.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClearFinder.Location = new System.Drawing.Point(54, 23);
-            this.lblClearFinder.Name = "lblClearFinder";
-            this.lblClearFinder.Size = new System.Drawing.Size(59, 22);
-            this.lblClearFinder.TabIndex = 36;
-            this.lblClearFinder.Text = "Clear";
-            this.lblClearFinder.Click += new System.EventHandler(this.lblClearFinder_Click);
-            // 
-            // ptbClearFinder
-            // 
-            this.ptbClearFinder.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_clear_symbol_100;
-            this.ptbClearFinder.Location = new System.Drawing.Point(6, 12);
-            this.ptbClearFinder.Name = "ptbClearFinder";
-            this.ptbClearFinder.Size = new System.Drawing.Size(45, 45);
-            this.ptbClearFinder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbClearFinder.TabIndex = 37;
-            this.ptbClearFinder.TabStop = false;
-            this.ptbClearFinder.Click += new System.EventHandler(this.ptbClearFinder_Click);
-            // 
             // employeeManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -760,13 +760,13 @@ namespace QuanLyShopThoiTrang
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbClearFinder)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).EndInit();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbClearFinder)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -228,7 +228,7 @@ DELETE Customer WHERE ID_Customer='KH007';
 UPDATE Customer SET Name_Customer='Lan Nguyen', PhoneNumber_Customer='01234' WHERE ID_Customer='KH007';
 
 --Tim kiem customer theo phone number
-SELECT * FROM Customer WHERE PhoneNumber_Customer='0939894721';
+SELECT ID_Customer FROM Customer WHERE PhoneNumber_Customer='0939894721';
 
 
 

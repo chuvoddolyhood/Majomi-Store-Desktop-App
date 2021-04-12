@@ -29,8 +29,8 @@ namespace QuanLyShopThoiTrang
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ptbArrowsBack = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -39,21 +39,42 @@ namespace QuanLyShopThoiTrang
             this.txtNameCustomer = new System.Windows.Forms.TextBox();
             this.txtPhoneNumberCustomer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblModify = new System.Windows.Forms.Label();
+            this.ptbModify = new System.Windows.Forms.PictureBox();
             this.txtPhoneNumberFinder = new System.Windows.Forms.TextBox();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnFind = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblClear = new System.Windows.Forms.Label();
+            this.ptbClear = new System.Windows.Forms.PictureBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblDel = new System.Windows.Forms.Label();
+            this.ptbDel = new System.Windows.Forms.PictureBox();
+            this.grbAdd = new System.Windows.Forms.GroupBox();
+            this.ptbAdd = new System.Windows.Forms.PictureBox();
+            this.lblAdd = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.lblID = new System.Windows.Forms.Label();
-            this.btnDel = new System.Windows.Forms.Button();
-            this.btnModify = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtTotalCustomer = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.lblFinder = new System.Windows.Forms.Label();
+            this.ptbFinder = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbModify)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbClear)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbDel)).BeginInit();
+            this.grbAdd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).BeginInit();
             this.SuspendLayout();
             // 
             // ptbArrowsBack
@@ -82,26 +103,27 @@ namespace QuanLyShopThoiTrang
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridView.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridView.Location = new System.Drawing.Point(9, 21);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.Size = new System.Drawing.Size(1869, 489);
@@ -144,14 +166,15 @@ namespace QuanLyShopThoiTrang
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox7);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.txtPhoneNumberFinder);
-            this.groupBox1.Controls.Add(this.btnClear);
-            this.groupBox1.Controls.Add(this.btnFind);
+            this.groupBox1.Controls.Add(this.groupBox5);
+            this.groupBox1.Controls.Add(this.groupBox4);
+            this.groupBox1.Controls.Add(this.grbAdd);
             this.groupBox1.Controls.Add(this.txtID);
             this.groupBox1.Controls.Add(this.lblID);
-            this.groupBox1.Controls.Add(this.btnDel);
-            this.groupBox1.Controls.Add(this.btnModify);
-            this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.lblName);
             this.groupBox1.Controls.Add(this.txtPhoneNumberCustomer);
             this.groupBox1.Controls.Add(this.txtNameCustomer);
@@ -164,32 +187,145 @@ namespace QuanLyShopThoiTrang
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controler";
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.lblModify);
+            this.groupBox6.Controls.Add(this.ptbModify);
+            this.groupBox6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox6.Location = new System.Drawing.Point(1014, 87);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(138, 61);
+            this.groupBox6.TabIndex = 44;
+            this.groupBox6.TabStop = false;
+            // 
+            // lblModify
+            // 
+            this.lblModify.AutoSize = true;
+            this.lblModify.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModify.Location = new System.Drawing.Point(54, 23);
+            this.lblModify.Name = "lblModify";
+            this.lblModify.Size = new System.Drawing.Size(72, 22);
+            this.lblModify.TabIndex = 36;
+            this.lblModify.Text = "Modify";
+            this.lblModify.Click += new System.EventHandler(this.lblModify_Click);
+            // 
+            // ptbModify
+            // 
+            this.ptbModify.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_pen_100;
+            this.ptbModify.Location = new System.Drawing.Point(6, 12);
+            this.ptbModify.Name = "ptbModify";
+            this.ptbModify.Size = new System.Drawing.Size(45, 45);
+            this.ptbModify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbModify.TabIndex = 37;
+            this.ptbModify.TabStop = false;
+            this.ptbModify.Click += new System.EventHandler(this.ptbModify_Click);
+            // 
             // txtPhoneNumberFinder
             // 
-            this.txtPhoneNumberFinder.Location = new System.Drawing.Point(1395, 54);
+            this.txtPhoneNumberFinder.Location = new System.Drawing.Point(1401, 73);
             this.txtPhoneNumberFinder.Name = "txtPhoneNumberFinder";
-            this.txtPhoneNumberFinder.Size = new System.Drawing.Size(352, 32);
+            this.txtPhoneNumberFinder.Size = new System.Drawing.Size(309, 32);
             this.txtPhoneNumberFinder.TabIndex = 23;
             // 
-            // btnClear
+            // groupBox5
             // 
-            this.btnClear.Location = new System.Drawing.Point(890, 161);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(100, 100);
-            this.btnClear.TabIndex = 25;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.groupBox5.Controls.Add(this.lblClear);
+            this.groupBox5.Controls.Add(this.ptbClear);
+            this.groupBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox5.Location = new System.Drawing.Point(881, 171);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(118, 61);
+            this.groupBox5.TabIndex = 43;
+            this.groupBox5.TabStop = false;
             // 
-            // btnFind
+            // lblClear
             // 
-            this.btnFind.Location = new System.Drawing.Point(1770, 31);
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(88, 74);
-            this.btnFind.TabIndex = 22;
-            this.btnFind.Text = "Find";
-            this.btnFind.UseVisualStyleBackColor = true;
-            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
+            this.lblClear.AutoSize = true;
+            this.lblClear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClear.Location = new System.Drawing.Point(54, 23);
+            this.lblClear.Name = "lblClear";
+            this.lblClear.Size = new System.Drawing.Size(59, 22);
+            this.lblClear.TabIndex = 36;
+            this.lblClear.Text = "Clear";
+            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
+            // 
+            // ptbClear
+            // 
+            this.ptbClear.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_clear_symbol_100;
+            this.ptbClear.Location = new System.Drawing.Point(6, 12);
+            this.ptbClear.Name = "ptbClear";
+            this.ptbClear.Size = new System.Drawing.Size(45, 45);
+            this.ptbClear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbClear.TabIndex = 37;
+            this.ptbClear.TabStop = false;
+            this.ptbClear.Click += new System.EventHandler(this.ptbClear_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.lblDel);
+            this.groupBox4.Controls.Add(this.ptbDel);
+            this.groupBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox4.Location = new System.Drawing.Point(1015, 167);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(137, 70);
+            this.groupBox4.TabIndex = 42;
+            this.groupBox4.TabStop = false;
+            // 
+            // lblDel
+            // 
+            this.lblDel.AutoSize = true;
+            this.lblDel.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDel.Location = new System.Drawing.Point(54, 23);
+            this.lblDel.Name = "lblDel";
+            this.lblDel.Size = new System.Drawing.Size(70, 22);
+            this.lblDel.TabIndex = 36;
+            this.lblDel.Text = "Delete";
+            this.lblDel.Click += new System.EventHandler(this.lblDel_Click);
+            // 
+            // ptbDel
+            // 
+            this.ptbDel.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_remove_96;
+            this.ptbDel.Location = new System.Drawing.Point(6, 12);
+            this.ptbDel.Name = "ptbDel";
+            this.ptbDel.Size = new System.Drawing.Size(45, 45);
+            this.ptbDel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbDel.TabIndex = 37;
+            this.ptbDel.TabStop = false;
+            this.ptbDel.Click += new System.EventHandler(this.ptbDel_Click);
+            // 
+            // grbAdd
+            // 
+            this.grbAdd.Controls.Add(this.ptbAdd);
+            this.grbAdd.Controls.Add(this.lblAdd);
+            this.grbAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.grbAdd.Location = new System.Drawing.Point(890, 98);
+            this.grbAdd.Name = "grbAdd";
+            this.grbAdd.Size = new System.Drawing.Size(100, 52);
+            this.grbAdd.TabIndex = 41;
+            this.grbAdd.TabStop = false;
+            // 
+            // ptbAdd
+            // 
+            this.ptbAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptbAdd.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_plus_100;
+            this.ptbAdd.Location = new System.Drawing.Point(6, 3);
+            this.ptbAdd.Name = "ptbAdd";
+            this.ptbAdd.Size = new System.Drawing.Size(40, 40);
+            this.ptbAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbAdd.TabIndex = 34;
+            this.ptbAdd.TabStop = false;
+            this.ptbAdd.Click += new System.EventHandler(this.ptbAdd_Click);
+            // 
+            // lblAdd
+            // 
+            this.lblAdd.AutoSize = true;
+            this.lblAdd.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdd.Location = new System.Drawing.Point(48, 12);
+            this.lblAdd.Name = "lblAdd";
+            this.lblAdd.Size = new System.Drawing.Size(51, 22);
+            this.lblAdd.TabIndex = 35;
+            this.lblAdd.Text = "Add";
+            this.lblAdd.Click += new System.EventHandler(this.lblAdd_Click);
             // 
             // txtID
             // 
@@ -209,36 +345,6 @@ namespace QuanLyShopThoiTrang
             this.lblID.TabIndex = 23;
             this.lblID.Text = "ID";
             // 
-            // btnDel
-            // 
-            this.btnDel.Location = new System.Drawing.Point(1015, 161);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(100, 100);
-            this.btnDel.TabIndex = 21;
-            this.btnDel.Text = "Delete";
-            this.btnDel.UseVisualStyleBackColor = true;
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
-            // 
-            // btnModify
-            // 
-            this.btnModify.Location = new System.Drawing.Point(1015, 41);
-            this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(100, 100);
-            this.btnModify.TabIndex = 20;
-            this.btnModify.Text = "Modify";
-            this.btnModify.UseVisualStyleBackColor = true;
-            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(890, 41);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(100, 100);
-            this.btnAdd.TabIndex = 19;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtTotalCustomer);
@@ -250,6 +356,14 @@ namespace QuanLyShopThoiTrang
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             // 
+            // txtTotalCustomer
+            // 
+            this.txtTotalCustomer.Location = new System.Drawing.Point(19, 527);
+            this.txtTotalCustomer.Name = "txtTotalCustomer";
+            this.txtTotalCustomer.ReadOnly = true;
+            this.txtTotalCustomer.Size = new System.Drawing.Size(111, 22);
+            this.txtTotalCustomer.TabIndex = 26;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -259,13 +373,47 @@ namespace QuanLyShopThoiTrang
             this.label2.TabIndex = 15;
             this.label2.Text = "Total";
             // 
-            // txtTotalCustomer
+            // label3
             // 
-            this.txtTotalCustomer.Location = new System.Drawing.Point(19, 527);
-            this.txtTotalCustomer.Name = "txtTotalCustomer";
-            this.txtTotalCustomer.ReadOnly = true;
-            this.txtTotalCustomer.Size = new System.Drawing.Size(111, 22);
-            this.txtTotalCustomer.TabIndex = 26;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1397, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(155, 23);
+            this.label3.TabIndex = 45;
+            this.label3.Text = "Phone Number";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.lblFinder);
+            this.groupBox7.Controls.Add(this.ptbFinder);
+            this.groupBox7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox7.Location = new System.Drawing.Point(1723, 52);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(138, 61);
+            this.groupBox7.TabIndex = 46;
+            this.groupBox7.TabStop = false;
+            // 
+            // lblFinder
+            // 
+            this.lblFinder.AutoSize = true;
+            this.lblFinder.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinder.Location = new System.Drawing.Point(54, 23);
+            this.lblFinder.Name = "lblFinder";
+            this.lblFinder.Size = new System.Drawing.Size(47, 22);
+            this.lblFinder.TabIndex = 36;
+            this.lblFinder.Text = "Find";
+            this.lblFinder.Click += new System.EventHandler(this.lblFinder_Click);
+            // 
+            // ptbFinder
+            // 
+            this.ptbFinder.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_find_user_male_100;
+            this.ptbFinder.Location = new System.Drawing.Point(6, 12);
+            this.ptbFinder.Name = "ptbFinder";
+            this.ptbFinder.Size = new System.Drawing.Size(45, 45);
+            this.ptbFinder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbFinder.TabIndex = 37;
+            this.ptbFinder.TabStop = false;
+            this.ptbFinder.Click += new System.EventHandler(this.ptbFinder_Click);
             // 
             // customerManagementForm
             // 
@@ -283,8 +431,23 @@ namespace QuanLyShopThoiTrang
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbModify)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbClear)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbDel)).EndInit();
+            this.grbAdd.ResumeLayout(false);
+            this.grbAdd.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,14 +465,25 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.Button btnFind;
-        private System.Windows.Forms.Button btnDel;
-        private System.Windows.Forms.Button btnModify;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPhoneNumberFinder;
         private System.Windows.Forms.TextBox txtTotalCustomer;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label lblModify;
+        private System.Windows.Forms.PictureBox ptbModify;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label lblClear;
+        private System.Windows.Forms.PictureBox ptbClear;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lblDel;
+        private System.Windows.Forms.PictureBox ptbDel;
+        private System.Windows.Forms.GroupBox grbAdd;
+        private System.Windows.Forms.PictureBox ptbAdd;
+        private System.Windows.Forms.Label lblAdd;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label lblFinder;
+        private System.Windows.Forms.PictureBox ptbFinder;
     }
 }

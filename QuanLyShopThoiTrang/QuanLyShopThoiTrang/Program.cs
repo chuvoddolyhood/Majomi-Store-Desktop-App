@@ -14,13 +14,12 @@ namespace QuanLyShopThoiTrang
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Application.Run(new splashScreen());
+            Application.Run(new splashScreen());
             //Application.Run(new loginForm());
             //Application.Run(new menuForm());
             //Application.Run(new employeeManagementForm());
+            //Application.Run(new customerManagementForm());
 
-
-            Application.Run(new customerManagementForm());
 
             //Application.Run(new productManagement());
 

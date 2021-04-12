@@ -52,6 +52,8 @@ namespace QuanLyShopThoiTrang
 
         private void Invoice_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+
             //auto setup ID
             txtIDInvoice.Text= setIDInTheIdButton();
             txtIDInvoiceDataGridView.Text= setIDInTheIdButton();

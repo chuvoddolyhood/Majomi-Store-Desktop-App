@@ -85,6 +85,8 @@ namespace QuanLyShopThoiTrang
 
         private void productManagement_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+
             //Xuat thong tin len bang lon
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.DataSource = getAllProduct().Tables[0];
