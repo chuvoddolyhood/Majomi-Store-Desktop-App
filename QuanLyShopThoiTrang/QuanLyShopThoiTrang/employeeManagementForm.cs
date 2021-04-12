@@ -83,6 +83,8 @@ namespace QuanLyShopThoiTrang
 
         private void employeeManagementForm_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+
             //Xuat thong tin len bang lon
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.DataSource = getAllEmployee().Tables[0];
@@ -110,119 +112,6 @@ namespace QuanLyShopThoiTrang
             connector.Close();
         }
 
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            if (nameTextBox.Text.Equals(""))
-            {
-                MessageBox.Show("Ban chua nhap doi tuong");
-            }
-            else
-            {
-                //Them du lieu vao table.Employee 
-                string queryAddEmployee = "INSERT INTO Employee VALUES(@id,@name,@sex,@dob,@address,@phoneNumber,@email,@edu,@language,@idWorkType,@startWorkingDay,@allowance);";
-            SqlConnection connector = new SqlConnection(strDatabase);
-            connector.Open();
-            SqlCommand commandAdd = new SqlCommand(queryAddEmployee, connector);
-
-            //Thuc thi lenh them du lieu vao bang EmpInfo
-            commandAdd.Parameters.AddWithValue("@id",idTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
-            commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
-            commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
-            commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
-            commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
-            commandAdd.Parameters.AddWithValue("@idWorkType", txtIDWorkType.Text);
-            commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
-            commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
-            commandAdd.ExecuteNonQuery();
-
-            employeeManagementForm_Load(sender, e);
-            btnClearInput_Click(sender, e);
-            connector.Close();
-            }
-        }
-
-        private void delButton_Click(object sender, EventArgs e)
-        {
-            if (nameTextBox.Text.Equals(""))
-            {
-                MessageBox.Show("Ban cho chon doi tuong can xoa");
-            }
-            else
-            {
-                string name = nameTextBox.Text;
-                DialogResult dlr = MessageBox.Show("Ban co chac chan muon xoa " + name + " khoi he thong ko?", "Thông báo",
-                                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
-                if (dlr == DialogResult.No)
-                {
-                    btnClearInput_Click(sender, e);
-                }
-                if (dlr == DialogResult.Yes)
-                {
-                    string queryDeleteTabelEmployee = "DELETE Employee WHERE ID=@id;";
-
-                    connector = new SqlConnection(strDatabase);
-                    connector.Open();
-                    SqlCommand commandDelTabelEmployee = new SqlCommand(queryDeleteTabelEmployee, connector);
-                    commandDelTabelEmployee.Parameters.AddWithValue("@id", idTextBox.Text);
-                    commandDelTabelEmployee.ExecuteNonQuery();
-
-                    employeeManagementForm_Load(sender, e);
-                    btnClearInput_Click(sender, e);
-                    connector.Close();
-                }
-            }
-        }
-
-        private void modifyButton_Click(object sender, EventArgs e)
-        {
-            //Them du lieu vao table.Employee
-            string queryAdd = "UPDATE Employee SET Emp_Name=@name, Sex=@sex,DOB=@dob,Emp_Address=@address,Phone_Number=@phoneNumber,Email=@email,Acadamic_Level=@edu,Language=@language,IDWorkType = @idWorkType,Start_Working_Day=@startWorkingDay,Allowance = @allowance WHERE ID=@id;";
-            
-            connector = new SqlConnection(strDatabase);
-            connector.Open();
-            SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
-
-            //Thuc thi lenh them du lieu vao bang EmpInfo
-            commandAdd.Parameters.AddWithValue("@id", idTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
-            commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
-            commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
-            commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
-            commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
-            commandAdd.Parameters.AddWithValue("@IDWorkType", txtIDWorkType.Text);
-            commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
-            commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
-            commandAdd.ExecuteNonQuery();
-
-            employeeManagementForm_Load(sender, e);
-            btnClearInput_Click(sender, e);
-            connector.Close();
-        }
-
-        private void btnClearInput_Click(object sender, EventArgs e)
-        {
-            setIDInTheIdButton();
-            nameTextBox.Clear();
-            sexComboBox.ResetText();
-            dateTimePicker.ResetText();
-            addressTextBox.Clear();
-            txtPhoneNumber.Clear();
-            emailTextBox.Clear();
-            acadamicLevelComboBox.ResetText();
-            cmbLanguage.ResetText();
-            cmbWorkType.ResetText();
-            dtpStartWorkingDay.ResetText();
-            txtIDWorkType.Clear();
-            txtAllowance.Clear();
-        }
-
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int i= dataGridView.CurrentRow.Index;;
@@ -238,15 +127,6 @@ namespace QuanLyShopThoiTrang
             cmbWorkType.Text = dataGridView.Rows[i].Cells[9].Value.ToString();
             dtpStartWorkingDay.Text = dataGridView.Rows[i].Cells[10].Value.ToString();
             txtAllowance.Text = dataGridView.Rows[i].Cells[12].Value.ToString();
-        }
-
-        private void findButton_Click(object sender, EventArgs e)
-        {
-            if (txtIdFinder.Text != null)
-            {
-                printInfoInTheTextBoxFromIDFinderRadio();
-            }
-            else MessageBox.Show("Ban chua nhap thong tin");
         }
 
         //Chuyen doi thong tin nhap vao va tim kiem trong CSDL
@@ -277,10 +157,166 @@ namespace QuanLyShopThoiTrang
             dataGridView.Rows[indexRow].Selected = true;
         }
 
-        private void btnClearFinder_Click(object sender, EventArgs e)
+        private void ptbAdd_Click(object sender, EventArgs e)
+        {
+            if (nameTextBox.Text.Equals(""))
+            {
+                MessageBox.Show("Ban chua nhap doi tuong");
+            }
+            else
+            {
+                //Them du lieu vao table.Employee 
+                string queryAddEmployee = "INSERT INTO Employee VALUES(@id,@name,@sex,@dob,@address,@phoneNumber,@email,@edu,@language,@idWorkType,@startWorkingDay,@allowance);";
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand commandAdd = new SqlCommand(queryAddEmployee, connector);
+
+                //Thuc thi lenh them du lieu vao bang EmpInfo
+                commandAdd.Parameters.AddWithValue("@id", idTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
+                commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
+                commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
+                commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
+                commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
+                commandAdd.Parameters.AddWithValue("@idWorkType", txtIDWorkType.Text);
+                commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
+                commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
+                commandAdd.ExecuteNonQuery();
+
+                employeeManagementForm_Load(sender, e);
+                ptbClear_Click(sender, e);
+                connector.Close();
+            }
+        }
+
+        private void lblAdd_Click(object sender, EventArgs e)
+        {
+            ptbAdd_Click(sender, e);
+        }
+
+        private void ptbDel_Click(object sender, EventArgs e)
+        {
+            if (nameTextBox.Text.Equals(""))
+            {
+                MessageBox.Show("Ban cho chon doi tuong can xoa");
+            }
+            else
+            {
+                string name = nameTextBox.Text;
+                DialogResult dlr = MessageBox.Show("Ban co chac chan muon xoa " + name + " khoi he thong ko?", "Thông báo",
+                                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+                if (dlr == DialogResult.No)
+                {
+                    ptbClear_Click(sender, e);
+                }
+                if (dlr == DialogResult.Yes)
+                {
+                    string queryDeleteTabelEmployee = "DELETE Employee WHERE ID=@id;";
+
+                    connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandDelTabelEmployee = new SqlCommand(queryDeleteTabelEmployee, connector);
+                    commandDelTabelEmployee.Parameters.AddWithValue("@id", idTextBox.Text);
+                    commandDelTabelEmployee.ExecuteNonQuery();
+
+                    employeeManagementForm_Load(sender, e);
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+            }
+        }
+
+        private void lblDel_Click(object sender, EventArgs e)
+        {
+            ptbDel_Click(sender, e);
+        }
+
+        private void ptbClear_Click(object sender, EventArgs e)
+        {
+            setIDInTheIdButton();
+            nameTextBox.Clear();
+            sexComboBox.ResetText();
+            dateTimePicker.ResetText();
+            addressTextBox.Clear();
+            txtPhoneNumber.Clear();
+            emailTextBox.Clear();
+            acadamicLevelComboBox.ResetText();
+            cmbLanguage.ResetText();
+            cmbWorkType.ResetText();
+            dtpStartWorkingDay.ResetText();
+            txtIDWorkType.Clear();
+            txtAllowance.Clear();
+        }
+
+        private void lblClear_Click(object sender, EventArgs e)
+        {
+            ptbClear_Click(sender, e);
+        }
+
+        private void ptbModify_Click(object sender, EventArgs e)
+        {
+            //Them du lieu vao table.Employee
+            string queryAdd = "UPDATE Employee SET Emp_Name=@name, Sex=@sex,DOB=@dob,Emp_Address=@address,Phone_Number=@phoneNumber,Email=@email,Acadamic_Level=@edu,Language=@language,IDWorkType = @idWorkType,Start_Working_Day=@startWorkingDay,Allowance = @allowance WHERE ID=@id;";
+
+            connector = new SqlConnection(strDatabase);
+            connector.Open();
+            SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+
+            //Thuc thi lenh them du lieu vao bang EmpInfo
+            commandAdd.Parameters.AddWithValue("@id", idTextBox.Text);
+            commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
+            commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
+            commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
+            commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
+            commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
+            commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
+            commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
+            commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
+            commandAdd.Parameters.AddWithValue("@IDWorkType", txtIDWorkType.Text);
+            commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
+            commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
+            commandAdd.ExecuteNonQuery();
+
+            employeeManagementForm_Load(sender, e);
+            ptbClear_Click(sender, e);
+            connector.Close();
+        }
+
+        private void lblModify_Click(object sender, EventArgs e)
+        {
+            ptbModify_Click(sender, e);
+        }
+
+        private void ptbFinder_Click(object sender, EventArgs e)
+        {
+            if (txtIdFinder.Text != null)
+            {
+                printInfoInTheTextBoxFromIDFinderRadio();
+            }
+            else MessageBox.Show("Ban chua nhap thong tin");
+        }
+
+        private void lblFinder_Click(object sender, EventArgs e)
+        {
+            ptbFinder_Click(sender,e);
+        }
+
+        private void ptbClearFinder_Click(object sender, EventArgs e)
         {
             txtIdFinder.Clear();
-            txtIdFinder.Visible = false;
+            
+            string id = idTextBox.Text.Substring(2, 3);
+            int indexRowDatagridview = int.Parse(id) - 1; //tri so cot xuat theo tu ID
+            dataGridView.Rows[indexRowDatagridview].Selected = false;
+            ptbClear_Click(sender, e);
+        }
+
+        private void lblClearFinder_Click(object sender, EventArgs e)
+        {
+            ptbClearFinder_Click(sender, e);
         }
     }
 }

@@ -60,42 +60,52 @@ namespace QuanLyShopThoiTrang
         private void productManagement_Label_MouseHover(object sender, EventArgs e)
         {
             productManagement_Label.Font = new Font(" ", 32, FontStyle.Italic);
-            employeeManagement_Label.Font= new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            customerManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            invoices_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             //BackColor = Color.Red;
-            BackgroundImage = global::QuanLyShopThoiTrang.Properties.Resources.product;
+            BackgroundImage = Properties.Resources.product;
         }
 
         private void employeeManagement_Label_MouseHover(object sender, EventArgs e)
         {
             employeeManagement_Label.Font = new Font(" ", 32, FontStyle.Italic);
-            customerManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            invoices_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            productManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            //BackColor = Color.AntiqueWhite;
-            BackgroundImage = global::QuanLyShopThoiTrang.Properties.Resources.employee;
+             //BackColor = Color.AntiqueWhite;
+            BackgroundImage = Properties.Resources.employee;
         }
 
         private void customerManagement_Label_MouseHover(object sender, EventArgs e)
         {
             customerManagement_Label.Font = new Font(" ", 32, FontStyle.Italic);
-            productManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            invoices_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            employeeManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
-            //BackColor = Color.Blue;
-            BackgroundImage = global::QuanLyShopThoiTrang.Properties.Resources.customer;
+           //BackColor = Color.Blue;
+            BackgroundImage = Properties.Resources.customer;
         }
 
         private void invoices_Label_MouseHover(object sender, EventArgs e)
         {
             invoices_Label.Font = new Font(" ", 32, FontStyle.Italic);
-            customerManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            BackgroundImage = Properties.Resources.sales;
+        }
+
+        private void productManagement_Label_MouseLeave(object sender, EventArgs e)
+        {
             productManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //BackColor = Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(227)))), ((int)(((byte)(214)))));
+        }
+
+        private void employeeManagement_Label_MouseLeave(object sender, EventArgs e)
+        {
             employeeManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            //BackColor = Color.White;
-            BackgroundImage = global::QuanLyShopThoiTrang.Properties.Resources.sales;
+            //BackColor = Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(227)))), ((int)(((byte)(214)))));
+        }
+
+        private void customerManagement_Label_MouseLeave(object sender, EventArgs e)
+        {
+            customerManagement_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //BackColor = Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(227)))), ((int)(((byte)(214)))));
+        }
+
+        private void invoices_Label_MouseLeave(object sender, EventArgs e)
+        {
+            invoices_Label.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //BackColor = Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(227)))), ((int)(((byte)(214)))));
         }
     }
 }

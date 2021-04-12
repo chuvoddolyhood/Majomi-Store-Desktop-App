@@ -95,6 +95,7 @@ namespace QuanLyShopThoiTrang
             this.passwd_textbox.Size = new System.Drawing.Size(370, 21);
             this.passwd_textbox.TabIndex = 5;
             this.passwd_textbox.UseSystemPasswordChar = true;
+            this.passwd_textbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passwd_textbox_KeyDown);
             // 
             // login_button
             // 

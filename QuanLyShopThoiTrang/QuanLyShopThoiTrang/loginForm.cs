@@ -63,5 +63,13 @@ namespace QuanLyShopThoiTrang
                 passwd_textbox.UseSystemPasswordChar = true;
             }
         }
+
+        private void passwd_textbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                login_button_Click(sender, e);
+            }
+        }
     }
 }

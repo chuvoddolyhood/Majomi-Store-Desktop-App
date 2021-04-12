@@ -113,6 +113,16 @@ namespace QuanLyShopThoiTrang.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fashionshop {
+            get {
+                object obj = ResourceManager.GetObject("fashionshop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon {
             get {
                 object obj = ResourceManager.GetObject("icon", resourceCulture);
@@ -126,6 +136,56 @@ namespace QuanLyShopThoiTrang.Properties {
         internal static System.Drawing.Bitmap icons8_back_to_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-back-to-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_clear_symbol_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-clear-symbol-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_find_user_male_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-find-user-male-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_pen_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-pen-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_plus_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-plus-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_remove_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-remove-96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
