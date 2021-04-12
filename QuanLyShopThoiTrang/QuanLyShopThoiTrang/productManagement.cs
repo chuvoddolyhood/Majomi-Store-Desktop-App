@@ -254,8 +254,6 @@ namespace QuanLyShopThoiTrang
             return picbyte;
         }
 
-
-
         //Co BUG
         //Chuyen du lieu Byte thanh Image
         private Image ByteToImg(string byteString)
@@ -270,50 +268,6 @@ namespace QuanLyShopThoiTrang
             return image;
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            txtIDProduct.Clear();
-            txtTitleProduct.Clear();
-            cmbTypeProduct.ResetText();
-            txtCostProduct.Clear();
-            txtAmountProduct.Clear();
-            txtManuProduct.Clear();
-            ptbProduct.Image = null;
-            txtColorProduct.Clear();
-            cmbSex.ResetText();
-        }
-
-        private void btnModify_Click(object sender, EventArgs e)
-        {
-            if (txtTitleProduct.Text.Equals(""))
-            {
-                MessageBox.Show("Ban chua nhap doi tuong");
-            }
-            else
-            {
-                string queryModify = "UPDATE Product SET Title_Product=@title, Type_Product=@type, Sex_Product=@sex, Cost_Product=@cost, " +
-                    "Amount_Product=@amount, Manufacturer=@manu, Color_Porduct=@color WHERE ID_Product=@id;";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandModify = new SqlCommand(queryModify, connector);
-
-                commandModify.Parameters.AddWithValue("@id", txtIDProduct.Text);
-                commandModify.Parameters.AddWithValue("@title", txtTitleProduct.Text);
-                commandModify.Parameters.AddWithValue("@type", cmbTypeProduct.Text);
-                commandModify.Parameters.AddWithValue("@sex", cmbSex.Text);
-                commandModify.Parameters.AddWithValue("@cost", txtCostProduct.Text);
-                commandModify.Parameters.AddWithValue("@amount", txtAmountProduct.Text);
-                commandModify.Parameters.AddWithValue("@manu", txtManuProduct.Text);
-                commandModify.Parameters.AddWithValue("@color", txtColorProduct.Text);
-                //image
-                //commandModify.Parameters.AddWithValue("@image", cmbSex.Text);
-                commandModify.ExecuteNonQuery();
-
-                productManagement_Load(sender, e);
-                btnClear_Click(sender, e);
-                connector.Close();
-            }
-        }
 
         private void dataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -348,7 +302,59 @@ namespace QuanLyShopThoiTrang
             setIDInTheIdButton();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+
+
+
+        //Con BUG o button Find
+
+        private void btnFinder_Click(object sender, EventArgs e)
+        {
+            if (txtFinderProduct.Text.Equals(""))
+            {
+                MessageBox.Show("Ban chua nhap thong tin can tim");
+            }
+            else
+            {
+                string id = txtFinderProduct.Text;
+                string id_number = id.Substring(2,3);
+                int indexRowDatagridview = int.Parse(id_number) - 1; //tri so cot xuat theo tu ID
+                showInfoIntoTextBox(indexRowDatagridview);
+            }
+        }
+
+        private void showInfoIntoTextBox(int indexRowDatagridview)
+        {
+            int indexRow = indexRowDatagridview;
+            txtIDProduct.Text = dataGridView.Rows[indexRow].Cells[0].Value.ToString();
+            txtTitleProduct.Text = dataGridView.Rows[indexRow].Cells[1].Value.ToString();
+            cmbTypeProduct.Text = dataGridView.Rows[indexRow].Cells[2].Value.ToString();
+            cmbSex.Text = dataGridView.Rows[indexRow].Cells[3].Value.ToString();
+            txtCostProduct.Text = dataGridView.Rows[indexRow].Cells[4].Value.ToString();
+            txtAmountProduct.Text = dataGridView.Rows[indexRow].Cells[5].Value.ToString();
+            txtManuProduct.Text = dataGridView.Rows[indexRow].Cells[6].Value.ToString();
+            txtColorProduct.Text = dataGridView.Rows[indexRow].Cells[7].Value.ToString();
+            dataGridView.Rows[indexRow].Selected = true;
+        }
+
+        private void dataGridView_CellContentClick(int i)
+        {
+            i = dataGridView.CurrentRow.Index;
+            txtIDProduct.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
+            txtTitleProduct.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
+            cmbTypeProduct.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
+            cmbSex.Text = dataGridView.Rows[i].Cells[3].Value.ToString();
+            txtCostProduct.Text = dataGridView.Rows[i].Cells[4].Value.ToString();
+            txtAmountProduct.Text = dataGridView.Rows[i].Cells[5].Value.ToString();
+            txtManuProduct.Text = dataGridView.Rows[i].Cells[6].Value.ToString();
+            txtColorProduct.Text = dataGridView.Rows[i].Cells[7].Value.ToString();
+            //image
+            //cmbTypeProduct.Text = dataGridView.Rows[i].Cells[8].Value.ToString();
+
+            //To sang o trong datagridview khi duoc tim
+            dataGridView.Rows[i].Selected = true;
+        }
+
+        private void ptbAdd_Click(object sender, EventArgs e)
         {
             if (txtTitleProduct.Text.Equals(""))
             {
@@ -375,7 +381,7 @@ namespace QuanLyShopThoiTrang
                 //Và sau đó mất chỉ 10 phút để sửa sai dcm =((((((
                 //Phai co hinh anh neu khong se co loi
                 commandAdd.Parameters.AddWithValue("@image", converImgToByte());
-                
+
                 //Link hinh anh da duoc chuyen doi sang dang byte code
 
                 //Tôi đã mất 3 tiếng đồng hồ để viết cái hàm ngu xuẩn này đm :((((
@@ -385,12 +391,71 @@ namespace QuanLyShopThoiTrang
                 commandAdd.ExecuteNonQuery();
 
                 productManagement_Load(sender, e);
-                btnClear_Click(sender, e);
+                ptbClear_Click(sender, e);
                 connector.Close();
             }
         }
 
-        private void btnDel_Click(object sender, EventArgs e)
+        private void lblAdd_Click(object sender, EventArgs e)
+        {
+            ptbAdd_Click(sender, e);
+        }
+
+        private void ptbModify_Click(object sender, EventArgs e)
+        {
+            if (txtTitleProduct.Text.Equals(""))
+            {
+                MessageBox.Show("Ban chua nhap doi tuong");
+            }
+            else
+            {
+                string queryModify = "UPDATE Product SET Title_Product = @title, Type_Product = @type, Sex_Product = @sex, UnitPrice = @cost, Amount_Product = @amount, Manufacturer = @manu, Color_Porduct = @color WHERE ID_Product = @id; ";
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand commandModify = new SqlCommand(queryModify, connector);
+
+                commandModify.Parameters.AddWithValue("@id", txtIDProduct.Text);
+                commandModify.Parameters.AddWithValue("@title", txtTitleProduct.Text);
+                commandModify.Parameters.AddWithValue("@type", cmbTypeProduct.Text);
+                commandModify.Parameters.AddWithValue("@sex", cmbSex.Text);
+                commandModify.Parameters.AddWithValue("@cost", txtCostProduct.Text);
+                commandModify.Parameters.AddWithValue("@amount", txtAmountProduct.Text);
+                commandModify.Parameters.AddWithValue("@manu", txtManuProduct.Text);
+                commandModify.Parameters.AddWithValue("@color", txtColorProduct.Text);
+                //image
+                //commandModify.Parameters.AddWithValue("@image", cmbSex.Text);
+                commandModify.ExecuteNonQuery();
+
+                productManagement_Load(sender, e);
+                ptbClear_Click(sender, e);
+                connector.Close();
+            }
+        }
+
+        private void lblModify_Click(object sender, EventArgs e)
+        {
+            ptbModify_Click(sender, e);
+        }
+
+        private void ptbClear_Click(object sender, EventArgs e)
+        {
+            txtIDProduct.Clear();
+            txtTitleProduct.Clear();
+            cmbTypeProduct.ResetText();
+            txtCostProduct.Clear();
+            txtAmountProduct.Clear();
+            txtManuProduct.Clear();
+            ptbProduct.Image = null;
+            txtColorProduct.Clear();
+            cmbSex.ResetText();
+        }
+
+        private void lblClear_Click(object sender, EventArgs e)
+        {
+            ptbClear_Click(sender, e);
+        }
+
+        private void ptbDel_Click(object sender, EventArgs e)
         {
             if (txtTitleProduct.Text.Equals(""))
             {
@@ -403,7 +468,7 @@ namespace QuanLyShopThoiTrang
                                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
                 if (dlr == DialogResult.No)
                 {
-                    btnClear_Click(sender, e);
+                    ptbClear_Click(sender, e);
                 }
                 if (dlr == DialogResult.Yes)
                 {
@@ -417,55 +482,15 @@ namespace QuanLyShopThoiTrang
                     commandDelTabelProduct.ExecuteNonQuery();
 
                     productManagement_Load(sender, e);
-                    btnClear_Click(sender, e);
+                    ptbClear_Click(sender, e);
                     connector.Close();
                 }
             }
         }
 
-
-
-        //Con BUG o button Find
-
-        private void btnFinder_Click(object sender, EventArgs e)
+        private void lblDel_Click(object sender, EventArgs e)
         {
-            if (txtFinderProduct.Text.Equals(""))
-            {
-                MessageBox.Show("Ban chua nhap thong tin can tim");
-            }
-            else
-            {
-                string queryFinder = "SELECT * FROM Product WHERE Title_Product=@tile;";
-                int i = dataGridView.CurrentRow.Index;
-
-                SqlConnection connector = new SqlConnection(strDatabase);
-
-                connector.Open();
-                SqlCommand command = new SqlCommand(queryFinder, connector);
-                command.Parameters.AddWithValue("@title",txtFinderProduct);
-
-                //////// BUG  Phai tra ve vi tri gi do moi ra duoc
-                dataGridView_CellContentClick(i);
-
-            }
-        }
-
-        private void dataGridView_CellContentClick(int i)
-        {
-            i = dataGridView.CurrentRow.Index;
-            txtIDProduct.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
-            txtTitleProduct.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
-            cmbTypeProduct.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
-            cmbSex.Text = dataGridView.Rows[i].Cells[3].Value.ToString();
-            txtCostProduct.Text = dataGridView.Rows[i].Cells[4].Value.ToString();
-            txtAmountProduct.Text = dataGridView.Rows[i].Cells[5].Value.ToString();
-            txtManuProduct.Text = dataGridView.Rows[i].Cells[6].Value.ToString();
-            txtColorProduct.Text = dataGridView.Rows[i].Cells[7].Value.ToString();
-            //image
-            //cmbTypeProduct.Text = dataGridView.Rows[i].Cells[8].Value.ToString();
-
-            //To sang o trong datagridview khi duoc tim
-            dataGridView.Rows[i].Selected = true;
+            ptbDel_Click(sender, e);
         }
     }
 }

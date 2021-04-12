@@ -251,9 +251,14 @@ SELECT * FROM Product WHERE Type_Product='Giay';
 --Tim tat ca loai Tui xach
 SELECT * FROM Product WHERE Type_Product='Tui xach';
 
+SELECT * FROM Product WHERE ID_Product='Ao001';
+
 --Cap nhat san pham
 UPDATE Product SET Title_Product=@title, Type_Product=@type, Sex_Product=@sex, Cost_Product=@cost, Amount_Product=@amount, Manufacturer=@manu, Color_Porduct=@color, Image_Product=@image WHERE ID_Product=@id;
 
+
+UPDATE Product 
+SET Title_Product='Vay jean', Type_Product='Vay', Sex_Product='Female', UnitPrice=180000, Amount_Product=20, Manufacturer='Taobao', Color_Porduct='Xanh dam' WHERE ID_Product='Va001';
 --Xac dinh ID Product
 
 SELECT * FROM Product;
@@ -318,4 +323,6 @@ SELECT * FROM Invoice WHERE ID_Invoice='HD001';
 
 SELECT Amount_Product FROM Product WHERE ID_Product='Ao001';
 
-UPDATE Product SET Amount_Product=10 WHERE ID_Product='Ao001';
+UPDATE Invoice SET Quantity_Product=2, GrandTotal WHERE ID_Invoice='HD001' AND ID_Customer='KH001' AND ID_Product='Ao003';
+
+DELETE Invoice WHERE ID_Invoice='HD001' AND ID_Customer='KH001' AND ID_Product='Ao003';

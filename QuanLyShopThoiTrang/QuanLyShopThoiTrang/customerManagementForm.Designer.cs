@@ -29,8 +29,8 @@ namespace QuanLyShopThoiTrang
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ptbArrowsBack = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -39,6 +39,10 @@ namespace QuanLyShopThoiTrang
             this.txtNameCustomer = new System.Windows.Forms.TextBox();
             this.txtPhoneNumberCustomer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.lblFinder = new System.Windows.Forms.Label();
+            this.ptbFinder = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.lblModify = new System.Windows.Forms.Label();
             this.ptbModify = new System.Windows.Forms.PictureBox();
@@ -57,13 +61,11 @@ namespace QuanLyShopThoiTrang
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtTotalCustomer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.lblFinder = new System.Windows.Forms.Label();
-            this.ptbFinder = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).BeginInit();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbModify)).BeginInit();
             this.groupBox5.SuspendLayout();
@@ -73,12 +75,11 @@ namespace QuanLyShopThoiTrang
             this.grbAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).BeginInit();
             this.SuspendLayout();
             // 
             // ptbArrowsBack
             // 
+            this.ptbArrowsBack.BackColor = System.Drawing.Color.Transparent;
             this.ptbArrowsBack.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_back_to_100;
             this.ptbArrowsBack.Location = new System.Drawing.Point(12, 12);
             this.ptbArrowsBack.Name = "ptbArrowsBack";
@@ -91,6 +92,7 @@ namespace QuanLyShopThoiTrang
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Vogue", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(869, 40);
             this.label1.Name = "label1";
@@ -103,23 +105,23 @@ namespace QuanLyShopThoiTrang
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridView.Location = new System.Drawing.Point(9, 21);
             this.dataGridView.Name = "dataGridView";
@@ -166,6 +168,7 @@ namespace QuanLyShopThoiTrang
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.groupBox7);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.groupBox6);
@@ -186,6 +189,48 @@ namespace QuanLyShopThoiTrang
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controler";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.lblFinder);
+            this.groupBox7.Controls.Add(this.ptbFinder);
+            this.groupBox7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox7.Location = new System.Drawing.Point(1723, 52);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(138, 61);
+            this.groupBox7.TabIndex = 46;
+            this.groupBox7.TabStop = false;
+            // 
+            // lblFinder
+            // 
+            this.lblFinder.AutoSize = true;
+            this.lblFinder.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinder.Location = new System.Drawing.Point(54, 23);
+            this.lblFinder.Name = "lblFinder";
+            this.lblFinder.Size = new System.Drawing.Size(47, 22);
+            this.lblFinder.TabIndex = 36;
+            this.lblFinder.Text = "Find";
+            this.lblFinder.Click += new System.EventHandler(this.lblFinder_Click);
+            // 
+            // ptbFinder
+            // 
+            this.ptbFinder.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_find_user_male_100;
+            this.ptbFinder.Location = new System.Drawing.Point(6, 12);
+            this.ptbFinder.Name = "ptbFinder";
+            this.ptbFinder.Size = new System.Drawing.Size(45, 45);
+            this.ptbFinder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbFinder.TabIndex = 37;
+            this.ptbFinder.TabStop = false;
+            this.ptbFinder.Click += new System.EventHandler(this.ptbFinder_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1397, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(155, 23);
+            this.label3.TabIndex = 45;
+            this.label3.Text = "Phone Number";
             // 
             // groupBox6
             // 
@@ -373,52 +418,11 @@ namespace QuanLyShopThoiTrang
             this.label2.TabIndex = 15;
             this.label2.Text = "Total";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1397, 43);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 23);
-            this.label3.TabIndex = 45;
-            this.label3.Text = "Phone Number";
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.lblFinder);
-            this.groupBox7.Controls.Add(this.ptbFinder);
-            this.groupBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox7.Location = new System.Drawing.Point(1723, 52);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(138, 61);
-            this.groupBox7.TabIndex = 46;
-            this.groupBox7.TabStop = false;
-            // 
-            // lblFinder
-            // 
-            this.lblFinder.AutoSize = true;
-            this.lblFinder.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinder.Location = new System.Drawing.Point(54, 23);
-            this.lblFinder.Name = "lblFinder";
-            this.lblFinder.Size = new System.Drawing.Size(47, 22);
-            this.lblFinder.TabIndex = 36;
-            this.lblFinder.Text = "Find";
-            this.lblFinder.Click += new System.EventHandler(this.lblFinder_Click);
-            // 
-            // ptbFinder
-            // 
-            this.ptbFinder.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_find_user_male_100;
-            this.ptbFinder.Location = new System.Drawing.Point(6, 12);
-            this.ptbFinder.Name = "ptbFinder";
-            this.ptbFinder.Size = new System.Drawing.Size(45, 45);
-            this.ptbFinder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbFinder.TabIndex = 37;
-            this.ptbFinder.TabStop = false;
-            this.ptbFinder.Click += new System.EventHandler(this.ptbFinder_Click);
-            // 
             // customerManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::QuanLyShopThoiTrang.Properties.Resources.stil_vdaJJbls3xE_unsplash;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -431,6 +435,9 @@ namespace QuanLyShopThoiTrang
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbModify)).EndInit();
@@ -445,9 +452,6 @@ namespace QuanLyShopThoiTrang
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbFinder)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

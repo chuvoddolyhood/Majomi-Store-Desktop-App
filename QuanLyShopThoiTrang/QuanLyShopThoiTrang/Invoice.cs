@@ -59,6 +59,18 @@ namespace QuanLyShopThoiTrang
             txtIDInvoiceDataGridView.Text= setIDInTheIdButton();
         }
 
+        private void Invoice_Load_Del(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Maximized;
+
+            //Xuat thong tin len bang lon
+            dataGridViewProduct.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProduct.DataSource = getAllProduct().Tables[0];
+
+            setIDInTheIdButton();
+            
+        }
+
         private void setTitleProductInTheTitleButton()
         {
             SqlConnection connector = new SqlConnection(strDatabase);
@@ -211,32 +223,7 @@ namespace QuanLyShopThoiTrang
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
 
-            if (txtTitleProduct.Text.Equals(""))
-                MessageBox.Show("Ban chua nhap doi tuong");
-
-            else
-            {
-                string queryAdd = "INSERT INTO INVOICE VALUES(@idInvoice,@date,@idCustomer,@idProduct,@quantity,@unitPrice,@grandTotal);";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
-
-                commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoiceDataGridView.Text);
-                commandAdd.Parameters.AddWithValue("@date", dateTimePicker.Value);
-                commandAdd.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
-                commandAdd.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
-                commandAdd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
-                commandAdd.Parameters.AddWithValue("@unitPrice", txtUnitPrice.Text);
-                commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
-                commandAdd.ExecuteNonQuery();
-
-                
-                loadProductToDataGridView();
-                countProduct();
-                updateAmountProduct();
-                btnClearProduct_Click(sender, e);
-                connector.Close();
-            }
+            
         }
 
         private string IDCustomer; //Lay ID trong DatagridviewCustomer
@@ -248,28 +235,6 @@ namespace QuanLyShopThoiTrang
             txtNameCustomer.Text = dataGridViewCustomer.Rows[i].Cells[1].Value.ToString();
             //string getMarkOfReward = dataGridViewCustomer.Rows[i].Cells[3].Value.ToString();
             //markOfReward = int.Parse(getMarkOfReward);
-        }
-
-        private void btnAddCustomer_Click(object sender, EventArgs e)
-        {
-            txtNameCustomerDGV.Text = txtNameCustomer.Text;
-            txtIDCustomerDGV.Text = IDCustomer;
-
-            //In label discount
-            //if (markOfReward < 15)
-            //    lblShowDiscount.Visible = false;
-            //else if (markOfReward >= 15 && markOfReward < 20)
-            //{
-            //    lblShowDiscount.Visible = true;
-            //    lblShowDiscount.Text = "Khách hàng nhận được discount giảm giá 15000đ";
-            //    btnUseDiscount.Visible = true;
-            //}
-            //else if (markOfReward >= 20)
-            //{
-            //    lblShowDiscount.Visible = true;
-            //    lblShowDiscount.Text = "Khách hàng nhận được discount giảm giá 20000đ";
-            //    btnUseDiscount.Visible = true;
-            //}
         }
 
         //private void btnUseDiscount_Click(object sender, EventArgs e)
@@ -306,19 +271,11 @@ namespace QuanLyShopThoiTrang
         //    }
         //}
 
-        private void btnClearProduct_Click(object sender, EventArgs e)
-        {
-            txtIDProduct.Clear();
-            txtTitleProduct.Clear();
-            txtUnitPrice.Clear();
-            txtQuantity.Clear();
-        }
-
         private void btnNewCustomer_Click(object sender, EventArgs e)
         {
             txtIDInvoice.Text = setIDInTheIdButton();
             txtIDInvoiceDataGridView.Text = setIDInTheIdButton();
-            btnClearProduct_Click(sender, e);
+            ptbClear_Click(sender, e);
             txtPhoneNumberCustomer.Clear();
             ((DataTable)dataGridViewProduct.DataSource).Rows.Clear();
             ((DataTable)dataGridViewCustomer.DataSource).Rows.Clear();
@@ -359,5 +316,126 @@ namespace QuanLyShopThoiTrang
             }
         }
 
+        private void ptbAdd_Click(object sender, EventArgs e)
+        {
+            txtNameCustomerDGV.Text = txtNameCustomer.Text;
+            txtIDCustomerDGV.Text = IDCustomer;
+        }
+
+        private void ptbAdd_Click_1(object sender, EventArgs e)
+        {
+            if (txtTitleProduct.Text.Equals(""))
+                MessageBox.Show("Ban chua nhap doi tuong");
+
+            else
+            {
+                string queryAdd = "INSERT INTO INVOICE VALUES(@idInvoice,@date,@idCustomer,@idProduct,@quantity,@unitPrice,@grandTotal);";
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+
+                commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoiceDataGridView.Text);
+                commandAdd.Parameters.AddWithValue("@date", dateTimePicker.Value);
+                commandAdd.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
+                commandAdd.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
+                commandAdd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
+                commandAdd.Parameters.AddWithValue("@unitPrice", txtUnitPrice.Text);
+                commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
+                commandAdd.ExecuteNonQuery();
+
+                loadProductToDataGridView();
+                countProduct();
+                updateAmountProduct();
+                ptbClear_Click(sender, e);
+                connector.Close();
+            }
+        }
+
+        private void lblAdd_Click(object sender, EventArgs e)
+        {
+            ptbAdd_Click_1(sender, e);
+        }
+
+        private void ptbModify_Click(object sender, EventArgs e)
+        {
+            if (txtTitleProduct.Text.Equals(""))
+                MessageBox.Show("Ban chua nhap doi tuong");
+
+            else
+            {
+                string queryAdd = "UPDATE Invoice SET Quantity_Product=@quantity, GrandTotal=@grandTotal WHERE ID_Invoice=@idInvoice AND ID_Customer=@idCustomer AND ID_Product=@idProduct;";
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+
+                commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoice.Text);
+                commandAdd.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
+                commandAdd.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
+                commandAdd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
+                commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
+                commandAdd.ExecuteNonQuery();
+
+                loadProductToDataGridView();
+                countProduct();
+                updateAmountProduct();
+                ptbClear_Click(sender, e);
+                connector.Close();
+            }
+        }
+
+        private void lblModify_Click(object sender, EventArgs e)
+        {
+            ptbModify_Click(sender, e);
+        }
+
+        private void ptbClear_Click(object sender, EventArgs e)
+        {
+            txtIDProduct.Clear();
+            txtTitleProduct.Clear();
+            txtUnitPrice.Clear();
+            txtQuantity.Clear();
+        }
+
+        private void lblClear_Click(object sender, EventArgs e)
+        {
+            ptbClear_Click(sender, e);
+        }
+
+        private void ptbDel_Click(object sender, EventArgs e)
+        {
+            if (txtNameCustomer.Text.Equals(""))
+            {
+                MessageBox.Show("Ban chua chon doi tuong can xoa");
+            }
+            else
+            {
+                string queryDel = "DELETE Invoice WHERE ID_Invoice = @idInvoice AND ID_Customer = @idCustomer AND ID_Product = @idProduct;";
+
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand commandDelTabelCustomer = new SqlCommand(queryDel, connector);
+                commandDelTabelCustomer.Parameters.AddWithValue("@idInvoice", txtIDInvoice.Text);
+                commandDelTabelCustomer.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
+                commandDelTabelCustomer.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
+                commandDelTabelCustomer.ExecuteNonQuery();
+
+                Invoice_Load_Del(sender, e);
+                ptbClear_Click(sender, e);
+                connector.Close();
+            }
+        }
+
+        private void lblDel_Click(object sender, EventArgs e)
+        {
+            ptbDel_Click(sender, e);
+        }
+
+        private void dataGridViewProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i= dataGridViewProduct.CurrentRow.Index;;
+            txtIDProduct.Text = dataGridViewProduct.Rows[i].Cells[0].Value.ToString();
+            txtTitleProduct.Text = dataGridViewProduct.Rows[i].Cells[1].Value.ToString();
+            txtQuantity.Text = dataGridViewProduct.Rows[i].Cells[2].Value.ToString();
+        }
     }
 }
