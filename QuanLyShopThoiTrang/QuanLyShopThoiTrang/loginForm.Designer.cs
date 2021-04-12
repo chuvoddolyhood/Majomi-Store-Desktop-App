@@ -63,11 +63,11 @@ namespace QuanLyShopThoiTrang
             // dangNhap_Label
             // 
             this.dangNhap_Label.AutoSize = true;
-            this.dangNhap_Label.Font = new System.Drawing.Font("Vogue", 45F);
+            this.dangNhap_Label.Font = new System.Drawing.Font("Vogue", 40F);
             this.dangNhap_Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(85)))), ((int)(((byte)(30)))));
-            this.dangNhap_Label.Location = new System.Drawing.Point(152, 325);
+            this.dangNhap_Label.Location = new System.Drawing.Point(172, 325);
             this.dangNhap_Label.Name = "dangNhap_Label";
-            this.dangNhap_Label.Size = new System.Drawing.Size(260, 67);
+            this.dangNhap_Label.Size = new System.Drawing.Size(230, 60);
             this.dangNhap_Label.TabIndex = 1;
             this.dangNhap_Label.Text = "Log in";
             // 
@@ -148,7 +148,7 @@ namespace QuanLyShopThoiTrang
             this.clearLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearLabel.Font = new System.Drawing.Font("Century Gothic", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.clearLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(85)))), ((int)(((byte)(30)))));
-            this.clearLabel.Location = new System.Drawing.Point(379, 578);
+            this.clearLabel.Location = new System.Drawing.Point(374, 578);
             this.clearLabel.Name = "clearLabel";
             this.clearLabel.Size = new System.Drawing.Size(103, 21);
             this.clearLabel.TabIndex = 14;

@@ -37,6 +37,7 @@ namespace QuanLyShopThoiTrang
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -63,10 +64,10 @@ namespace QuanLyShopThoiTrang
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Century", 25F, System.Drawing.FontStyle.Bold);
+            this.label1.Font = new System.Drawing.Font("Vogue", 25.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(174, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(351, 50);
+            this.label1.Size = new System.Drawing.Size(341, 39);
             this.label1.TabIndex = 1;
             this.label1.Text = "Majomi Concept";
             // 
@@ -76,7 +77,7 @@ namespace QuanLyShopThoiTrang
             this.progressBar.ForeColor = System.Drawing.Color.Red;
             this.progressBar.Location = new System.Drawing.Point(195, 199);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(300, 6);
+            this.progressBar.Size = new System.Drawing.Size(250, 5);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 2;
             // 
@@ -101,16 +102,27 @@ namespace QuanLyShopThoiTrang
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Century", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(177, 43);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(212, 31);
+            this.label3.Size = new System.Drawing.Size(198, 28);
             this.label3.TabIndex = 11;
             this.label3.Text = "Welcome back to";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 6F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(195, 176);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 14);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Version Sugar1.0";
             // 
             // splashScreen
             // 
             this.ClientSize = new System.Drawing.Size(555, 348);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressBar);
@@ -136,5 +148,6 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
