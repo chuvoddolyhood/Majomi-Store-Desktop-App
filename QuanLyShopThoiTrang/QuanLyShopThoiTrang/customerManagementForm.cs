@@ -259,5 +259,21 @@ namespace QuanLyShopThoiTrang
         {
             ptbFinder_Click(sender, e);
         }
+
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            pictureBox1_Click(sender, e);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            txtPhoneNumberFinder.Clear();
+
+            string id = txtID.Text.Substring(2, 3);
+            int indexRowDatagridview = int.Parse(id) - 1; //tri so cot xuat theo tu ID
+            dataGridView.Rows[indexRowDatagridview].Selected = false;
+            ptbClear_Click(sender, e);
+        }
     }
 }

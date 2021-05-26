@@ -142,6 +142,7 @@ namespace QuanLyShopThoiTrang
         private void showInfoIntoTextBox(int indexRowDatagridview)
         {
             int indexRow = indexRowDatagridview;
+            
             idTextBox.Text = dataGridView.Rows[indexRow].Cells[0].Value.ToString();
             nameTextBox.Text = dataGridView.Rows[indexRow].Cells[1].Value.ToString();
             sexComboBox.Text = dataGridView.Rows[indexRow].Cells[2].Value.ToString();
@@ -292,7 +293,7 @@ namespace QuanLyShopThoiTrang
 
         private void ptbFinder_Click(object sender, EventArgs e)
         {
-            if (txtIdFinder.Text != null)
+            if (!txtIdFinder.Text.Equals(""))
             {
                 printInfoInTheTextBoxFromIDFinderRadio();
             }
@@ -317,6 +318,14 @@ namespace QuanLyShopThoiTrang
         private void lblClearFinder_Click(object sender, EventArgs e)
         {
             ptbClearFinder_Click(sender, e);
+        }
+
+        private void txtIDFinder(object sender, EventArgs e)
+        {
+            if (!txtIdFinder.Text.Equals(""))
+            {
+                ptbClearFinder_Click(sender, e);
+            }
         }
     }
 }

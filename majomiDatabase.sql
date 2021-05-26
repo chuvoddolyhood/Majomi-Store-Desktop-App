@@ -25,9 +25,9 @@ CREATE TABLE Work(
 
 
 CREATE TABLE Account(
-	ID VARCHAR(3) NOT NULL PRIMARY KEY REFERENCES Employee(ID),
-	UserName VARCHAR(25) NOT NULL UNIQUE,
-	User_Password VARCHAR(25) NOT NULL	
+	ID VARCHAR(7) NOT NULL PRIMARY KEY REFERENCES Employee(ID),
+	UserName VARCHAR(50) NOT NULL UNIQUE,
+	User_Password VARCHAR(50) NOT NULL	
 );
 
 
@@ -63,8 +63,7 @@ CREATE TABLE Invoice(
 );
 
 ---------------------Employee----------------------------------
-SELECT *
-FROM Employee;
+SELECT *FROM Employee;
 
 INSERT INTO Employee VALUES('NV001','Huynh Anh Thu','Female','Dec 30, 2001','57 Duong so 1 KDC Metro','0782966311','thu001@gmail.com','Dai hoc','Tieng Anh','CV01','Mar 21, 2021',0);
 INSERT INTO Employee VALUES('NV002','Le Minh Ngoc','Female','Mar 7, 2001','Nguyen Van Cu','01234567','ngoc002@gmail.com','Dai hoc','Tieng Anh','CV02','Mar 21, 2021',200000);
@@ -76,10 +75,12 @@ INSERT INTO Employee VALUES('NV007','Le Doan Khanh','Male','Apr 30, 2000','Stell
 
 ---------------------Account----------------------------------
 SELECT * FROM Account;
-INSERT INTO Account VALUES ('001','thu3012','alittlesugar');
-INSERT INTO Account VALUES ('002','ngoc73','ngoc73');
-INSERT INTO Account VALUES ('003','thaouyen','thaouyen');
-INSERT INTO Account VALUES ('004','nghia241','chuvod');
+DELETE Account
+
+INSERT INTO Account VALUES ('NV001','thu','thu3012');
+INSERT INTO Account VALUES ('NV002','ngoc','ngoc73');
+INSERT INTO Account VALUES ('NV003','thaouyen','thaouyen');
+INSERT INTO Account VALUES ('NV004','nghia','chuvod2401');
 
 
 ------------------------------WORK------------------------------
@@ -326,3 +327,17 @@ SELECT Amount_Product FROM Product WHERE ID_Product='Ao001';
 UPDATE Invoice SET Quantity_Product=2, GrandTotal WHERE ID_Invoice='HD001' AND ID_Customer='KH001' AND ID_Product='Ao003';
 
 DELETE Invoice WHERE ID_Invoice='HD001' AND ID_Customer='KH001' AND ID_Product='Ao003';
+
+
+--------------------------------------------------
+USE majomiStore
+SELECT * FROM Account
+
+SELECT * FROM EMPLOYEE
+
+SELECT User_Password FROM Account WHERE UserName='thu';
+
+SELECT IDWorkType FROM Account A JOIN Employee E ON A.ID=E.ID WHERE User_Password='thu3012' AND UserName='thu';
+
+SELECT IDWorkType FROM Account A JOIN Employee E ON A.ID=E.ID WHERE UserName='nghia' AND User_Password='chuvod2401'
+
