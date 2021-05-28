@@ -83,7 +83,7 @@ namespace QuanLyShopThoiTrang
                         f.Show();
                         this.Hide();
                     }
-                    else MessageBox.Show("Ban khong phai admin");
+                    else MessageBox.Show("Ban khong phai Quan Ly");
 
                     connector.Close();
                 }
