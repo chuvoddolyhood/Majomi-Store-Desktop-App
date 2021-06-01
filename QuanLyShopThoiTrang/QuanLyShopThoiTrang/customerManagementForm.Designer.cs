@@ -62,9 +62,6 @@ namespace QuanLyShopThoiTrang
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtTotalCustomer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -79,8 +76,6 @@ namespace QuanLyShopThoiTrang
             this.grbAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ptbArrowsBack
@@ -175,7 +170,6 @@ namespace QuanLyShopThoiTrang
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.groupBox7);
             this.groupBox1.Controls.Add(this.label3);
@@ -287,6 +281,7 @@ namespace QuanLyShopThoiTrang
             this.txtPhoneNumberFinder.Name = "txtPhoneNumberFinder";
             this.txtPhoneNumberFinder.Size = new System.Drawing.Size(309, 32);
             this.txtPhoneNumberFinder.TabIndex = 23;
+            this.txtPhoneNumberFinder.Click += new System.EventHandler(this.txtPhoneNumberFinder_Click);
             // 
             // groupBox5
             // 
@@ -434,41 +429,6 @@ namespace QuanLyShopThoiTrang
             this.label2.TabIndex = 15;
             this.label2.Text = "Total";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.pictureBox1);
-            this.groupBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox3.Location = new System.Drawing.Point(1723, 119);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(131, 69);
-            this.groupBox3.TabIndex = 47;
-            this.groupBox3.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_clear_symbol_100;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 14);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(54, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 10.8F);
-            this.label4.Location = new System.Drawing.Point(66, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 22);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Clear";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
             // customerManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -503,9 +463,6 @@ namespace QuanLyShopThoiTrang
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,8 +501,5 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.Label lblFinder;
         private System.Windows.Forms.PictureBox ptbFinder;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -200,6 +200,9 @@
   <ItemGroup>
     <None Include="Resources\stil-vdaJJbls3xE-unsplash.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_order_history_80px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"

@@ -163,6 +163,16 @@ namespace QuanLyShopThoiTrang.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_order_history_80px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_order_history_80px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_pen_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-pen-100", resourceCulture);

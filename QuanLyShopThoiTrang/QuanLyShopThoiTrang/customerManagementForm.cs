@@ -46,36 +46,50 @@ namespace QuanLyShopThoiTrang
             return data;
         }
 
-        private void countCustomer()
+        private int countCustomer()
         {
             int total;
-            SqlConnection connector = new SqlConnection(strDatabase);
-            connector.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM Customer;", connector);
-            total = (int)cmd.ExecuteScalar();
-            txtTotalCustomer.Text = total.ToString();
-            connector.Close();
+            try
+            {
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM Customer;", connector);
+                total = (int)cmd.ExecuteScalar();
+                connector.Close();
+            }
+            catch(Exception)
+            {
+                total = 0;
+            }
+            return total;
         }
 
         private void setIDInTheIdButton()
         {
-            SqlConnection connector = new SqlConnection(strDatabase);
-            connector.Open();
-            //Mac dinh lay gia tri cuoi danh sach trong CSDL
-            SqlCommand cmd = new SqlCommand("SELECT MAX(ID_Customer) FROM Customer", connector);
-            string id_temp = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
-            string getTheLastNumberOfID = id_temp.Substring(2, 3); //Lay ky tu 3 so cuoi cung
-            int id = int.Parse(getTheLastNumberOfID) + 1; //CHuyen doi sang dang so(int)
-            if (id < 10)
+            try
             {
-                txtID.Text = "KH" + "00" + id.ToString();
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                //Mac dinh lay gia tri cuoi danh sach trong CSDL
+                SqlCommand cmd = new SqlCommand("SELECT MAX(ID_Customer) FROM Customer", connector);
+                string id_temp = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
+                string getTheLastNumberOfID = id_temp.Substring(2, 3); //Lay ky tu 3 so cuoi cung
+                int id = int.Parse(getTheLastNumberOfID) + 1; //CHuyen doi sang dang so(int)
+                if (id < 10)
+                {
+                    txtID.Text = "KH" + "00" + id.ToString();
+                }
+                else if (id >= 10 && id < 100)
+                {
+                    txtID.Text = "KH" + "0" + id.ToString();
+                }
+                else txtID.Text = "KH" + id.ToString();
+                connector.Close();
             }
-            else if (id >= 10 && id < 100)
+            catch (Exception ex)
             {
-                txtID.Text = "KH" + "0" + id.ToString();
+                MessageBox.Show(ex.Message+ex.StackTrace);
             }
-            else txtID.Text = "KH" + id.ToString();
-            connector.Close();
         }
 
         private void customerManagementForm_Load(object sender, EventArgs e)
@@ -87,7 +101,7 @@ namespace QuanLyShopThoiTrang
             dataGridView.DataSource = getAllCustomer().Tables[0];
 
             //Dem so luong nhan vien
-            countCustomer();
+            txtTotalCustomer.Text=countCustomer().ToString();
 
             //Set up ID
             setIDInTheIdButton();
@@ -114,7 +128,7 @@ namespace QuanLyShopThoiTrang
         }
 
 
-        //Ham ho tro button finer de goi toi in thong tin ra cac textbox
+        //Ham ho tro button finder de goi toi in thong tin ra cac textbox
         //vi ham tren co event e ko su dung duoc
         private void dataGridView_CellContentClick(int index)
         {
@@ -135,24 +149,30 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-                //Them du lieu vao table.EmpInfo
-                string queryAdd = "INSERT INTO Customer VALUES (@id,@name,@phoneNumber);";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+                try
+                {
+                    //Them du lieu vao table.EmpInfo
+                    string queryAdd = "INSERT INTO Customer VALUES (@id,@name,@phoneNumber);";
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
 
-                //Thuc thi lenh them du lieu vao bang EmpInfo
-                commandAdd.Parameters.AddWithValue("@id", txtID.Text);
-                commandAdd.Parameters.AddWithValue("@name", txtNameCustomer.Text);
-                commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberCustomer.Text);
-                commandAdd.ExecuteNonQuery();
+                    //Thuc thi lenh them du lieu vao bang EmpInfo
+                    commandAdd.Parameters.AddWithValue("@id", txtID.Text);
+                    commandAdd.Parameters.AddWithValue("@name", txtNameCustomer.Text);
+                    commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberCustomer.Text);
+                    commandAdd.ExecuteNonQuery();
 
-                customerManagementForm_Load(sender, e);
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    customerManagementForm_Load(sender, e);
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Loi thong tin. Vui long thu lai");
+                }
             }
         }
-
         private void lblAdd_Click(object sender, EventArgs e)
         {
             ptbAdd_Click(sender, e);
@@ -166,27 +186,34 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-                string name = txtNameCustomer.Text;
-                DialogResult dlr = MessageBox.Show("Ban co chac chan muon xoa " + name + " khoi he thong ko?", "Thông báo",
-                                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
-                if (dlr == DialogResult.No)
+                try
                 {
-                    ptbClear_Click(sender, e);
+                    string name = txtNameCustomer.Text;
+                    DialogResult dlr = MessageBox.Show("Ban co chac chan muon xoa " + name + " khoi he thong ko?", "Thông báo",
+                                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+                    if (dlr == DialogResult.No)
+                    {
+                        ptbClear_Click(sender, e);
+                    }
+                    if (dlr == DialogResult.Yes)
+                    {
+                        string queryDeleteTabelCustomer = "DELETE Customer WHERE ID_Customer=@id;";
+
+                        SqlConnection connector = new SqlConnection(strDatabase);
+                        connector.Open();
+                        //Thuc thi tren table.EmpInfo
+                        SqlCommand commandDelTabelCustomer = new SqlCommand(queryDeleteTabelCustomer, connector);
+                        commandDelTabelCustomer.Parameters.AddWithValue("@id", txtID.Text);
+                        commandDelTabelCustomer.ExecuteNonQuery();
+
+                        customerManagementForm_Load(sender, e);
+                        ptbClear_Click(sender, e);
+                        connector.Close();
+                    }
                 }
-                if (dlr == DialogResult.Yes)
+                catch (Exception)
                 {
-                    string queryDeleteTabelCustomer = "DELETE Customer WHERE ID_Customer=@id;";
-
-                    SqlConnection connector = new SqlConnection(strDatabase);
-                    connector.Open();
-                    //Thuc thi tren table.EmpInfo
-                    SqlCommand commandDelTabelCustomer = new SqlCommand(queryDeleteTabelCustomer, connector);
-                    commandDelTabelCustomer.Parameters.AddWithValue("@id", txtID.Text);
-                    commandDelTabelCustomer.ExecuteNonQuery();
-
-                    customerManagementForm_Load(sender, e);
-                    ptbClear_Click(sender, e);
-                    connector.Close();
+                    MessageBox.Show("Loi thong tin. Vui long thu lai");
                 }
             }
         }
@@ -216,19 +243,26 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-                string queryModify = "UPDATE Customer SET Name_Customer=@name, PhoneNumber_Customer=@phoneNumber WHERE ID_Customer=@id;";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandModify = new SqlCommand(queryModify, connector);
+                try
+                {
+                    string queryModify = "UPDATE Customer SET Name_Customer=@name, PhoneNumber_Customer=@phoneNumber WHERE ID_Customer=@id;";
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandModify = new SqlCommand(queryModify, connector);
 
-                commandModify.Parameters.AddWithValue("@id", txtID.Text);
-                commandModify.Parameters.AddWithValue("@name", txtNameCustomer.Text);
-                commandModify.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberCustomer.Text);
-                commandModify.ExecuteNonQuery();
+                    commandModify.Parameters.AddWithValue("@id", txtID.Text);
+                    commandModify.Parameters.AddWithValue("@name", txtNameCustomer.Text);
+                    commandModify.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberCustomer.Text);
+                    commandModify.ExecuteNonQuery();
 
-                customerManagementForm_Load(sender, e);
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    customerManagementForm_Load(sender, e);
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Loi thong tin. Vui long thu lai");
+                }
             }
         }
 
@@ -239,18 +273,23 @@ namespace QuanLyShopThoiTrang
 
         private void ptbFinder_Click(object sender, EventArgs e)
         {
+            string sdt = txtPhoneNumberFinder.Text;
+            int indexRowDatagridview = 0; //tri so cot xuat theo tu ID
+            bool check = false;
             if (txtPhoneNumberFinder.Text != null)
             {
-                //In thong tin ra tung textbox nho trong groupbox Input Employee lay tu ID
-                string query = "SELECT ID_Customer FROM Customer WHERE PhoneNumber_Customer=@phoneNumber;";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand command = new SqlCommand(query, connector);
-                command.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberFinder.Text);
-                string id = (string)command.ExecuteScalar();
-                string id_number = id.Substring(2, 3);
-                int indexRowDatagridview = int.Parse(id_number) - 1; //tri so cot xuat theo tu ID
-                showInfoIntoTextBox(indexRowDatagridview);
+                for (int i = 0; i < countCustomer(); i++)
+                {
+                    if (sdt.Equals(dataGridView.Rows[i].Cells[2].Value.ToString()))
+                    {
+                        indexRowDatagridview = i; //tri so cot xuat theo tu ID
+                        check = true;
+                    }
+                }
+                if (check == true)
+                    //In thong tin ra tung textbox nho trong groupbox Input Employee lay tu ID
+                    showInfoIntoTextBox(indexRowDatagridview);
+                else MessageBox.Show("Khong tim thay nhan vien");
             }
             else MessageBox.Show("Ban chua nhap thong tin tim kiem");
         }
@@ -260,13 +299,7 @@ namespace QuanLyShopThoiTrang
             ptbFinder_Click(sender, e);
         }
 
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-            pictureBox1_Click(sender, e);
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void txtPhoneNumberFinder_Click(object sender, EventArgs e)
         {
             txtPhoneNumberFinder.Clear();
 

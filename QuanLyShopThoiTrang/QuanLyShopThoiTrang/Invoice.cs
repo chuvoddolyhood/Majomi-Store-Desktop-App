@@ -27,26 +27,33 @@ namespace QuanLyShopThoiTrang
             menu.Show();
         }
 
-        private string setIDInTheIdButton()
+        private string setIDInvoiceInTheIdButton()
         {
             string printIDInvoice;
-            SqlConnection connector = new SqlConnection(strDatabase);
-            connector.Open();
-            //Mac dinh lay gia tri cuoi danh sach trong CSDL
-            SqlCommand cmd = new SqlCommand("SELECT MAX(ID_Invoice) FROM INVOICE;", connector);
-            string id_temp = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
-            string getTheLastNumberOfID = id_temp.Substring(2, 3); //Lay ky tu 3 so cuoi cung
-            int id = int.Parse(getTheLastNumberOfID) + 1; //CHuyen doi sang dang so(int)
-            if (id < 10)
+            try
             {
-                printIDInvoice = "HD" + "00" + id.ToString();
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                //Mac dinh lay gia tri cuoi danh sach trong CSDL
+                SqlCommand cmd = new SqlCommand("SELECT MAX(ID_Invoice) FROM INVOICE;", connector);
+                string id_temp = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
+                string getTheLastNumberOfID = id_temp.Substring(2, 3); //Lay ky tu 3 so cuoi cung
+                int id = int.Parse(getTheLastNumberOfID) + 1; //CHuyen doi sang dang so(int)
+                if (id < 10)
+                {
+                    printIDInvoice = "HD" + "00" + id.ToString();
+                }
+                else if (id >= 10 && id < 100)
+                {
+                    printIDInvoice = "HD" + "0" + id.ToString();
+                }
+                else printIDInvoice = "HD" + id.ToString();
+                connector.Close();
             }
-            else if (id >= 10 && id < 100)
+            catch (Exception)
             {
-                printIDInvoice = "HD" + "0" + id.ToString();
+                printIDInvoice="HD000";
             }
-            else printIDInvoice = "HD" + id.ToString();
-            connector.Close();
             return printIDInvoice;
         }
 
@@ -55,20 +62,14 @@ namespace QuanLyShopThoiTrang
             WindowState = FormWindowState.Maximized;
 
             //auto setup ID
-            txtIDInvoice.Text= setIDInTheIdButton();
-            txtIDInvoiceDataGridView.Text= setIDInTheIdButton();
-        }
-
-        private void Invoice_Load_Del(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Maximized;
+            txtIDInvoice.Text = setIDInvoiceInTheIdButton();
+            txtIDInvoiceDataGridView.Text = setIDInvoiceInTheIdButton();
 
             //Xuat thong tin len bang lon
             dataGridViewProduct.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewProduct.DataSource = getAllProduct().Tables[0];
 
-            setIDInTheIdButton();
-            
+            setIDInvoiceInTheIdButton();
         }
 
         private void setTitleProductInTheTitleButton()
@@ -95,7 +96,7 @@ namespace QuanLyShopThoiTrang
             connector.Close();
         }
 
-        private void txtQuantity_TextChanged(object sender, EventArgs e)
+        private void txtQuantity_Click(object sender, EventArgs e)
         {
             setTitleProductInTheTitleButton();
             setUnitPriceInTheButton();
@@ -164,7 +165,9 @@ namespace QuanLyShopThoiTrang
 
         private void btnFindCustomer_Click(object sender, EventArgs e)
         {
-            loadCustomerToDataGridView();
+            if (!txtPhoneNumberCustomer.Text.Equals(""))
+                loadCustomerToDataGridView();
+            else MessageBox.Show("Vui long nhap so dien thoai khach hang");
         }
 
         //Dem so luong hang hoa them vao
@@ -179,11 +182,6 @@ namespace QuanLyShopThoiTrang
             txtTotalProduct.Text = total.ToString();
             connector.Close();
         }
-
-        //private int discount; //Luu gia tri discount
-
-        //Tinh tong tien
-        private int grandTotal() =>  int.Parse(txtUnitPrice.Text) * int.Parse(txtQuantity.Text);
 
         private string getIDProduct()
         {
@@ -217,13 +215,6 @@ namespace QuanLyShopThoiTrang
             //commandUpdate.Parameters.AddWithValue("@updateAmountProduct", updateAmountProduct);
             commandUpdate.Parameters.AddWithValue("@idProduct", getIDProduct());
             connector.Close(); 
-        }
-
-
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-
-            
         }
 
         private string IDCustomer; //Lay ID trong DatagridviewCustomer
@@ -273,8 +264,8 @@ namespace QuanLyShopThoiTrang
 
         private void btnNewCustomer_Click(object sender, EventArgs e)
         {
-            txtIDInvoice.Text = setIDInTheIdButton();
-            txtIDInvoiceDataGridView.Text = setIDInTheIdButton();
+            txtIDInvoice.Text = setIDInvoiceInTheIdButton();
+            txtIDInvoiceDataGridView.Text = setIDInvoiceInTheIdButton();
             ptbClear_Click(sender, e);
             txtPhoneNumberCustomer.Clear();
             ((DataTable)dataGridViewProduct.DataSource).Rows.Clear();
@@ -286,100 +277,85 @@ namespace QuanLyShopThoiTrang
             txtCost.Clear();
         }
 
-        private void btnCost_Click(object sender, EventArgs e)
-        {
-            string querySumMoney = "SELECT SUM(GrandTotal) FROM Invoice WHERE ID_Invoice=@idInvoice;";
-
-            SqlConnection connector = new SqlConnection(strDatabase);
-            connector.Open();
-            SqlCommand commandAdd = new SqlCommand(querySumMoney, connector);
-
-            commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoiceDataGridView.Text);
-            int costSum = Convert.ToInt32(commandAdd.ExecuteScalar());
-            txtCost.Text = costSum.ToString();
-            connector.Close();
-        }
-
-        private void lblHistory_Click(object sender, EventArgs e)
-        {
-            History history = new History();
-            history.Show();
-        }
-
-        private void btnPrintInvoice_Click(object sender, EventArgs e)
-        {
-            DialogResult dlr = MessageBox.Show("Xac nhan thanh toan hoa don voi so tien "+txtCost.Text, "Thanh toan",
-                                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-            if (dlr == DialogResult.Yes)
-            {
-                MessageBox.Show("Da thanh toan!");
-            }
-        }
-
-        private void ptbAdd_Click(object sender, EventArgs e)
+        private void ptbAddCustomer_Click(object sender, EventArgs e)
         {
             txtNameCustomerDGV.Text = txtNameCustomer.Text;
             txtIDCustomerDGV.Text = IDCustomer;
         }
 
-        private void ptbAdd_Click_1(object sender, EventArgs e)
+        //Tinh tong tien
+        private int grandTotal() => int.Parse(txtUnitPrice.Text) * int.Parse(txtQuantity.Text);
+
+        private void ptbAdd_Click(object sender, EventArgs e)
         {
             if (txtTitleProduct.Text.Equals(""))
                 MessageBox.Show("Ban chua nhap doi tuong");
-
             else
             {
-                string queryAdd = "INSERT INTO INVOICE VALUES(@idInvoice,@date,@idCustomer,@idProduct,@quantity,@unitPrice,@grandTotal);";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+                try
+                {
+                    string queryAdd = "INSERT INTO INVOICE VALUES(@idInvoice,@date,@idCustomer,@idProduct,@quantity,@unitPrice,@grandTotal);";
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
 
-                commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoiceDataGridView.Text);
-                commandAdd.Parameters.AddWithValue("@date", dateTimePicker.Value);
-                commandAdd.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
-                commandAdd.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
-                commandAdd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
-                commandAdd.Parameters.AddWithValue("@unitPrice", txtUnitPrice.Text);
-                commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
-                commandAdd.ExecuteNonQuery();
+                    commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoiceDataGridView.Text);
+                    commandAdd.Parameters.AddWithValue("@date", dateTimePicker.Value);
+                    commandAdd.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
+                    commandAdd.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
+                    commandAdd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
+                    commandAdd.Parameters.AddWithValue("@unitPrice", txtUnitPrice.Text);
+                    commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
+                    commandAdd.ExecuteNonQuery();
 
-                loadProductToDataGridView();
-                countProduct();
-                updateAmountProduct();
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    loadProductToDataGridView();
+                    countProduct();
+                    updateAmountProduct();
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Loi thong tin. Vui long kiem tra lai");
+                }
             }
         }
 
         private void lblAdd_Click(object sender, EventArgs e)
         {
-            ptbAdd_Click_1(sender, e);
+            ptbAdd_Click(sender, e);
         }
 
         private void ptbModify_Click(object sender, EventArgs e)
         {
             if (txtTitleProduct.Text.Equals(""))
                 MessageBox.Show("Ban chua nhap doi tuong");
-
             else
             {
-                string queryAdd = "UPDATE Invoice SET Quantity_Product=@quantity, GrandTotal=@grandTotal WHERE ID_Invoice=@idInvoice AND ID_Customer=@idCustomer AND ID_Product=@idProduct;";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+                try
+                {
+                    string queryAdd = "UPDATE Invoice SET Quantity_Product=@quantity, GrandTotal=@grandTotal WHERE ID_Invoice=@idInvoice AND ID_Customer=@idCustomer AND ID_Product=@idProduct;";
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
 
-                commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoice.Text);
-                commandAdd.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
-                commandAdd.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
-                commandAdd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
-                commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
-                commandAdd.ExecuteNonQuery();
+                    commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoice.Text);
+                    commandAdd.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
+                    commandAdd.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
+                    commandAdd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
+                    commandAdd.Parameters.AddWithValue("@grandTotal", grandTotal().ToString());
+                    commandAdd.ExecuteNonQuery();
 
-                loadProductToDataGridView();
-                countProduct();
-                updateAmountProduct();
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    loadProductToDataGridView();
+                    countProduct();
+                    updateAmountProduct();
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Loi thong tin. Vui long kiem tra lai");
+                }
             }
         }
 
@@ -409,19 +385,26 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-                string queryDel = "DELETE Invoice WHERE ID_Invoice = @idInvoice AND ID_Customer = @idCustomer AND ID_Product = @idProduct;";
+                try
+                {
+                    string queryDel = "DELETE Invoice WHERE ID_Invoice = @idInvoice AND ID_Customer = @idCustomer AND ID_Product = @idProduct;";
 
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandDelTabelCustomer = new SqlCommand(queryDel, connector);
-                commandDelTabelCustomer.Parameters.AddWithValue("@idInvoice", txtIDInvoice.Text);
-                commandDelTabelCustomer.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
-                commandDelTabelCustomer.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
-                commandDelTabelCustomer.ExecuteNonQuery();
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandDelTabelCustomer = new SqlCommand(queryDel, connector);
+                    commandDelTabelCustomer.Parameters.AddWithValue("@idInvoice", txtIDInvoice.Text);
+                    commandDelTabelCustomer.Parameters.AddWithValue("@idCustomer", txtIDCustomerDGV.Text);
+                    commandDelTabelCustomer.Parameters.AddWithValue("@idProduct", txtIDProduct.Text);
+                    commandDelTabelCustomer.ExecuteNonQuery();
 
-                Invoice_Load_Del(sender, e);
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    Invoice_Load(sender, e);
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Loi thong tin. Vui long kiem tra lai");
+                }
             }
         }
 
@@ -436,6 +419,43 @@ namespace QuanLyShopThoiTrang
             txtIDProduct.Text = dataGridViewProduct.Rows[i].Cells[0].Value.ToString();
             txtTitleProduct.Text = dataGridViewProduct.Rows[i].Cells[1].Value.ToString();
             txtQuantity.Text = dataGridViewProduct.Rows[i].Cells[2].Value.ToString();
+        }
+
+        private void btnCost_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string querySumMoney = "SELECT SUM(GrandTotal) FROM Invoice WHERE ID_Invoice=@idInvoice;";
+
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand commandAdd = new SqlCommand(querySumMoney, connector);
+
+                commandAdd.Parameters.AddWithValue("@idInvoice", txtIDInvoiceDataGridView.Text);
+                int costSum = Convert.ToInt32(commandAdd.ExecuteScalar());
+                txtCost.Text = costSum.ToString();
+                connector.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void lblHistory_Click(object sender, EventArgs e)
+        {
+            History history = new History();
+            history.Show();
+        }
+
+        private void btnPrintInvoice_Click(object sender, EventArgs e)
+        {
+            DialogResult dlr = MessageBox.Show("Xac nhan thanh toan hoa don voi so tien " + txtCost.Text, "Thanh toan",
+                                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+            if (dlr == DialogResult.Yes)
+            {
+                MessageBox.Show("Da thanh toan!");
+            }
         }
     }
 }

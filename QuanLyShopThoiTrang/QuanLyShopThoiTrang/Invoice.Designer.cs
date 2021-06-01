@@ -128,7 +128,7 @@ namespace QuanLyShopThoiTrang
             // 
             // txtTotalProduct
             // 
-            this.txtTotalProduct.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txtTotalProduct.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtTotalProduct.Location = new System.Drawing.Point(6, 413);
             this.txtTotalProduct.Name = "txtTotalProduct";
             this.txtTotalProduct.ReadOnly = true;
@@ -158,6 +158,7 @@ namespace QuanLyShopThoiTrang
             this.dataGridViewProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProduct.Location = new System.Drawing.Point(6, 21);
             this.dataGridViewProduct.Name = "dataGridViewProduct";
+            this.dataGridViewProduct.ReadOnly = true;
             this.dataGridViewProduct.RowHeadersWidth = 51;
             this.dataGridViewProduct.RowTemplate.Height = 24;
             this.dataGridViewProduct.Size = new System.Drawing.Size(1866, 373);
@@ -273,7 +274,7 @@ namespace QuanLyShopThoiTrang
             this.ptbAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptbAdd.TabIndex = 34;
             this.ptbAdd.TabStop = false;
-            this.ptbAdd.Click += new System.EventHandler(this.ptbAdd_Click_1);
+            this.ptbAdd.Click += new System.EventHandler(this.ptbAdd_Click);
             // 
             // lblAdd
             // 
@@ -369,7 +370,7 @@ namespace QuanLyShopThoiTrang
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(208, 28);
             this.txtQuantity.TabIndex = 10;
-            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
+            this.txtQuantity.Click += new System.EventHandler(this.txtQuantity_Click);
             // 
             // label5
             // 
@@ -440,9 +441,9 @@ namespace QuanLyShopThoiTrang
             // btnNewCustomer
             // 
             this.btnNewCustomer.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewCustomer.Location = new System.Drawing.Point(552, 243);
+            this.btnNewCustomer.Location = new System.Drawing.Point(541, 243);
             this.btnNewCustomer.Name = "btnNewCustomer";
-            this.btnNewCustomer.Size = new System.Drawing.Size(104, 58);
+            this.btnNewCustomer.Size = new System.Drawing.Size(115, 58);
             this.btnNewCustomer.TabIndex = 15;
             this.btnNewCustomer.Text = "New Customer";
             this.btnNewCustomer.UseVisualStyleBackColor = true;
@@ -475,7 +476,7 @@ namespace QuanLyShopThoiTrang
             this.ptbAddCustomer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptbAddCustomer.TabIndex = 35;
             this.ptbAddCustomer.TabStop = false;
-            this.ptbAddCustomer.Click += new System.EventHandler(this.ptbAdd_Click);
+            this.ptbAddCustomer.Click += new System.EventHandler(this.ptbAddCustomer_Click);
             // 
             // txtNameCustomer
             // 
@@ -492,6 +493,7 @@ namespace QuanLyShopThoiTrang
             this.dataGridViewCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCustomer.Location = new System.Drawing.Point(20, 120);
             this.dataGridViewCustomer.Name = "dataGridViewCustomer";
+            this.dataGridViewCustomer.ReadOnly = true;
             this.dataGridViewCustomer.RowHeadersWidth = 51;
             this.dataGridViewCustomer.RowTemplate.Height = 24;
             this.dataGridViewCustomer.Size = new System.Drawing.Size(636, 87);
@@ -584,9 +586,10 @@ namespace QuanLyShopThoiTrang
             // 
             this.lblHistory.AutoSize = true;
             this.lblHistory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHistory.Location = new System.Drawing.Point(1794, 25);
             this.lblHistory.Name = "lblHistory";
-            this.lblHistory.Size = new System.Drawing.Size(52, 17);
+            this.lblHistory.Size = new System.Drawing.Size(79, 25);
             this.lblHistory.TabIndex = 18;
             this.lblHistory.Text = "History";
             this.lblHistory.Click += new System.EventHandler(this.lblHistory_Click);
@@ -619,7 +622,6 @@ namespace QuanLyShopThoiTrang
             this.Name = "Invoice";
             this.Text = "Invoice";
             this.Load += new System.EventHandler(this.Invoice_Load);
-            this.Load += new System.EventHandler(this.Invoice_Load_Del);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduct)).EndInit();
