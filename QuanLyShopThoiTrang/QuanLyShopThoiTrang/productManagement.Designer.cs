@@ -30,9 +30,21 @@ namespace QuanLyShopThoiTrang
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblModify = new System.Windows.Forms.Label();
+            this.ptbModify = new System.Windows.Forms.PictureBox();
             this.cmbSex = new System.Windows.Forms.ComboBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblClear = new System.Windows.Forms.Label();
+            this.ptbClear = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblDel = new System.Windows.Forms.Label();
+            this.ptbDel = new System.Windows.Forms.PictureBox();
             this.txtColorProduct = new System.Windows.Forms.TextBox();
+            this.grbAdd = new System.Windows.Forms.GroupBox();
+            this.ptbAdd = new System.Windows.Forms.PictureBox();
+            this.lblAdd = new System.Windows.Forms.Label();
             this.lblColor = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.ptbProduct = new System.Windows.Forms.PictureBox();
@@ -65,25 +77,8 @@ namespace QuanLyShopThoiTrang
             this.rdbAll = new System.Windows.Forms.RadioButton();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.txtTotalProduct = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.lblModify = new System.Windows.Forms.Label();
-            this.ptbModify = new System.Windows.Forms.PictureBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.lblClear = new System.Windows.Forms.Label();
-            this.ptbClear = new System.Windows.Forms.PictureBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lblDel = new System.Windows.Forms.Label();
-            this.ptbDel = new System.Windows.Forms.PictureBox();
-            this.grbAdd = new System.Windows.Forms.GroupBox();
-            this.ptbAdd = new System.Windows.Forms.PictureBox();
-            this.lblAdd = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbProduct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbModify)).BeginInit();
             this.groupBox5.SuspendLayout();
@@ -92,6 +87,11 @@ namespace QuanLyShopThoiTrang
             ((System.ComponentModel.ISupportInitialize)(this.ptbDel)).BeginInit();
             this.grbAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -128,6 +128,40 @@ namespace QuanLyShopThoiTrang
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox6.Controls.Add(this.lblModify);
+            this.groupBox6.Controls.Add(this.ptbModify);
+            this.groupBox6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox6.Location = new System.Drawing.Point(1112, 39);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(138, 61);
+            this.groupBox6.TabIndex = 48;
+            this.groupBox6.TabStop = false;
+            // 
+            // lblModify
+            // 
+            this.lblModify.AutoSize = true;
+            this.lblModify.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModify.Location = new System.Drawing.Point(54, 23);
+            this.lblModify.Name = "lblModify";
+            this.lblModify.Size = new System.Drawing.Size(72, 22);
+            this.lblModify.TabIndex = 36;
+            this.lblModify.Text = "Modify";
+            this.lblModify.Click += new System.EventHandler(this.lblModify_Click);
+            // 
+            // ptbModify
+            // 
+            this.ptbModify.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_pen_100;
+            this.ptbModify.Location = new System.Drawing.Point(6, 12);
+            this.ptbModify.Name = "ptbModify";
+            this.ptbModify.Size = new System.Drawing.Size(45, 45);
+            this.ptbModify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbModify.TabIndex = 37;
+            this.ptbModify.TabStop = false;
+            this.ptbModify.Click += new System.EventHandler(this.ptbModify_Click);
+            // 
             // cmbSex
             // 
             this.cmbSex.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -142,6 +176,40 @@ namespace QuanLyShopThoiTrang
             this.cmbSex.Size = new System.Drawing.Size(160, 29);
             this.cmbSex.TabIndex = 25;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox5.Controls.Add(this.lblClear);
+            this.groupBox5.Controls.Add(this.ptbClear);
+            this.groupBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox5.Location = new System.Drawing.Point(979, 123);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(118, 61);
+            this.groupBox5.TabIndex = 47;
+            this.groupBox5.TabStop = false;
+            // 
+            // lblClear
+            // 
+            this.lblClear.AutoSize = true;
+            this.lblClear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClear.Location = new System.Drawing.Point(54, 23);
+            this.lblClear.Name = "lblClear";
+            this.lblClear.Size = new System.Drawing.Size(59, 22);
+            this.lblClear.TabIndex = 36;
+            this.lblClear.Text = "Clear";
+            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
+            // 
+            // ptbClear
+            // 
+            this.ptbClear.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_clear_symbol_100;
+            this.ptbClear.Location = new System.Drawing.Point(6, 12);
+            this.ptbClear.Name = "ptbClear";
+            this.ptbClear.Size = new System.Drawing.Size(45, 45);
+            this.ptbClear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbClear.TabIndex = 37;
+            this.ptbClear.TabStop = false;
+            this.ptbClear.Click += new System.EventHandler(this.ptbClear_Click);
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -153,6 +221,41 @@ namespace QuanLyShopThoiTrang
             this.label11.TabIndex = 24;
             this.label11.Text = "Sex";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox4.Controls.Add(this.lblDel);
+            this.groupBox4.Controls.Add(this.ptbDel);
+            this.groupBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.groupBox4.Location = new System.Drawing.Point(1113, 119);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(137, 70);
+            this.groupBox4.TabIndex = 46;
+            this.groupBox4.TabStop = false;
+            // 
+            // lblDel
+            // 
+            this.lblDel.AutoSize = true;
+            this.lblDel.BackColor = System.Drawing.Color.Transparent;
+            this.lblDel.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDel.Location = new System.Drawing.Point(54, 23);
+            this.lblDel.Name = "lblDel";
+            this.lblDel.Size = new System.Drawing.Size(70, 22);
+            this.lblDel.TabIndex = 36;
+            this.lblDel.Text = "Delete";
+            this.lblDel.Click += new System.EventHandler(this.lblDel_Click);
+            // 
+            // ptbDel
+            // 
+            this.ptbDel.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_remove_96;
+            this.ptbDel.Location = new System.Drawing.Point(6, 12);
+            this.ptbDel.Name = "ptbDel";
+            this.ptbDel.Size = new System.Drawing.Size(45, 45);
+            this.ptbDel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbDel.TabIndex = 37;
+            this.ptbDel.TabStop = false;
+            this.ptbDel.Click += new System.EventHandler(this.ptbDel_Click);
+            // 
             // txtColorProduct
             // 
             this.txtColorProduct.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -161,6 +264,41 @@ namespace QuanLyShopThoiTrang
             this.txtColorProduct.Name = "txtColorProduct";
             this.txtColorProduct.Size = new System.Drawing.Size(217, 28);
             this.txtColorProduct.TabIndex = 21;
+            // 
+            // grbAdd
+            // 
+            this.grbAdd.BackColor = System.Drawing.Color.Transparent;
+            this.grbAdd.Controls.Add(this.ptbAdd);
+            this.grbAdd.Controls.Add(this.lblAdd);
+            this.grbAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.grbAdd.Location = new System.Drawing.Point(988, 50);
+            this.grbAdd.Name = "grbAdd";
+            this.grbAdd.Size = new System.Drawing.Size(100, 52);
+            this.grbAdd.TabIndex = 45;
+            this.grbAdd.TabStop = false;
+            // 
+            // ptbAdd
+            // 
+            this.ptbAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptbAdd.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_plus_100;
+            this.ptbAdd.Location = new System.Drawing.Point(6, 3);
+            this.ptbAdd.Name = "ptbAdd";
+            this.ptbAdd.Size = new System.Drawing.Size(40, 40);
+            this.ptbAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbAdd.TabIndex = 34;
+            this.ptbAdd.TabStop = false;
+            this.ptbAdd.Click += new System.EventHandler(this.ptbAdd_Click);
+            // 
+            // lblAdd
+            // 
+            this.lblAdd.AutoSize = true;
+            this.lblAdd.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdd.Location = new System.Drawing.Point(48, 12);
+            this.lblAdd.Name = "lblAdd";
+            this.lblAdd.Size = new System.Drawing.Size(51, 22);
+            this.lblAdd.TabIndex = 35;
+            this.lblAdd.Text = "Add";
+            this.lblAdd.Click += new System.EventHandler(this.lblAdd_Click);
             // 
             // lblColor
             // 
@@ -374,6 +512,7 @@ namespace QuanLyShopThoiTrang
             this.txtFinderProduct.Name = "txtFinderProduct";
             this.txtFinderProduct.Size = new System.Drawing.Size(217, 28);
             this.txtFinderProduct.TabIndex = 21;
+            this.txtFinderProduct.Click += new System.EventHandler(this.txtFinderProduct_Click);
             // 
             // label8
             // 
@@ -515,144 +654,6 @@ namespace QuanLyShopThoiTrang
             this.txtTotalProduct.Size = new System.Drawing.Size(100, 22);
             this.txtTotalProduct.TabIndex = 14;
             // 
-            // groupBox6
-            // 
-            this.groupBox6.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox6.Controls.Add(this.lblModify);
-            this.groupBox6.Controls.Add(this.ptbModify);
-            this.groupBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox6.Location = new System.Drawing.Point(1112, 39);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(138, 61);
-            this.groupBox6.TabIndex = 48;
-            this.groupBox6.TabStop = false;
-            // 
-            // lblModify
-            // 
-            this.lblModify.AutoSize = true;
-            this.lblModify.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModify.Location = new System.Drawing.Point(54, 23);
-            this.lblModify.Name = "lblModify";
-            this.lblModify.Size = new System.Drawing.Size(72, 22);
-            this.lblModify.TabIndex = 36;
-            this.lblModify.Text = "Modify";
-            this.lblModify.Click += new System.EventHandler(this.lblModify_Click);
-            // 
-            // ptbModify
-            // 
-            this.ptbModify.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_pen_100;
-            this.ptbModify.Location = new System.Drawing.Point(6, 12);
-            this.ptbModify.Name = "ptbModify";
-            this.ptbModify.Size = new System.Drawing.Size(45, 45);
-            this.ptbModify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbModify.TabIndex = 37;
-            this.ptbModify.TabStop = false;
-            this.ptbModify.Click += new System.EventHandler(this.ptbModify_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox5.Controls.Add(this.lblClear);
-            this.groupBox5.Controls.Add(this.ptbClear);
-            this.groupBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox5.Location = new System.Drawing.Point(979, 123);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(118, 61);
-            this.groupBox5.TabIndex = 47;
-            this.groupBox5.TabStop = false;
-            // 
-            // lblClear
-            // 
-            this.lblClear.AutoSize = true;
-            this.lblClear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClear.Location = new System.Drawing.Point(54, 23);
-            this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(59, 22);
-            this.lblClear.TabIndex = 36;
-            this.lblClear.Text = "Clear";
-            this.lblClear.Click += new System.EventHandler(this.lblClear_Click);
-            // 
-            // ptbClear
-            // 
-            this.ptbClear.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_clear_symbol_100;
-            this.ptbClear.Location = new System.Drawing.Point(6, 12);
-            this.ptbClear.Name = "ptbClear";
-            this.ptbClear.Size = new System.Drawing.Size(45, 45);
-            this.ptbClear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbClear.TabIndex = 37;
-            this.ptbClear.TabStop = false;
-            this.ptbClear.Click += new System.EventHandler(this.ptbClear_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox4.Controls.Add(this.lblDel);
-            this.groupBox4.Controls.Add(this.ptbDel);
-            this.groupBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox4.Location = new System.Drawing.Point(1113, 119);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(137, 70);
-            this.groupBox4.TabIndex = 46;
-            this.groupBox4.TabStop = false;
-            // 
-            // lblDel
-            // 
-            this.lblDel.AutoSize = true;
-            this.lblDel.BackColor = System.Drawing.Color.Transparent;
-            this.lblDel.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDel.Location = new System.Drawing.Point(54, 23);
-            this.lblDel.Name = "lblDel";
-            this.lblDel.Size = new System.Drawing.Size(70, 22);
-            this.lblDel.TabIndex = 36;
-            this.lblDel.Text = "Delete";
-            this.lblDel.Click += new System.EventHandler(this.lblDel_Click);
-            // 
-            // ptbDel
-            // 
-            this.ptbDel.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_remove_96;
-            this.ptbDel.Location = new System.Drawing.Point(6, 12);
-            this.ptbDel.Name = "ptbDel";
-            this.ptbDel.Size = new System.Drawing.Size(45, 45);
-            this.ptbDel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbDel.TabIndex = 37;
-            this.ptbDel.TabStop = false;
-            this.ptbDel.Click += new System.EventHandler(this.ptbDel_Click);
-            // 
-            // grbAdd
-            // 
-            this.grbAdd.BackColor = System.Drawing.Color.Transparent;
-            this.grbAdd.Controls.Add(this.ptbAdd);
-            this.grbAdd.Controls.Add(this.lblAdd);
-            this.grbAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.grbAdd.Location = new System.Drawing.Point(988, 50);
-            this.grbAdd.Name = "grbAdd";
-            this.grbAdd.Size = new System.Drawing.Size(100, 52);
-            this.grbAdd.TabIndex = 45;
-            this.grbAdd.TabStop = false;
-            // 
-            // ptbAdd
-            // 
-            this.ptbAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ptbAdd.Image = global::QuanLyShopThoiTrang.Properties.Resources.icons8_plus_100;
-            this.ptbAdd.Location = new System.Drawing.Point(6, 3);
-            this.ptbAdd.Name = "ptbAdd";
-            this.ptbAdd.Size = new System.Drawing.Size(40, 40);
-            this.ptbAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbAdd.TabIndex = 34;
-            this.ptbAdd.TabStop = false;
-            this.ptbAdd.Click += new System.EventHandler(this.ptbAdd_Click);
-            // 
-            // lblAdd
-            // 
-            this.lblAdd.AutoSize = true;
-            this.lblAdd.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdd.Location = new System.Drawing.Point(48, 12);
-            this.lblAdd.Name = "lblAdd";
-            this.lblAdd.Size = new System.Drawing.Size(51, 22);
-            this.lblAdd.TabIndex = 35;
-            this.lblAdd.Text = "Add";
-            this.lblAdd.Click += new System.EventHandler(this.lblAdd_Click);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -683,13 +684,6 @@ namespace QuanLyShopThoiTrang
             this.Load += new System.EventHandler(this.productManagement_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbProduct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbModify)).EndInit();
@@ -702,6 +696,13 @@ namespace QuanLyShopThoiTrang
             this.grbAdd.ResumeLayout(false);
             this.grbAdd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbArrowsBack)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

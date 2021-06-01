@@ -704,7 +704,7 @@ namespace QuanLyShopThoiTrang
             this.txtIdFinder.Name = "txtIdFinder";
             this.txtIdFinder.Size = new System.Drawing.Size(313, 36);
             this.txtIdFinder.TabIndex = 3;
-            this.txtIdFinder.Click += new System.EventHandler(this.txtIDFinder);
+            this.txtIdFinder.Click += new System.EventHandler(this.txtIDFinder_Click);
             // 
             // label2
             // 

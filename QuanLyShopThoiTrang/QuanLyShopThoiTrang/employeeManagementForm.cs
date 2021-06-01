@@ -49,15 +49,15 @@ namespace QuanLyShopThoiTrang
             }
             return data;
         }
-        private void countEmployee()
+        private int countEmployee()
         {
             int total;
             SqlConnection connector = new SqlConnection(strDatabase);
             connector.Open();
             SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM Employee;", connector);
             total = (int)cmd.ExecuteScalar();
-            totalEmployeeTextBox.Text = total.ToString();
             connector.Close();
+            return total;
         }
 
         private void setIDInTheIdButton()
@@ -90,7 +90,7 @@ namespace QuanLyShopThoiTrang
             dataGridView.DataSource = getAllEmployee().Tables[0];
 
             //Dem so luong nhan vien
-            countEmployee();
+            totalEmployeeTextBox.Text=countEmployee().ToString();
 
             //Set up ID
             setIDInTheIdButton();
@@ -129,15 +129,6 @@ namespace QuanLyShopThoiTrang
             txtAllowance.Text = dataGridView.Rows[i].Cells[12].Value.ToString();
         }
 
-        //Chuyen doi thong tin nhap vao va tim kiem trong CSDL
-        private void printInfoInTheTextBoxFromIDFinderRadio()
-        {
-            //In thong tin ra tung textbox nho trong groupbox Input Employee lay tu ID
-            string id = txtIdFinder.Text.Substring(2, 3);
-            int indexRowDatagridview = int.Parse(id) -1; //tri so cot xuat theo tu ID
-            showInfoIntoTextBox(indexRowDatagridview);
-        }
-
         //Xuat thong tin tu datagridview ra tung textbox
         private void showInfoIntoTextBox(int indexRowDatagridview)
         {
@@ -166,30 +157,37 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-                //Them du lieu vao table.Employee 
-                string queryAddEmployee = "INSERT INTO Employee VALUES(@id,@name,@sex,@dob,@address,@phoneNumber,@email,@edu,@language,@idWorkType,@startWorkingDay,@allowance);";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandAdd = new SqlCommand(queryAddEmployee, connector);
+                try
+                {
+                    //Them du lieu vao table.Employee 
+                    string queryAddEmployee = "INSERT INTO Employee VALUES(@id,@name,@sex,@dob,@address,@phoneNumber,@email,@edu,@language,@idWorkType,@startWorkingDay,@allowance);";
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandAdd = new SqlCommand(queryAddEmployee, connector);
 
-                //Thuc thi lenh them du lieu vao bang EmpInfo
-                commandAdd.Parameters.AddWithValue("@id", idTextBox.Text);
-                commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
-                commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
-                commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
-                commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
-                commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
-                commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
-                commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
-                commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
-                commandAdd.Parameters.AddWithValue("@idWorkType", txtIDWorkType.Text);
-                commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
-                commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
-                commandAdd.ExecuteNonQuery();
+                    //Thuc thi lenh them du lieu vao bang EmpInfo
+                    commandAdd.Parameters.AddWithValue("@id", idTextBox.Text);
+                    commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
+                    commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
+                    commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
+                    commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
+                    commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
+                    commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
+                    commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
+                    commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
+                    commandAdd.Parameters.AddWithValue("@idWorkType", txtIDWorkType.Text);
+                    commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
+                    commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
+                    commandAdd.ExecuteNonQuery();
 
-                employeeManagementForm_Load(sender, e);
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    employeeManagementForm_Load(sender, e);
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Loi thong tin. Vui long kiem tra lai");
+                }
             }
         }
 
@@ -215,17 +213,24 @@ namespace QuanLyShopThoiTrang
                 }
                 if (dlr == DialogResult.Yes)
                 {
-                    string queryDeleteTabelEmployee = "DELETE Employee WHERE ID=@id;";
+                    try
+                    {
+                        string queryDeleteTabelEmployee = "DELETE Employee WHERE ID=@id;";
 
-                    connector = new SqlConnection(strDatabase);
-                    connector.Open();
-                    SqlCommand commandDelTabelEmployee = new SqlCommand(queryDeleteTabelEmployee, connector);
-                    commandDelTabelEmployee.Parameters.AddWithValue("@id", idTextBox.Text);
-                    commandDelTabelEmployee.ExecuteNonQuery();
+                        connector = new SqlConnection(strDatabase);
+                        connector.Open();
+                        SqlCommand commandDelTabelEmployee = new SqlCommand(queryDeleteTabelEmployee, connector);
+                        commandDelTabelEmployee.Parameters.AddWithValue("@id", idTextBox.Text);
+                        commandDelTabelEmployee.ExecuteNonQuery();
 
-                    employeeManagementForm_Load(sender, e);
-                    ptbClear_Click(sender, e);
-                    connector.Close();
+                        employeeManagementForm_Load(sender, e);
+                        ptbClear_Click(sender, e);
+                        connector.Close();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Loi thong tin. Vui long kiem tra lai noi dung");
+                    }
                 }
             }
         }
@@ -259,31 +264,38 @@ namespace QuanLyShopThoiTrang
 
         private void ptbModify_Click(object sender, EventArgs e)
         {
-            //Them du lieu vao table.Employee
-            string queryAdd = "UPDATE Employee SET Emp_Name=@name, Sex=@sex,DOB=@dob,Emp_Address=@address,Phone_Number=@phoneNumber,Email=@email,Acadamic_Level=@edu,Language=@language,IDWorkType = @idWorkType,Start_Working_Day=@startWorkingDay,Allowance = @allowance WHERE ID=@id;";
+            try
+            {
+                //Them du lieu vao table.Employee
+                string queryAdd = "UPDATE Employee SET Emp_Name=@name, Sex=@sex,DOB=@dob,Emp_Address=@address,Phone_Number=@phoneNumber,Email=@email,Acadamic_Level=@edu,Language=@language,IDWorkType = @idWorkType,Start_Working_Day=@startWorkingDay,Allowance = @allowance WHERE ID=@id;";
 
-            connector = new SqlConnection(strDatabase);
-            connector.Open();
-            SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+                connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
 
-            //Thuc thi lenh them du lieu vao bang EmpInfo
-            commandAdd.Parameters.AddWithValue("@id", idTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
-            commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
-            commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
-            commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
-            commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
-            commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
-            commandAdd.Parameters.AddWithValue("@IDWorkType", txtIDWorkType.Text);
-            commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
-            commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
-            commandAdd.ExecuteNonQuery();
+                //Thuc thi lenh them du lieu vao bang EmpInfo
+                commandAdd.Parameters.AddWithValue("@id", idTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@name", nameTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@sex", sexComboBox.Text);
+                commandAdd.Parameters.AddWithValue("@dob", dateTimePicker.Value);
+                commandAdd.Parameters.AddWithValue("@address", addressTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumber.Text);
+                commandAdd.Parameters.AddWithValue("@email", emailTextBox.Text);
+                commandAdd.Parameters.AddWithValue("@edu", acadamicLevelComboBox.Text);
+                commandAdd.Parameters.AddWithValue("@language", cmbLanguage.Text);
+                commandAdd.Parameters.AddWithValue("@IDWorkType", txtIDWorkType.Text);
+                commandAdd.Parameters.AddWithValue("@startWorkingDay", dtpStartWorkingDay.Value);
+                commandAdd.Parameters.AddWithValue("@allowance", txtAllowance.Text);
+                commandAdd.ExecuteNonQuery();
 
-            employeeManagementForm_Load(sender, e);
-            ptbClear_Click(sender, e);
-            connector.Close();
+                employeeManagementForm_Load(sender, e);
+                ptbClear_Click(sender, e);
+                connector.Close();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Loi thong tin. Vui long kiem tra lai noi dung");
+            }
         }
 
         private void lblModify_Click(object sender, EventArgs e)
@@ -293,9 +305,23 @@ namespace QuanLyShopThoiTrang
 
         private void ptbFinder_Click(object sender, EventArgs e)
         {
-            if (!txtIdFinder.Text.Equals(""))
+            String id = txtIdFinder.Text;
+            int indexRowDatagridview = 0; //tri so cot xuat theo tu ID
+            bool check = false;
+            if (!id.Equals(""))
             {
-                printInfoInTheTextBoxFromIDFinderRadio();
+                for (int i = 0; i < countEmployee(); i++)
+                {
+                    if (id.Equals(dataGridView.Rows[i].Cells[0].Value.ToString()))
+                    {
+                        indexRowDatagridview = i; //tri so cot xuat theo tu ID
+                        check = true;
+                    }
+                }
+                if (check == true)
+                    //In thong tin ra tung textbox nho trong groupbox Input Employee lay tu ID
+                    showInfoIntoTextBox(indexRowDatagridview);
+                else MessageBox.Show("Khong tim thay nhan vien");
             }
             else MessageBox.Show("Ban chua nhap thong tin");
         }
@@ -307,10 +333,18 @@ namespace QuanLyShopThoiTrang
 
         private void ptbClearFinder_Click(object sender, EventArgs e)
         {
+            string id = txtIdFinder.Text;
+            int indexRowDatagridview=0;
             txtIdFinder.Clear();
-            
-            string id = idTextBox.Text.Substring(2, 3);
-            int indexRowDatagridview = int.Parse(id) - 1; //tri so cot xuat theo tu ID
+
+            for (int i = 0; i < countEmployee(); i++)
+            {
+                if (id.Equals(dataGridView.Rows[i].Cells[0].Value.ToString()))
+                {
+                    indexRowDatagridview = i; //tri so cot xuat theo tu ID
+                }
+            }
+
             dataGridView.Rows[indexRowDatagridview].Selected = false;
             ptbClear_Click(sender, e);
         }
@@ -320,7 +354,7 @@ namespace QuanLyShopThoiTrang
             ptbClearFinder_Click(sender, e);
         }
 
-        private void txtIDFinder(object sender, EventArgs e)
+        private void txtIDFinder_Click(object sender, EventArgs e)
         {
             if (!txtIdFinder.Text.Equals(""))
             {

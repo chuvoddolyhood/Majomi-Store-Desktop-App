@@ -36,32 +36,39 @@ namespace QuanLyShopThoiTrang
             return check;
         }
 
+        //Kiem tra mat khau
         private string getPasswordDTB;
         private bool isPasswordCorrect()
         {
             bool isCorrect = false;
             String passwordFromDatabase;
-
-            SqlConnection connector = new SqlConnection(strDatabase);
-            connector.Open();
-            SqlCommand cmd = new SqlCommand("SELECT User_Password FROM Account WHERE UserName=@username;", connector);
-            cmd.Parameters.AddWithValue("@username", userName_textBox.Text);
-            passwordFromDatabase = (string)cmd.ExecuteScalar();
-            if (passwordFromDatabase.Equals("") == false)
+            try
             {
-                if (passwd_textbox.Text.Equals(passwordFromDatabase)) {
-                    isCorrect = true;
-                    getPasswordDTB = passwordFromDatabase;
-                }
-                else
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                SqlCommand cmd = new SqlCommand("SELECT User_Password FROM Account WHERE UserName=@username;", connector);
+                cmd.Parameters.AddWithValue("@username", userName_textBox.Text);
+                passwordFromDatabase = (string)cmd.ExecuteScalar();
+                if (passwordFromDatabase.Equals("") == false)
                 {
-                    isCorrect = false;
-                    MessageBox.Show("Sai mat khau");
-                }
-                    
-            }
-            connector.Close();
+                    if (passwd_textbox.Text.Equals(passwordFromDatabase))
+                    {
+                        isCorrect = true;
+                        getPasswordDTB = passwordFromDatabase;
+                    }
+                    else
+                    {
+                        isCorrect = false;
+                        MessageBox.Show("Sai mat khau");
+                    }
 
+                }
+                connector.Close();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Tai Khoan Khong Ton Tai");
+            }
             return isCorrect;
         }
         private void login_button_Click(object sender, EventArgs e)
@@ -101,6 +108,7 @@ namespace QuanLyShopThoiTrang
             passwd_textbox.Clear();
         }
 
+        //Show password
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (showPassCheckBox.Checked)
@@ -113,6 +121,7 @@ namespace QuanLyShopThoiTrang
             }
         }
 
+        //Press enter key to login
         private void passwd_textbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

@@ -47,40 +47,45 @@ namespace QuanLyShopThoiTrang
             return data;
         }
 
-        private void countProduct()
+        private int countProduct()
         {
             int total;
             SqlConnection connector = new SqlConnection(strDatabase);
             connector.Open();
             SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM Product;", connector);
             total = (int)cmd.ExecuteScalar();
-            txtTotalProduct.Text = total.ToString();
             connector.Close();
+            return total;
         }
 
         private void setIDInTheIdButton()
         {
             string type = cmbTypeProduct.Text;
             string subCharactersID = type.Substring(0, 2);
-            
-            SqlConnection connector = new SqlConnection(strDatabase);
-            connector.Open();
-            //Mac dinh lay gia tri cuoi danh sach trong CSDL
-            SqlCommand cmd = new SqlCommand("SELECT MAX(ID_Product) FROM Product WHERE Type_Product=@type;", connector);
-            cmd.Parameters.AddWithValue("@type",type);
-            string id_temp = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
-            string getTheLastNumberOfID = id_temp.Substring(2, 3); //Lay ky tu 3 so cuoi cung
-            int id = int.Parse(getTheLastNumberOfID) + 1; //CHuyen doi sang dang so(int)
-            if (id < 10)
+            try
             {
-                txtIDProduct.Text = subCharactersID + "00" + id.ToString();
-            }
-            else if (id >= 10 && id < 100)
+                SqlConnection connector = new SqlConnection(strDatabase);
+                connector.Open();
+                //Mac dinh lay gia tri cuoi danh sach trong CSDL
+                SqlCommand cmd = new SqlCommand("SELECT MAX(ID_Product) FROM Product WHERE Type_Product=@type;", connector);
+                cmd.Parameters.AddWithValue("@type",type);
+                string id_temp = (string)cmd.ExecuteScalar(); //Lay ra nhung o dang chuoi(string)
+                string getTheLastNumberOfID = id_temp.Substring(2, 3); //Lay ky tu 3 so cuoi cung
+                int id = int.Parse(getTheLastNumberOfID) + 1; //CHuyen doi sang dang so(int)
+                if (id < 10)
+                {
+                    txtIDProduct.Text = subCharactersID + "00" + id.ToString();
+                }
+                else if (id >= 10 && id < 100)
+                {
+                    txtIDProduct.Text = subCharactersID + "0" + id.ToString();
+                }
+                else txtIDProduct.Text = subCharactersID + id.ToString();
+                connector.Close();
+            }catch(Exception ex)
             {
-                txtIDProduct.Text = subCharactersID + "0" + id.ToString();
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
-            else txtIDProduct.Text = subCharactersID + id.ToString();
-            connector.Close();
         }
 
         private void productManagement_Load(object sender, EventArgs e)
@@ -91,8 +96,8 @@ namespace QuanLyShopThoiTrang
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.DataSource = getAllProduct().Tables[0];
 
-            //Dem so luong nhan vien
-            countProduct();
+            //Dem so luong hang hoa
+            txtTotalProduct.Text=countProduct().ToString();
         }
         
         private void rdbAll_CheckedChanged(object sender, EventArgs e)
@@ -282,7 +287,7 @@ namespace QuanLyShopThoiTrang
             i = dataGridView.CurrentRow.Index;
             txtIDProduct.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
             txtTitleProduct.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
-            cmbTypeProduct.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
+            //cmbTypeProduct.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
             cmbSex.Text = dataGridView.Rows[i].Cells[3].Value.ToString();
             txtCostProduct.Text = dataGridView.Rows[i].Cells[4].Value.ToString();
             txtAmountProduct.Text = dataGridView.Rows[i].Cells[5].Value.ToString();
@@ -297,16 +302,12 @@ namespace QuanLyShopThoiTrang
 
         private void cmbTypeProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Sau khi chon Type moi xuat ID ra ID Button
+            //Sau khi chon Type san pham moi se xuat ID ra ID Button
             //Set up ID
             setIDInTheIdButton();
         }
 
-
-
-
-        //Con BUG o button Find
-
+        //Tim kiem product theo ID_Product
         private void btnFinder_Click(object sender, EventArgs e)
         {
             if (txtFinderProduct.Text.Equals(""))
@@ -316,9 +317,19 @@ namespace QuanLyShopThoiTrang
             else
             {
                 string id = txtFinderProduct.Text;
-                string id_number = id.Substring(2,3);
-                int indexRowDatagridview = int.Parse(id_number) - 1; //tri so cot xuat theo tu ID
-                showInfoIntoTextBox(indexRowDatagridview);
+                int indexRowDatagridview=0;
+                bool check = false;
+                for (int i=0;i< countProduct(); i++)
+                {
+                    if (id.Equals(dataGridView.Rows[i].Cells[0].Value.ToString()))
+                    {
+                        indexRowDatagridview = i; //tri so cot xuat theo tu ID
+                        check = true;
+                    }  
+                }
+                if (check == true)
+                    showInfoIntoTextBox(indexRowDatagridview);
+                else MessageBox.Show("Khong tim thay san pham");
             }
         }
 
@@ -327,31 +338,13 @@ namespace QuanLyShopThoiTrang
             int indexRow = indexRowDatagridview;
             txtIDProduct.Text = dataGridView.Rows[indexRow].Cells[0].Value.ToString();
             txtTitleProduct.Text = dataGridView.Rows[indexRow].Cells[1].Value.ToString();
-            cmbTypeProduct.Text = dataGridView.Rows[indexRow].Cells[2].Value.ToString();
+            //cmbTypeProduct.Text = dataGridView.Rows[indexRow].Cells[2].Value.ToString();
             cmbSex.Text = dataGridView.Rows[indexRow].Cells[3].Value.ToString();
             txtCostProduct.Text = dataGridView.Rows[indexRow].Cells[4].Value.ToString();
             txtAmountProduct.Text = dataGridView.Rows[indexRow].Cells[5].Value.ToString();
             txtManuProduct.Text = dataGridView.Rows[indexRow].Cells[6].Value.ToString();
             txtColorProduct.Text = dataGridView.Rows[indexRow].Cells[7].Value.ToString();
             dataGridView.Rows[indexRow].Selected = true;
-        }
-
-        private void dataGridView_CellContentClick(int i)
-        {
-            i = dataGridView.CurrentRow.Index;
-            txtIDProduct.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
-            txtTitleProduct.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
-            cmbTypeProduct.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
-            cmbSex.Text = dataGridView.Rows[i].Cells[3].Value.ToString();
-            txtCostProduct.Text = dataGridView.Rows[i].Cells[4].Value.ToString();
-            txtAmountProduct.Text = dataGridView.Rows[i].Cells[5].Value.ToString();
-            txtManuProduct.Text = dataGridView.Rows[i].Cells[6].Value.ToString();
-            txtColorProduct.Text = dataGridView.Rows[i].Cells[7].Value.ToString();
-            //image
-            //cmbTypeProduct.Text = dataGridView.Rows[i].Cells[8].Value.ToString();
-
-            //To sang o trong datagridview khi duoc tim
-            dataGridView.Rows[i].Selected = true;
         }
 
         private void ptbAdd_Click(object sender, EventArgs e)
@@ -362,37 +355,43 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-                //Them du lieu vao table.EmpInfo
-                string queryAdd = "INSERT INTO Product VALUES (@id,@title,@type,@sex,@cost,@amount,@manu,@color,@image);";
+                try
+                {
+                    //Them du lieu vao table.EmpInfo
+                    string queryAdd = "INSERT INTO Product VALUES (@id,@title,@type,@sex,@cost,@amount,@manu,@color,@image);";
 
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandAdd = new SqlCommand(queryAdd, connector);
 
-                //Thuc thi lenh them du lieu vao bang Product
-                commandAdd.Parameters.AddWithValue("@id", txtIDProduct.Text);
-                commandAdd.Parameters.AddWithValue("@title", txtTitleProduct.Text);
-                commandAdd.Parameters.AddWithValue("@type", cmbTypeProduct.Text);
-                commandAdd.Parameters.AddWithValue("@sex", cmbSex.Text);
-                commandAdd.Parameters.AddWithValue("@cost", txtCostProduct.Text); //Kieu String
-                commandAdd.Parameters.AddWithValue("@amount", txtAmountProduct.Text); //Kieu String
-                commandAdd.Parameters.AddWithValue("@manu", txtManuProduct.Text);
-                commandAdd.Parameters.AddWithValue("@color", txtColorProduct.Text);
-                //Và sau đó mất chỉ 10 phút để sửa sai dcm =((((((
-                //Phai co hinh anh neu khong se co loi
-                commandAdd.Parameters.AddWithValue("@image", converImgToByte());
+                    //Thuc thi lenh them du lieu vao bang Product
+                    commandAdd.Parameters.AddWithValue("@id", txtIDProduct.Text);
+                    commandAdd.Parameters.AddWithValue("@title", txtTitleProduct.Text);
+                    commandAdd.Parameters.AddWithValue("@type", cmbTypeProduct.Text);
+                    commandAdd.Parameters.AddWithValue("@sex", cmbSex.Text);
+                    commandAdd.Parameters.AddWithValue("@cost", txtCostProduct.Text); //Kieu String
+                    commandAdd.Parameters.AddWithValue("@amount", txtAmountProduct.Text); //Kieu String
+                    commandAdd.Parameters.AddWithValue("@manu", txtManuProduct.Text);
+                    commandAdd.Parameters.AddWithValue("@color", txtColorProduct.Text);
+                    //Và sau đó mất chỉ 10 phút để sửa sai dcm =((((((
+                    //Phai co hinh anh neu khong se co loi
+                    commandAdd.Parameters.AddWithValue("@image", converImgToByte());
 
-                //Link hinh anh da duoc chuyen doi sang dang byte code
+                    //Link hinh anh da duoc chuyen doi sang dang byte code
 
-                //Tôi đã mất 3 tiếng đồng hồ để viết cái hàm ngu xuẩn này đm :((((
-                //Nó convert từ byte sang dạng quần què gì đéo hiểu nvarchar :((((
-                //String linkImage= Convert.ToBase64String(converImgToByte()); 
+                    //Tôi đã mất 3 tiếng đồng hồ để viết cái hàm ngu xuẩn này :((((
+                    //Nó convert từ byte sang dạng quần què gì đ' hiểu nvarchar :((((
+                    //String linkImage= Convert.ToBase64String(converImgToByte()); 
 
-                commandAdd.ExecuteNonQuery();
+                    commandAdd.ExecuteNonQuery();
 
-                productManagement_Load(sender, e);
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    productManagement_Load(sender, e);
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }catch(Exception)
+                {
+                    MessageBox.Show("Ban da nhap thieu thong tin. Vui long kiem tra");
+                }
             }
         }
 
@@ -409,26 +408,33 @@ namespace QuanLyShopThoiTrang
             }
             else
             {
-                string queryModify = "UPDATE Product SET Title_Product = @title, Type_Product = @type, Sex_Product = @sex, UnitPrice = @cost, Amount_Product = @amount, Manufacturer = @manu, Color_Porduct = @color WHERE ID_Product = @id; ";
-                SqlConnection connector = new SqlConnection(strDatabase);
-                connector.Open();
-                SqlCommand commandModify = new SqlCommand(queryModify, connector);
+                try
+                {
+                    string queryModify = "UPDATE Product SET Title_Product = @title, Type_Product = @type, Sex_Product = @sex, UnitPrice = @cost, Amount_Product = @amount, Manufacturer = @manu, Color_Porduct = @color WHERE ID_Product = @id; ";
+                    SqlConnection connector = new SqlConnection(strDatabase);
+                    connector.Open();
+                    SqlCommand commandModify = new SqlCommand(queryModify, connector);
 
-                commandModify.Parameters.AddWithValue("@id", txtIDProduct.Text);
-                commandModify.Parameters.AddWithValue("@title", txtTitleProduct.Text);
-                commandModify.Parameters.AddWithValue("@type", cmbTypeProduct.Text);
-                commandModify.Parameters.AddWithValue("@sex", cmbSex.Text);
-                commandModify.Parameters.AddWithValue("@cost", txtCostProduct.Text);
-                commandModify.Parameters.AddWithValue("@amount", txtAmountProduct.Text);
-                commandModify.Parameters.AddWithValue("@manu", txtManuProduct.Text);
-                commandModify.Parameters.AddWithValue("@color", txtColorProduct.Text);
-                //image
-                //commandModify.Parameters.AddWithValue("@image", cmbSex.Text);
-                commandModify.ExecuteNonQuery();
+                    commandModify.Parameters.AddWithValue("@id", txtIDProduct.Text);
+                    commandModify.Parameters.AddWithValue("@title", txtTitleProduct.Text);
+                    commandModify.Parameters.AddWithValue("@type", cmbTypeProduct.Text);
+                    commandModify.Parameters.AddWithValue("@sex", cmbSex.Text);
+                    commandModify.Parameters.AddWithValue("@cost", txtCostProduct.Text);
+                    commandModify.Parameters.AddWithValue("@amount", txtAmountProduct.Text);
+                    commandModify.Parameters.AddWithValue("@manu", txtManuProduct.Text);
+                    commandModify.Parameters.AddWithValue("@color", txtColorProduct.Text);
+                    //image
+                    //commandModify.Parameters.AddWithValue("@image", cmbSex.Text);
+                    commandModify.ExecuteNonQuery();
 
-                productManagement_Load(sender, e);
-                ptbClear_Click(sender, e);
-                connector.Close();
+                    productManagement_Load(sender, e);
+                    ptbClear_Click(sender, e);
+                    connector.Close();
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Loi thong tin. Vui long kiem tra lai");
+                }
             }
         }
 
@@ -472,18 +478,24 @@ namespace QuanLyShopThoiTrang
                 }
                 if (dlr == DialogResult.Yes)
                 {
-                    string queryDeleteTabelCustomer = "DELETE Product WHERE ID_Product=@id;";
+                    try
+                    {
+                        string queryDeleteTabelCustomer = "DELETE Product WHERE ID_Product=@id;";
+                        SqlConnection connector = new SqlConnection(strDatabase);
+                        connector.Open();
+                        //Thuc thi tren table.EmpInfo
+                        SqlCommand commandDelTabelProduct = new SqlCommand(queryDeleteTabelCustomer, connector);
+                        commandDelTabelProduct.Parameters.AddWithValue("@id", txtIDProduct.Text);
+                        commandDelTabelProduct.ExecuteNonQuery();
 
-                    SqlConnection connector = new SqlConnection(strDatabase);
-                    connector.Open();
-                    //Thuc thi tren table.EmpInfo
-                    SqlCommand commandDelTabelProduct = new SqlCommand(queryDeleteTabelCustomer, connector);
-                    commandDelTabelProduct.Parameters.AddWithValue("@id", txtIDProduct.Text);
-                    commandDelTabelProduct.ExecuteNonQuery();
-
-                    productManagement_Load(sender, e);
-                    ptbClear_Click(sender, e);
-                    connector.Close();
+                        productManagement_Load(sender, e);
+                        ptbClear_Click(sender, e);
+                        connector.Close();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message + ex.StackTrace);
+                    }
                 }
             }
         }
@@ -491,6 +503,24 @@ namespace QuanLyShopThoiTrang
         private void lblDel_Click(object sender, EventArgs e)
         {
             ptbDel_Click(sender, e);
+        }
+
+        private void txtFinderProduct_Click(object sender, EventArgs e)
+        {
+            if (!txtFinderProduct.Equals(""))
+            {
+                txtFinderProduct.Clear();
+
+                string id = txtIDProduct.Text;
+                int indexRowDatagridview = 0;
+                for (int i = 0; i < countProduct(); i++)
+                {
+                    if (id.Equals(dataGridView.Rows[i].Cells[0].Value.ToString()))
+                        indexRowDatagridview = i; //tri so cot xuat theo tu ID
+                }
+                dataGridView.Rows[indexRowDatagridview].Selected = false;
+                ptbClear_Click(sender, e);
+            }
         }
     }
 }
