@@ -301,12 +301,14 @@ namespace QuanLyShopThoiTrang
 
         private void txtPhoneNumberFinder_Click(object sender, EventArgs e)
         {
-            txtPhoneNumberFinder.Clear();
-
-            string id = txtID.Text.Substring(2, 3);
-            int indexRowDatagridview = int.Parse(id) - 1; //tri so cot xuat theo tu ID
-            dataGridView.Rows[indexRowDatagridview].Selected = false;
-            ptbClear_Click(sender, e);
+            if (!txtPhoneNumberFinder.Text.Equals(""))
+            {
+                txtPhoneNumberFinder.Clear();
+                string id = txtID.Text.Substring(2, 3);
+                int indexRowDatagridview = int.Parse(id) - 1; //tri so cot xuat theo tu ID
+                dataGridView.Rows[indexRowDatagridview].Selected = false;
+                ptbClear_Click(sender, e);
+            }
         }
     }
 }

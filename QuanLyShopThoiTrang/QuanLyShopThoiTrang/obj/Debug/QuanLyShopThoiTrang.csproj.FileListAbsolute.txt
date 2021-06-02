@@ -47,3 +47,7 @@ F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTr
 F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.csproj.CoreCompileInputs.cache
 F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.exe
 F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.pdb
+F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\bin\Debug\BouncyCastle.Crypto.dll
+F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\bin\Debug\itextsharp.dll
+F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\bin\Debug\itextsharp.xml
+F:\Programming\App\Majomi-Store-Desktop-App\QuanLyShopThoiTrang\QuanLyShopThoiTrang\obj\Debug\QuanLyShopThoiTrang.csproj.CopyComplete

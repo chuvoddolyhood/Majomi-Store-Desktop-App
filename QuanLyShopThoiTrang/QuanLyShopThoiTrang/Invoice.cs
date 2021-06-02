@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace QuanLyShopThoiTrang
 {
@@ -454,7 +456,74 @@ namespace QuanLyShopThoiTrang
                                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
             if (dlr == DialogResult.Yes)
             {
-                MessageBox.Show("Da thanh toan!");
+                MessageBox.Show("Da thanh toan va In hoa don");
+
+                if (dataGridViewProduct.Rows.Count > 0)
+                {
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.Filter = "PDF (*.pdf)|*.pdf";
+                    sfd.FileName = "Invoice "+ setIDInvoiceInTheIdButton() + ".pdf";
+                    bool fileError = false;
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        if (File.Exists(sfd.FileName))
+                        {
+                            try
+                            {
+                                File.Delete(sfd.FileName);
+                            }
+                            catch (IOException ex)
+                            {
+                                fileError = true;
+                                MessageBox.Show("Không thể ghi dữ liệu tới ổ đĩa. Lỗi:" + ex.Message);
+                            }
+                        }
+                        if (!fileError)
+                        {
+                            try
+                            {
+                                PdfPTable pdfTable = new PdfPTable(dataGridViewProduct.Columns.Count);
+                                pdfTable.DefaultCell.Padding = 3;
+                                pdfTable.WidthPercentage = 100;
+                                pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                                foreach (DataGridViewColumn column in dataGridViewProduct.Columns)
+                                {
+                                    PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
+                                    pdfTable.AddCell(cell);
+                                }
+
+                                foreach (DataGridViewRow row in dataGridViewProduct.Rows)
+                                {
+                                    foreach (DataGridViewCell cell in row.Cells)
+                                    {
+                                        pdfTable.AddCell(cell.Value.ToString());
+                                    }
+                                }
+
+                                using (FileStream stream = new FileStream(sfd.FileName, FileMode.Create))
+                                {
+                                    Document pdfDoc = new Document(PageSize.A4, 10f, 20f, 20f, 10f);
+                                    PdfWriter.GetInstance(pdfDoc, stream);
+                                    pdfDoc.Open();
+                                    pdfDoc.Add(pdfTable);
+                                    pdfDoc.Close();
+                                    stream.Close();
+                                }
+
+                                MessageBox.Show("Da xuat Bill", "Info");
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Lỗi: " + ex.Message);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không có bản ghi nào được Export!!!", "Info");
+                }
             }
         }
     }

@@ -287,7 +287,7 @@ namespace QuanLyShopThoiTrang
             i = dataGridView.CurrentRow.Index;
             txtIDProduct.Text = dataGridView.Rows[i].Cells[0].Value.ToString();
             txtTitleProduct.Text = dataGridView.Rows[i].Cells[1].Value.ToString();
-            //cmbTypeProduct.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
+            cmbTypeProduct.Text = dataGridView.Rows[i].Cells[2].Value.ToString();
             cmbSex.Text = dataGridView.Rows[i].Cells[3].Value.ToString();
             txtCostProduct.Text = dataGridView.Rows[i].Cells[4].Value.ToString();
             txtAmountProduct.Text = dataGridView.Rows[i].Cells[5].Value.ToString();

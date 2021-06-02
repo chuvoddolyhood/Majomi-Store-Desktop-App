@@ -155,6 +155,7 @@ namespace QuanLyShopThoiTrang
             // 
             // dataGridViewProduct
             // 
+            this.dataGridViewProduct.AllowUserToAddRows = false;
             this.dataGridViewProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProduct.Location = new System.Drawing.Point(6, 21);
             this.dataGridViewProduct.Name = "dataGridViewProduct";

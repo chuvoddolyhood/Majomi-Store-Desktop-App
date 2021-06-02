@@ -35,7 +35,6 @@ CREATE TABLE Customer(
 	ID_Customer VARCHAR(10) NOT NULL PRIMARY KEY,
 	Name_Customer VARCHAR(25) NOT NULL,
 	PhoneNumber_Customer VARCHAR(15) NOT NULL,
-	MarkOfReward_Customer INT,
 );
 
 

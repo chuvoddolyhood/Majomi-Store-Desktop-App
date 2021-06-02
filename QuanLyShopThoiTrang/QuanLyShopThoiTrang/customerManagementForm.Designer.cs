@@ -39,7 +39,6 @@ namespace QuanLyShopThoiTrang
             this.txtNameCustomer = new System.Windows.Forms.TextBox();
             this.txtPhoneNumberCustomer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.lblFinder = new System.Windows.Forms.Label();
             this.ptbFinder = new System.Windows.Forms.PictureBox();
@@ -170,7 +169,6 @@ namespace QuanLyShopThoiTrang
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.groupBox7);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.groupBox6);
@@ -191,14 +189,6 @@ namespace QuanLyShopThoiTrang
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controler";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Location = new System.Drawing.Point(0, 0);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(200, 100);
-            this.groupBox8.TabIndex = 0;
-            this.groupBox8.TabStop = false;
             // 
             // groupBox7
             // 
@@ -500,6 +490,5 @@ namespace QuanLyShopThoiTrang
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label lblFinder;
         private System.Windows.Forms.PictureBox ptbFinder;
-        private System.Windows.Forms.GroupBox groupBox8;
     }
 }
